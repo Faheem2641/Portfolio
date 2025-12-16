@@ -31,7 +31,7 @@ export default function MasonryGallerySection() {
     <section
       ref={sectionRef}
       id="masonry-gallery"
-      className="relative"
+      className="relative mb-24"
       style={{
         height: "200vh",
       }}

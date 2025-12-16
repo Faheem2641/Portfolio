@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/projects/autodesk-inventor":{},"/projects/ansys":{},"/projects/volunteer":{},"/projects/production-machining":{},"/projects/research":{},"/projects/clubs-and-societies":{},"/projects/web-development":{},"/projects/education":{},"/projects/language":{},"/projects/cfd-analysis":{},"/projects/community-service":{},"/projects/cnc-machining":{}},"dynamicRoutes":{"/projects/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/projects/[slug]","routeRegex":"^\\/projects\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"d135ff8d23e9060de4a8b219a526430a","previewModeSigningKey":"711867514cc90434fe0fd26d16d50ed4edc0d6859dff257af3d646832bb612ad","previewModeEncryptionKey":"f132c0ef99bcb4bf9f715966d9ee6cb70e5fbb007faf8c67562cb4d152a13fd6"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "59af1a4f5d8231d5acaedd70b4472f90",
+    "previewModeSigningKey": "0a8330b452b7f55d8faa80c5e2bcc70a9dc5c857cfff0d6fefd70c9681929961",
+    "previewModeEncryptionKey": "a7fb2203cd3e46e68055b543032e1872bd349b6d333daee43801f867f341611f"
+  }
+}

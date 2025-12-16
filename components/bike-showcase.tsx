@@ -46,7 +46,7 @@ function AnimatedCounter({ target, label, unit = "" }: AnimatedCounterProps) {
 
 export default function BikeShowcase() {
   return (
-    <section className="relative bg-lorenzo-dark px-6 md:px-12 overflow-hidden py-16">
+    <section className="relative bg-lorenzo-dark px-6 md:px-12 overflow-hidden py-16 mt-24">
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-center items-center">
           <motion.div

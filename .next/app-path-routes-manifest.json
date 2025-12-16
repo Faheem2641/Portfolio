@@ -1,0 +1,12 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/components-archive/page": "/components-archive",
+  "/inventor/[slug]/page": "/inventor/[slug]",
+  "/inventor/page": "/inventor",
+  "/page": "/",
+  "/projects/[slug]/page": "/projects/[slug]",
+  "/projects/ansys/[slug]/page": "/projects/ansys/[slug]",
+  "/projects/ansys/page": "/projects/ansys",
+  "/projects/language/page": "/projects/language"
+}

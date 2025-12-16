@@ -960,6 +960,10 @@
     margin-bottom: calc(var(--spacing) * 20);
   }
 
+  .mb-24 {
+    margin-bottom: calc(var(--spacing) * 24);
+  }
+
   .-ml-4 {
     margin-left: calc(var(--spacing) * -4);
   }
