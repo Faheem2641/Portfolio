@@ -6,7 +6,7 @@ import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { galleryImages } from "@/lib/gallery-data"
 
-
+// Gallery section with fixed spacing to prevent overlap
 
 export default function MasonryGallerySection() {
   const sectionRef = useRef<HTMLDivElement>(null)
