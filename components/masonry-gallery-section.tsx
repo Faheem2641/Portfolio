@@ -16,9 +16,6 @@ export default function MasonryGallerySection() {
     offset: ["start start", "end end"],
   })
 
-  // Background transition: Dark Green -> Dark Green -> White
-  const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 0.9], ["#282c20", "#ccc", "#ffffff"])
-
   // Y Movement: Move grid up to reveal all images
   // Starts at 0vh and moves up to -80vh to show bottom images
   const y = useTransform(scrollYProgress, [0, 1], ["0vh", "-80vh"])
@@ -31,12 +28,12 @@ export default function MasonryGallerySection() {
     <section
       ref={sectionRef}
       id="masonry-gallery"
-      className="relative mb-24"
+      className="relative"
       style={{
         height: "200vh",
       }}
     >
-      <motion.div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-white">
         <motion.div style={{ y }} className="relative w-full max-w-[1400px] mx-auto px-4 md:px-8 pt-2 pb-12">
           <div className="flex flex-col md:flex-row gap-4 w-full">
             {/* Column 1 */}
@@ -61,7 +58,7 @@ export default function MasonryGallerySection() {
             </div>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   )
 }

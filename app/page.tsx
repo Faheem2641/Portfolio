@@ -4,7 +4,7 @@ import MissionSection from "@/components/mission-section"
 
 
 // import SignatureMarqueeSection from "@/components/signature-marquee-section"
-import BikeShowcase from "@/components/bike-showcase"
+
 import SocialSection from "@/components/social-section"
 import Footer from "@/components/footer"
 import MasonryGallerySection from "@/components/masonry-gallery-section"
@@ -22,8 +22,6 @@ export default function Home() {
         <MissionSection />
         <MasonryGallerySection />
         {/* <TrackSplitSection /> */}
-
-        <BikeShowcase />
 
 
         <InteractiveSchedule />

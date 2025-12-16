@@ -47,7 +47,7 @@ export function InteractiveSchedule() {
   const [hoveredEvent, setHoveredEvent] = useState<number | null>(null)
 
   return (
-    <div className="w-full bg-[#0a0e1a] py-20 md:py-32 relative overflow-hidden">
+    <div className="w-full bg-[#0a0e1a] pb-20 md:pb-32 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl">
         {/* Timeline Container */}
         <div className="relative">
