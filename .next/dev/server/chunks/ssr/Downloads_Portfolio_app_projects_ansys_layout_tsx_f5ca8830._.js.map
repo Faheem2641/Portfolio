@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/fahee/Downloads/Portfolio/app/projects/ansys/layout.tsx"],"sourcesContent":["import type React from \"react\"\r\n\r\nexport default function AnsysLayout({\r\n    children,\r\n}: {\r\n    children: React.ReactNode\r\n}) {\r\n    // This layout explicitly does NOT include the Footer component\r\n    // Only the ANSYS content will be rendered\r\n    return <>{children}</>\r\n}\r\n"],"names":[],"mappings":";;;;;;AAEe,SAAS,YAAY,EAChC,QAAQ,EAGX;IACG,+DAA+D;IAC/D,0CAA0C;IAC1C,qBAAO;kBAAG;;AACd","debugId":null}}]
+}
