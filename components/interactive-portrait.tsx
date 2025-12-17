@@ -2,13 +2,15 @@
 
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import * as THREE from "three"
 
 export default function InteractivePortrait() {
   const containerRef = useRef<HTMLDivElement>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
   const animationFrameRef = useRef<number>()
+  const [webGLAvailable, setWebGLAvailable] = useState(true)
+
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -16,6 +18,17 @@ export default function InteractivePortrait() {
     const container = containerRef.current
     const width = container.clientWidth
     const height = container.clientHeight
+
+    // Check WebGL availability
+    const canvas = document.createElement('canvas')
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+
+    if (!gl) {
+      console.warn('WebGL is not available. Using fallback rendering.')
+      // Set fallback state
+      setWebGLAvailable(false)
+      return
+    }
 
     const gu = {
       time: { value: 0 },
@@ -29,7 +42,15 @@ export default function InteractivePortrait() {
     const camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0.1, 1000)
     camera.position.z = 1
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    let renderer: THREE.WebGLRenderer
+
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    } catch (error) {
+      console.error('Failed to create WebGL renderer:', error)
+      setWebGLAvailable(false)
+      return
+    }
     renderer.setSize(width, height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     container.appendChild(renderer.domElement)
@@ -356,6 +377,48 @@ export default function InteractivePortrait() {
       blob.rtOutput.dispose()
     }
   }, [])
+
+  // Fallback rendering when WebGL is not available
+  if (!webGLAvailable) {
+    return (
+      <div
+        className="fixed inset-0 w-full h-full bg-[#1a1f1a] flex items-center justify-center overflow-hidden"
+        style={{ touchAction: "none" }}
+      >
+        <div className="relative w-full h-full flex items-center justify-center">
+          {/* Fallback static image */}
+          <img
+            src="/images/1.png"
+            alt="Portrait"
+            className="max-w-full max-h-full object-contain"
+            style={{ filter: "contrast(1.1) brightness(0.95)" }}
+          />
+
+          {/* Optional overlay image */}
+          <img
+            src="/images/2.png"
+            alt="Helmet overlay"
+            className="absolute max-w-full max-h-full object-contain"
+            style={{ mixBlendMode: "normal", opacity: 0.9 }}
+          />
+
+          {/* Inspired by text */}
+          <img
+            src="/images/inspired-by-lando-norris.png"
+            alt="Inspired by Faheem Ali"
+            className="absolute bottom-4 left-4 z-10 pointer-events-none"
+            style={{ maxWidth: "120px", width: "120px", height: "auto" }}
+          />
+
+          {/* Warning message for developers */}
+          <div className="absolute top-4 right-4 bg-yellow-900/80 text-yellow-200 px-4 py-2 rounded text-sm max-w-xs">
+            <strong>WebGL Unavailable</strong>
+            <p className="text-xs mt-1">Enable hardware acceleration in your browser settings for the full interactive experience.</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div
