@@ -410,11 +410,6 @@ export default function InteractivePortrait() {
             style={{ maxWidth: "120px", width: "120px", height: "auto" }}
           />
 
-          {/* Warning message for developers */}
-          <div className="absolute top-4 right-4 bg-yellow-900/80 text-yellow-200 px-4 py-2 rounded text-sm max-w-xs">
-            <strong>WebGL Unavailable</strong>
-            <p className="text-xs mt-1">Enable hardware acceleration in your browser settings for the full interactive experience.</p>
-          </div>
         </div>
       </div>
     )
