@@ -30,10 +30,10 @@ export default function MasonryGallerySection() {
       id="masonry-gallery"
       className="relative"
       style={{
-        height: "200vh",
+        maxHeight: "110vh",
       }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-white">
+      <div className="sticky top-0 h-auto w-full overflow-hidden bg-white">
         <motion.div style={{ y }} className="relative w-full max-w-[1400px] mx-auto px-4 md:px-8 pt-2 pb-12">
           <div className="flex flex-col md:flex-row gap-4 w-full">
             {/* Column 1 */}
