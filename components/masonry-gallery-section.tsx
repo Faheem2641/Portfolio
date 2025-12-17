@@ -30,7 +30,7 @@ export default function MasonryGallerySection() {
       id="masonry-gallery"
       className="relative"
       style={{
-        maxHeight: "110vh",
+        maxHeight: "120vh",
       }}
     >
       <div className="sticky top-0 h-auto w-full overflow-hidden bg-white">
