@@ -31,7 +31,7 @@ export default function Footer() {
       <div className="relative flex-1 flex flex-col w-full max-w-[1688px] mx-auto mt-6 z-10">
         {/* SVG Background Mask */}
         <div
-          className="relative w-full h-full z-0 bg-[#282c20] overflow-hidden"
+          className="relative w-full h-full z-0 bg-[#0a192f] overflow-hidden"
           style={{
             maskImage: 'url("/images/footer-mask.svg")',
             WebkitMaskImage: 'url("/images/footer-mask.svg")',
@@ -43,10 +43,11 @@ export default function Footer() {
         >
           {/* <AnimatedTextureCanvas /> */}
 
+
           <div
-            className="absolute inset-0 w-full h-full opacity-30"
+            className="absolute inset-0 w-full h-full opacity-60"
             style={{
-              backgroundImage: 'url("/images/curv.svg")',
+              backgroundImage: `url("/images/curveb.svg")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

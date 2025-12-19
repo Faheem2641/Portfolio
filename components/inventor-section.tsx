@@ -22,8 +22,8 @@ const projects: InventorProject[] = [
 export default function InventorSection() {
     const [isPaused, setIsPaused] = useState(false)
     const scrollContainerRef = useRef<HTMLDivElement>(null)
-    const animationRef = useRef<number>()
-    const pauseTimeoutRef = useRef<NodeJS.Timeout>()
+    const animationRef = useRef<number | null>(null)
+    const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
         const container = scrollContainerRef.current
@@ -150,7 +150,7 @@ export default function InventorSection() {
             <style jsx>{`
                 .inventor-radial-section {
                     margin: 0;
-                    background: #282c20;
+                    background: #0a192f;
                     min-height: 100vh;
                     position: relative;
                     display: flex;
@@ -193,12 +193,12 @@ export default function InventorSection() {
                 }
                 
                 .inventor-title .accent {
-                    color: #c8ff00;
+                    color: #e8e8e3;
                 }
                 
                 .inventor-description {
                     font-size: 1.125rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: rgba(232, 232, 227, 0.7);
                     max-width: 800px;
                     margin: 0 auto;
                 }
@@ -266,26 +266,25 @@ export default function InventorSection() {
                 .project-card {
                     flex-shrink: 0;
                     width: 600px;
-                    background: rgba(58, 63, 50, 0.5);
+                    background: #162439;
                     border-radius: 16px;
                     overflow: hidden;
-                    border: 2px solid rgba(200, 255, 0, 0.2);
+                    border: 2px solid rgba(232, 232, 227, 0.1);
                     transition: all 0.4s ease;
-                    backdrop-filter: blur(10px);
                 }
 
                 .project-card:hover {
                     transform: translateY(-10px) scale(1.02);
-                    border-color: rgba(200, 255, 0, 0.6);
+                    border-color: rgba(232, 232, 227, 0.6);
                     box-shadow: 
                         0 20px 40px rgba(0, 0, 0, 0.4),
-                        0 0 30px rgba(200, 255, 0, 0.2);
+                        0 0 30px rgba(232, 232, 227, 0.1);
                 }
 
                 .card-image-placeholder {
                     width: 100%;
                     height: 400px;
-                    background: linear-gradient(135deg, #3a3f32 0%, #4a4f42 100%);
+                    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
                     position: relative;
                     overflow: hidden;
                 }
@@ -300,7 +299,7 @@ export default function InventorSection() {
                     background: linear-gradient(
                         90deg,
                         transparent,
-                        rgba(200, 255, 0, 0.1),
+                        rgba(232, 232, 227, 0.05),
                         transparent
                     );
                     animation: shimmer 3s infinite;
@@ -328,8 +327,8 @@ export default function InventorSection() {
                 }
 
                 .category-badge {
-                    background: rgba(200, 255, 0, 0.9);
-                    color: #282c20;
+                    background: #e8e8e3;
+                    color: #0a192f;
                     padding: 6px 14px;
                     border-radius: 20px;
                     font-size: 0.75rem;
@@ -361,8 +360,8 @@ export default function InventorSection() {
                 .card-button {
                     width: 100%;
                     background: transparent;
-                    color: #c8ff00;
-                    border: 2px solid #c8ff00;
+                    color: #e8e8e3;
+                    border: 2px solid #e8e8e3;
                     padding: 12px 24px;
                     border-radius: 8px;
                     font-weight: 700;
@@ -377,10 +376,10 @@ export default function InventorSection() {
                 }
 
                 .card-button:hover {
-                    background: #c8ff00;
-                    color: #282c20;
+                    background: #e8e8e3;
+                    color: #0a192f;
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 20px rgba(200, 255, 0, 0.4);
+                    box-shadow: 0 4px 20px rgba(232, 232, 227, 0.2);
                 }
 
                 /* Scroll Controls */
@@ -396,23 +395,22 @@ export default function InventorSection() {
                     width: 60px;
                     height: 60px;
                     border-radius: 50%;
-                    background: rgba(40, 44, 32, 0.9);
-                    border: 2px solid rgba(200, 255, 0, 0.4);
-                    color: #c8ff00;
+                    background: #162439;
+                    border: 2px solid rgba(232, 232, 227, 0.4);
+                    color: #e8e8e3;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
                     transition: all 0.3s ease;
-                    backdrop-filter: blur(10px);
                 }
 
                 .scroll-btn:hover {
-                    background: #c8ff00;
-                    color: #282c20;
-                    border-color: #c8ff00;
+                    background: #e8e8e3;
+                    color: #0a192f;
+                    border-color: #e8e8e3;
                     transform: scale(1.1);
-                    box-shadow: 0 8px 25px rgba(200, 255, 0, 0.4);
+                    box-shadow: 0 8px 25px rgba(232, 232, 227, 0.2);
                 }
                 
                 /* Navigation Buttons */
@@ -427,26 +425,25 @@ export default function InventorSection() {
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
-                    background: rgba(40, 44, 32, 0.95);
-                    color: #c8ff00;
+                    background: #162439;
+                    color: #e8e8e3;
                     font-weight: 700;
                     text-transform: uppercase;
                     letter-spacing: 1.5px;
                     padding: 12px 24px;
                     border-radius: 8px;
                     text-decoration: none;
-                    border: 2px solid rgba(200, 255, 0, 0.4);
+                    border: 2px solid rgba(232, 232, 227, 0.4);
                     transition: all 0.3s ease;
                     font-size: 0.875rem;
-                    backdrop-filter: blur(10px);
                 }
                 
                 .nav-btn:hover {
-                    background: #c8ff00;
-                    color: #282c20;
-                    border-color: #c8ff00;
+                    background: #e8e8e3;
+                    color: #0a192f;
+                    border-color: #e8e8e3;
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 20px rgba(200, 255, 0, 0.4);
+                    box-shadow: 0 4px 20px rgba(232, 232, 227, 0.2);
                 }
                 
                 .nav-btn svg {

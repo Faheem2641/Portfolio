@@ -29,7 +29,7 @@ export default function TestimonialSection() {
               viewport={{ once: true }}
               className="mb-6 md:mb-12"
             >
-              <svg width="80" height="80" viewBox="0 0 120 120" className="text-[#CFFF04]/30">
+              <svg width="80" height="80" viewBox="0 0 120 120" className="text-lorenzo-accent/30">
                 <text x="0" y="100" fontSize="140" fontFamily="Georgia, serif" fontWeight="bold" fill="currentColor">
                   "
                 </text>
@@ -47,14 +47,14 @@ export default function TestimonialSection() {
               <p className="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-white leading-tight tracking-tight">
                 I THINK <br />
                 ABOUT BEING <br />
-                <span className="text-[#CFFF04] font-brier font-normal normal-case text-5xl md:text-7xl lg:text-8xl block mt-2 mb-2">
+                <span className="text-lorenzo-accent font-brier font-normal normal-case text-5xl md:text-7xl lg:text-8xl block mt-2 mb-2">
                   FASTER
                 </span>
                 ON THE NEXT LAP.
               </p>
             </motion.blockquote>
 
-            {/* Author */}
+            {/* Author Info */}
             <motion.footer
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -62,7 +62,7 @@ export default function TestimonialSection() {
               viewport={{ once: true }}
               className="flex items-center gap-6"
             >
-              <div className="w-12 md:w-20 h-1 bg-[#CFFF04]" />
+              <div className="w-12 md:w-20 h-1 bg-lorenzo-accent" />
               <div>
                 <p className="text-lg md:text-xl font-bold text-white font-mono">Faheem Ali</p>
               </div>

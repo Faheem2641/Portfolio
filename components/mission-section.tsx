@@ -60,7 +60,7 @@ export default function MissionSection() {
     <section
       id="mission"
       ref={sectionRef}
-      className="relative h-auto bg-lorenzo-dark text-lorenzo-text-light py-4 flex items-center justify-center"
+      className="relative h-auto bg-lorenzo-dark text-lorenzo-text-light pt-0 pb-8 flex items-center justify-center"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
@@ -76,7 +76,7 @@ export default function MissionSection() {
         </div>
         */}
 
-        <div className="relative h-32 flex items-center justify-center mt-4">
+        <div className="relative h-32 flex items-center justify-center mt-0">
           <img
             src="/images/image-removebg-preview.png"
             className="h-full w-auto max-h-[120px] object-contain"
@@ -103,7 +103,7 @@ export default function MissionSection() {
             <motion.path
               d="M30,75 Q60,40 110,75 T220,75 Q250,95 310,65 Q340,45 370,75 M200,90 Q220,110 250,90"
               fill="none"
-              stroke="#c8f550"
+              stroke="#e8e8e3"
               strokeWidth="4"
               strokeLinecap="round"
               strokeLinejoin="round"

@@ -103,13 +103,13 @@ export default function Header() {
             className="flex flex-col justify-center items-start mix-blend-difference"
           >
             <h1
-              className={`font-brier text-5xl md:text-6xl leading-none mt-6 tracking-tight font-bold transition-colors duration-300 ${logoColor === "white" ? "text-white" : "text-lorenzo-dark"
+              className={`font-brier text-5xl md:text-6xl leading-none mt-6 tracking-tight font-bold transition-colors duration-300 ${logoColor === "white" ? "text-lorenzo-text-light" : "text-lorenzo-dark"
                 }`}
             >
               FAHEEM ALI
             </h1>
             <p
-              className={`text-xs md:text-sm uppercase tracking-widest font-bold pl-1 transition-colors duration-300 ${logoColor === "white" ? "text-white/80" : "text-lorenzo-dark/80"
+              className={`text-xs md:text-sm uppercase tracking-widest font-bold pl-1 transition-colors duration-300 ${logoColor === "white" ? "text-lorenzo-text-light/80" : "text-lorenzo-dark/80"
                 }`}
             >
               Mechanical Engineering Undergraduate
@@ -185,7 +185,7 @@ export default function Header() {
                 {["INSTAGRAM", "TIKTOK", "YOUTUBE"].map((social) => (
                   <motion.a
                     key={social}
-                    whileHover={{ scale: 1.1, color: "#c8f550" }}
+                    whileHover={{ scale: 1.1, color: "#e8e8e3" }}
                     href="#"
                     className="text-sm font-bold text-white/60 hover:text-lorenzo-accent transition-colors"
                   >

@@ -74,6 +74,7 @@ export default function SocialSection() {
               { label: "EMAIL", href: "mailto:fali.ug24smme@student.nust.edu.pk" },
               { label: "GITHUB", href: "https://github.com/Faheem2641" },
               { label: "LINKEDIN", href: "https://www.linkedin.com/in/faheem-ali-b87293373/" },
+              { label: "WHATSAPP", href: "https://wa.me/" },
               { label: "RESUME", href: "#" }
             ].map((item) => (
               <motion.a
@@ -82,9 +83,9 @@ export default function SocialSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="inline-flex items-center justify-center border border-black/20 rounded-full px-8 py-3 backdrop-blur-sm bg-black/5 hover:bg-black/10 transition-colors"
+                className="inline-flex items-center justify-center border border-lorenzo-dark rounded-full px-8 py-3 backdrop-blur-sm bg-lorenzo-dark hover:bg-lorenzo-dark/90 transition-colors shadow-lg"
               >
-                <span className="font-black uppercase text-sm tracking-wider text-black">{item.label}</span>
+                <span className="font-black uppercase text-sm tracking-wider text-lorenzo-accent">{item.label}</span>
               </motion.a>
             ))}
           </div>

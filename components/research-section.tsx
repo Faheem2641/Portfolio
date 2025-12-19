@@ -78,7 +78,7 @@ export default function ResearchSection() {
                             onClick={() => setActiveTab(researchExperiences[0].id)}
                             className={`px-8 py-3 rounded-full font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === researchExperiences[0].id
                                 ? 'bg-lorenzo-accent text-lorenzo-dark shadow-lg'
-                                : 'bg-white/10 text-white hover:bg-white/20'
+                                : 'bg-white/10 text-lorenzo-text-light hover:bg-white/20'
                                 }`}
                         >
                             Review Paper
@@ -95,7 +95,7 @@ export default function ResearchSection() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.5 }}
-                            className="bg-white/5 backdrop-blur-sm border-2 border-white/10 rounded-3xl p-8 md:p-12 relative pb-32 overflow-hidden"
+                            className="bg-[#162439] border-2 border-white/10 rounded-3xl p-8 md:p-12 relative pb-32 overflow-hidden"
                         >
                             {/* Cutout overlay for button area - matches background and has border */}
                             <div
@@ -167,7 +167,7 @@ export default function ResearchSection() {
                                                 className="relative bg-gradient-to-b from-white/5 to-white/10 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
                                             >
                                                 {/* Colored Top Section with Number */}
-                                                <div className="bg-gradient-to-br from-lorenzo-accent to-[#b8e03f] h-20 flex items-center justify-center relative">
+                                                <div className="bg-gradient-to-br from-lorenzo-accent to-lorenzo-accent h-20 flex items-center justify-center relative">
                                                     <span className="text-black text-6xl font-black opacity-50">01</span>
                                                 </div>
 
@@ -177,7 +177,7 @@ export default function ResearchSection() {
                                                         <h5 className="text-2xl md:text-3xl font-black uppercase text-lorenzo-accent tracking-wider text-center">
                                                             What
                                                         </h5>
-                                                        <h6 className="text-xs font-semibold text-white/90 uppercase">
+                                                        <h6 className="text-xs font-semibold text-lorenzo-text-light/90 uppercase">
 
                                                         </h6>
                                                         <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-justify">
@@ -204,7 +204,7 @@ export default function ResearchSection() {
                                                 className="relative bg-gradient-to-b from-white/5 to-white/10 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
                                             >
                                                 {/* Colored Top Section with Number */}
-                                                <div className="bg-gradient-to-br from-[#b8e03f] to-lorenzo-accent h-20 flex items-center justify-center relative">
+                                                <div className="bg-gradient-to-br from-lorenzo-accent to-lorenzo-accent h-20 flex items-center justify-center relative">
                                                     <span className="text-black text-6xl font-black opacity-50">02</span>
                                                 </div>
 
@@ -214,11 +214,11 @@ export default function ResearchSection() {
                                                         <h5 className="text-2xl md:text-3xl font-black uppercase text-lorenzo-accent tracking-wider text-center">
                                                             How
                                                         </h5>
-                                                        <h6 className="text-xs font-semibold text-white/90 uppercase">
-                                                            
+                                                        <h6 className="text-xs font-semibold text-lorenzo-text-light/90 uppercase">
+
                                                         </h6>
                                                         <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-justify">
-                                                            Various machine learning models are trained and tested based on a experimental and DNS(Direct Numerical Simulation) 
+                                                            Various machine learning models are trained and tested based on a experimental and DNS(Direct Numerical Simulation)
                                                             datasets and are utilized to predict the flow behavior. This eliminates the need of the generation of a new datasets for every new analysis. Machine learning models being effective once trained can be used for new senerios and conditions.
                                                         </p>
                                                     </div>
@@ -243,7 +243,7 @@ export default function ResearchSection() {
                                                 className="relative bg-gradient-to-b from-white/5 to-white/10 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
                                             >
                                                 {/* Colored Top Section with Number */}
-                                                <div className="bg-gradient-to-br from-lorenzo-accent to-[#b8e03f] h-20 flex items-center justify-center relative">
+                                                <div className="bg-gradient-to-br from-lorenzo-accent to-lorenzo-accent h-20 flex items-center justify-center relative">
                                                     <span className="text-black text-6xl font-black opacity-50">03</span>
                                                 </div>
 
@@ -253,7 +253,7 @@ export default function ResearchSection() {
                                                         <h5 className="text-2xl md:text-3xl font-black uppercase text-lorenzo-accent tracking-wider text-center">
                                                             Results
                                                         </h5>
-                                                        <h6 className="text-xs font-semibold text-white/90 uppercase">
+                                                        <h6 className="text-xs font-semibold text-lorenzo-text-light/90 uppercase">
 
                                                         </h6>
                                                         <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-justify">

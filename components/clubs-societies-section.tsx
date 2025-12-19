@@ -133,7 +133,7 @@ export default function ClubsSocietiesSection() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.5 }}
-                            className="bg-white/5 backdrop-blur-sm border-2 border-white/10 rounded-3xl p-8 md:p-12 relative pb-32 overflow-hidden"
+                            className="bg-[#162439] border-2 border-white/10 rounded-3xl p-8 md:p-12 relative pb-32 overflow-hidden"
                         >
                             {/* Cutout overlay for button area - matches background and has border */}
                             <div

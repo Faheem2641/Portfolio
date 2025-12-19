@@ -5,14 +5,14 @@
 
 :root {
   --darkcinzabg: #111112;
-  --lorenzo-dark: #282c20;
-  --lorenzo-darkbk: #282c20;
+  --lorenzo-dark: #0a192f;
+  --lorenzo-darkbk: #0a192f;
   --lorenzo-light: #e8e8e3;
-  --lorenzo-accent: #c8f550;
+  --lorenzo-accent: #e8e8e3;
   --lorenzo-text-dark: #000000;
-  --lorenzo-text-light: #ffffff;
-  --verdetitulo: #282c20;
-  --background: #282c20;
+  --lorenzo-text-light: #e8e8e3;
+  --verdetitulo: #0a192f;
+  --background: #0a192f;
   /* --background: oklch(0.92 0.01 80); */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -108,7 +108,8 @@
   --font-serif: var(--font-libre-baskerville), "Georgia", serif;
   /* Adding Gochi Hand font for the Race Day counter script text */
   --font-gochi: "Gochi Hand", cursive;
-  --font-oswald: var(--font-oswald); /* Using Oswald variable correctly */
+  --font-oswald: var(--font-oswald);
+  /* Using Oswald variable correctly */
 
   /* Adding custom fonts to theme */
   --font-brier: "Brier", sans-serif;
@@ -165,6 +166,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     /* Removendo overflow-x: hidden para permitir scroll horizontal controlado na masonry */
@@ -210,6 +212,7 @@
       opacity: 0;
       transform: scale(0.95);
     }
+
     to {
       opacity: 1;
       transform: scale(1);
@@ -238,7 +241,7 @@
 }
 
 .simteste {
-  color: #c8f550;
+  color: #e8e8e3;
   font-size: 1050px;
   line-height: 600px;
 }

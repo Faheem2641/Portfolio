@@ -11,6 +11,7 @@ import MasonryGallerySection from "@/components/masonry-gallery-section"
 import Image from "next/image"
 
 import { InteractiveSchedule } from "@/components/interactive-schedule"
+import { CurveDivider } from "@/components/curve-divider"
 
 
 export default function Home() {
@@ -20,12 +21,16 @@ export default function Home() {
       <HeroSection />
       <div className="relative z-10">
         <MissionSection />
-        <MasonryGallerySection />
-        {/* <TrackSplitSection /> */}
 
+        <CurveDivider topColor="#0a192f" bottomColor="#ffffff" />
+
+        <MasonryGallerySection />
+
+        <CurveDivider topColor="#ffffff" bottomColor="#0a192f" />
 
         <InteractiveSchedule />
 
+        <CurveDivider topColor="#0a192f" bottomColor="#F5F1E8" />
 
         <SocialSection />
         <Footer />

@@ -130,7 +130,7 @@ function HotspotPoint({ spot, isActive, onHover, onLeave }: HotspotPointProps) {
           >
             {/* Connector Line */}
             <div className="absolute -top-4 left-1/2 w-px h-4 bg-gradient-to-b from-transparent to-lorenzo-accent/50" />
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-lorenzo-accent rounded-full shadow-[0_0_10px_#a3e635]" />
+            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-lorenzo-accent rounded-full shadow-[0_0_10px_#e8e8e3]" />
 
             {/* Card Container - Glassmorphism & Tech Borders */}
             <div className="relative overflow-hidden rounded-lg bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl">

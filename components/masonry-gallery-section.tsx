@@ -70,7 +70,7 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
       viewport={{ once: true, margin: "-50px" }}
-      className={`relative overflow-hidden rounded-xl shadow-2xl transition-all duration-500 ${image.title === "CLUBS & SOCIETIES" ? "bg-white" : "bg-gray-900/20"} border-2 border-transparent w-full ${image.aspect} group`}
+      className={`relative overflow-hidden rounded-xl shadow-2xl transition-all duration-500 ${image.title === "CLUBS & SOCIETIES" ? "bg-[#e8e8e3]" : "bg-[#162439]"} border-2 border-transparent w-full ${image.aspect} group`}
     >
       <Link href={`/projects/${image.slug}`} className="block w-full h-full">
         <Image
