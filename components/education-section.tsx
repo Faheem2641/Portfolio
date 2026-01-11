@@ -125,7 +125,7 @@ export default function EducationSection() {
                                                 <motion.div
                                                     whileHover={{ scale: 1.02 }}
                                                     transition={{ duration: 0.3 }}
-                                                    className="bg-[#162439] border-2 border-lorenzo-accent/10 rounded-2xl p-8 hover:border-lorenzo-accent/60 transition-all duration-300"
+                                                    className="bg-lorenzo-dark/50 border-2 border-lorenzo-accent/30 rounded-2xl p-8 backdrop-blur-sm hover:border-lorenzo-accent/60 transition-all duration-300"
                                                 >
                                                     <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-lorenzo-text-light text-right break-words">
                                                         {item.title === "Bachelor's of Mechanical Engineering" ? (
@@ -152,7 +152,7 @@ export default function EducationSection() {
                                                 <motion.div
                                                     whileHover={{ scale: 1.02 }}
                                                     transition={{ duration: 0.3 }}
-                                                    className="bg-[#162439] border-2 border-lorenzo-accent/10 rounded-2xl p-8 hover:border-lorenzo-accent/60 transition-all duration-300"
+                                                    className="bg-lorenzo-dark/50 border-2 border-lorenzo-accent/30 rounded-2xl p-8 backdrop-blur-sm hover:border-lorenzo-accent/60 transition-all duration-300"
                                                 >
                                                     <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-lorenzo-text-light break-words">
                                                         {item.title === "Bachelor's of Mechanical Engineering" ? (

@@ -62,7 +62,16 @@ export default function MissionSection() {
       ref={sectionRef}
       className="relative h-auto bg-lorenzo-dark text-lorenzo-text-light pt-0 pb-8 flex items-center justify-center"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative">
+        {/* Background Grid */}
+        <div
+          className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
+          style={{
+            backgroundImage: 'linear-gradient(#e8e8e3 1px, transparent 1px), linear-gradient(90deg, #e8e8e3 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+            maskImage: 'linear-gradient(to bottom, transparent, black, transparent)'
+          }}
+        />
 
         {/*
         <div className="flex justify-center mb-12">

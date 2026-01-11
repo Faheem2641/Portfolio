@@ -187,18 +187,12 @@ export default function InteractivePortrait() {
     const baseImage = new THREE.Mesh(new THREE.PlaneGeometry(width, height), baseImageMaterial)
     scene.add(baseImage)
 
-    // Load the wallpaper texture
-    const wallpaperTexture = textureLoader.load("/images/Blue wallpaper.jpg")
-    wallpaperTexture.colorSpace = THREE.SRGBColorSpace
-
-    // Update material to partial transparent to show wallpaper
-    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true })
+    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x1a1f1a, transparent: true })
     bgPlaneMaterial.defines = { USE_UV: "" }
 
     bgPlaneMaterial.onBeforeCompile = (shader) => {
       shader.uniforms.texBlob = { value: blob.rtOutput.texture }
       shader.uniforms.time = gu.time
-      shader.uniforms.uWallpaper = { value: wallpaperTexture } // Pass wallpaper to shader
 
       let vertexShader = shader.vertexShader
       vertexShader = vertexShader.replace("void main() {", "varying vec4 vPosProj;\nvoid main() {")
@@ -210,7 +204,6 @@ export default function InteractivePortrait() {
 
       shader.fragmentShader = `
         uniform sampler2D texBlob; 
-        uniform sampler2D uWallpaper; // Wallpaper uniform
         uniform float time; 
         varying vec4 vPosProj;
 
@@ -241,33 +234,35 @@ export default function InteractivePortrait() {
 
         // <<< LÓGICA ATUALIZADA PARA ANIMAÇÃO LÍQUIDA (DOMAIN WARPING) >>>
 
+        // 1. Define as cores
+        vec3 colorBg = vec3(1.0);
+        vec3 colorSoftShape = vec3(0.92);
+        vec3 colorLine = vec3(0.8);
+
         // 2. Coordenada base da textura (controla o "zoom")
         vec2 uv = vUv * 3.5;
 
         // 3. Cria um "campo de distorção" que muda com o tempo
         // Este é o nosso "líquido invisível" que vai mover a textura
         vec2 distortionField = vUv * 2.0;
-        float distortion = fbm(distortionField + time * 0.1); 
+        float distortion = fbm(distortionField + time * 0.1); // O campo de distorção se move lentamente
 
         // 4. Aplica a distorção (warp) às coordenadas da textura principal
-        float distortionStrength = 0.4; 
+        // Usamos o 'distortion' para empurrar as coordenadas 'uv'
+        float distortionStrength = 0.4; // <-- CONTROLE A INTENSIDADE AQUI
         vec2 warpedUv = uv + (distortion - 0.5) * distortionStrength;
         
-        // 5. Gera o valor final do ruído para manter detalhes se necessário, mas vamos usar a imagem
+        // 5. Gera o valor final do ruído a partir das coordenadas distorcidas
         float n = fbm(warpedUv);
 
-        // Usar a imagem do wallpaper com coordenadas levemente distorcidas para efeito líquido
-        // Usamos vUv original para manter a escala da imagem correta, mas somamos a distorção
-        vec2 wallpaperUV = vUv + (distortion - 0.5) * 0.1; 
-        vec4 wallpaperColor = texture(uWallpaper, wallpaperUV);
+        // O resto da lógica para desenhar as formas e linhas permanece o mesmo
+        float softShapeMix = smoothstep(0.1, 0.9, sin(n * 3.0));
+        vec3 baseColor = mix(colorBg, colorSoftShape, softShapeMix);
+        float linePattern = fract(n * 15.0);
+        float lineMix = 1.0 - smoothstep(0.49, 0.51, linePattern);
+        vec3 finalColor = mix(baseColor, colorLine, lineMix);
 
-        // Mistura suave nas bordas se desejar, ou apenas usa a cor
-        diffuseColor.rgb = wallpaperColor.rgb;
-        
-        // Opcional: Adicionar um pouco de brilho baseado no ruído líquido
-        // float highlight = smoothstep(0.4, 0.6, n);
-        // diffuseColor.rgb += highlight * 0.1;
-
+        diffuseColor.rgb = finalColor;
         #include <clipping_planes_fragment>
         `,
       )

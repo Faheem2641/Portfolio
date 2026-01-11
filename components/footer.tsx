@@ -31,7 +31,7 @@ export default function Footer() {
       <div className="relative flex-1 flex flex-col w-full max-w-[1688px] mx-auto mt-6 z-10">
         {/* SVG Background Mask */}
         <div
-          className="relative w-full h-full z-0 bg-[#0a192f] overflow-hidden"
+          className="relative w-full h-full z-0 bg-[#282c20] overflow-hidden"
           style={{
             maskImage: 'url("/images/footer-mask.svg")',
             WebkitMaskImage: 'url("/images/footer-mask.svg")',
@@ -43,11 +43,10 @@ export default function Footer() {
         >
           {/* <AnimatedTextureCanvas /> */}
 
-
           <div
-            className="absolute inset-0 w-full h-full opacity-60"
+            className="absolute inset-0 w-full h-full opacity-30"
             style={{
-              backgroundImage: `url("/images/curveb.svg")`,
+              backgroundImage: 'url("/images/curv.svg")',
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -95,9 +94,8 @@ export default function Footer() {
 
       <div className="w-full max-w-[1688px] mx-auto px-8 md:px-12 relative z-20 pt-0">
         <div className="flex flex-col md:flex-row justify-center items-center text-lorenzo-dark text-xs font-bold tracking-wider uppercase">
-          <p className="text-xs mt-7 opacity-40 font-medium leading-4 text-center">
-            This project was developed by Faheem ali as a portfolio website as a Mechanical Engineer . Inspired by the website of racing
-            driver Lando Norris.
+          <p className="text-xs mt-7 text-[#162439] font-bold leading-4 text-center">
+            This project was developed by Faheem ali as a portfolio website being a Mechanical Engineer.
           </p>
         </div>
       </div>

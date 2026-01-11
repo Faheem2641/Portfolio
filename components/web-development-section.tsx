@@ -75,7 +75,7 @@ export default function WebDevelopmentSection() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                            className="bg-[#162439] border-2 border-white/10 rounded-3xl p-6 hover:border-lorenzo-accent/50 transition-all duration-300 flex flex-col"
+                            className="bg-white/5 backdrop-blur-sm border-2 border-white/10 rounded-3xl p-6 hover:border-lorenzo-accent/50 transition-all duration-300 flex flex-col"
                         >
                             {/* Project Name */}
                             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-2 text-lorenzo-accent">

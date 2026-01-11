@@ -52,10 +52,10 @@ export default function SocialSection() {
           viewport={{ once: true }}
           className="text-center mb-2.5"
         >
-          <h2 className="text-5xl md:text-7xl font-black uppercase leading-none leading-[2.25] text-lorenzo-dark lg:text-6xl">
+          <h2 className="text-4xl md:text-7xl font-black uppercase leading-none leading-[2.25] text-lorenzo-dark lg:text-6xl">
             WHAT'S UP
           </h2>
-          <h3 className="text-4xl md:text-6xl font-brier mt-2 lg:text-6xl leading-10 text-lorenzo-dark">ON SOCIALS</h3>
+          <h3 className="text-3xl md:text-6xl font-brier mt-2 lg:text-6xl leading-10 text-lorenzo-dark">ON SOCIALS</h3>
         </motion.div>
 
         {/* Social Cards Removed */}
@@ -69,25 +69,27 @@ export default function SocialSection() {
         >
           <p className="text-lg md:text-xl font-serif text-black/80 font-medium">Let’s Connect</p>
 
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              { label: "EMAIL", href: "mailto:fali.ug24smme@student.nust.edu.pk" },
-              { label: "GITHUB", href: "https://github.com/Faheem2641" },
-              { label: "LINKEDIN", href: "https://www.linkedin.com/in/faheem-ali-b87293373/" },
-              { label: "WHATSAPP", href: "https://wa.me/" },
-              { label: "RESUME", href: "#" }
-            ].map((item) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="inline-flex items-center justify-center border border-lorenzo-dark rounded-full px-8 py-3 backdrop-blur-sm bg-lorenzo-dark hover:bg-lorenzo-dark/90 transition-colors shadow-lg"
-              >
-                <span className="font-black uppercase text-sm tracking-wider text-lorenzo-accent">{item.label}</span>
-              </motion.a>
-            ))}
+          <div className="flex justify-center mt-8">
+            <div className="bg-[#162439] border border-white/10 rounded-full p-2 flex flex-wrap justify-center gap-2 shadow-2xl max-w-4xl mx-auto">
+              {[
+                { label: "EMAIL", href: "mailto:fali.ug24smme@student.nust.edu.pk" },
+                { label: "GITHUB", href: "https://github.com/Faheem2641" },
+                { label: "LINKEDIN", href: "https://www.linkedin.com/in/faheem-ali-b87293373/" },
+                { label: "WHATSAPP", href: "https://wa.me/923304188776" },
+                { label: "RESUME", href: "#" }
+              ].map((item) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="inline-flex items-center justify-center bg-[#e8e8e3] rounded-full px-6 py-3 shadow-sm hover:shadow-lg transition-all duration-300"
+                >
+                  <span className="font-black uppercase text-xs md:text-sm tracking-widest text-[#162439]">{item.label}</span>
+                </motion.a>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

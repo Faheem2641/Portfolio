@@ -6,9 +6,6 @@ import { motion, AnimatePresence } from "framer-motion"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [logoColor, setLogoColor] = useState<"white" | "dark">("dark")
-
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
 
@@ -25,53 +22,6 @@ export default function Header() {
         setIsVisible(true) // Scrolling up
       }
       setLastScrollY(currentScroll)
-
-      setScrolled(currentScroll >= 300)
-
-      let newColor: "white" | "dark" = "dark"
-
-      if (currentScroll > 2) {
-        newColor = "white"
-      }
-
-      const headerOffset = 100 // Approximate header height
-
-      const masonry = document.getElementById("masonry-gallery")
-      if (masonry) {
-        const rect = masonry.getBoundingClientRect()
-        if (rect.top <= headerOffset && rect.bottom > headerOffset) {
-          const progress = (headerOffset - rect.top) / rect.height
-          if (progress > 0.65) {
-            newColor = "dark"
-          }
-        }
-      }
-
-      const helmets = document.getElementById("helmets")
-      if (helmets) {
-        const rect = helmets.getBoundingClientRect()
-        if (rect.top <= headerOffset && rect.bottom > headerOffset) {
-          newColor = "white"
-        }
-      }
-
-      const social = document.getElementById("social-section")
-      if (social) {
-        const rect = social.getBoundingClientRect()
-        if (rect.top <= headerOffset && rect.bottom > headerOffset) {
-          newColor = "dark"
-        }
-      }
-
-      const techSpecs = document.getElementById("tech-specs")
-      if (techSpecs) {
-        const rect = techSpecs.getBoundingClientRect()
-        if (rect.top <= headerOffset && rect.bottom > headerOffset) {
-          newColor = "dark"
-        }
-      }
-
-      setLogoColor(newColor)
     }
 
     window.addEventListener("scroll", handleScroll)
@@ -89,52 +39,68 @@ export default function Header() {
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: isVisible ? 0 : -100 }}
-        transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${scrolled ? "backdrop-blur-md" : "bg-transparent"
-          }`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{
+          y: isVisible ? 0 : -100,
+          opacity: isVisible ? 1 : 0
+        }}
+        transition={{ duration: 0.4, type: "spring", stiffness: 100, damping: 20 }}
+        className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
-        <div className="mx-auto px-4 md:px-6 flex items-center justify-between h-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col justify-center items-start mix-blend-difference"
-          >
-            <h1
-              className={`font-brier text-5xl md:text-6xl leading-none mt-6 tracking-tight font-bold transition-colors duration-300 ${logoColor === "white" ? "text-lorenzo-text-light" : "text-lorenzo-dark"
-                }`}
-            >
-              FAHEEM ALI
-            </h1>
-            <p
-              className={`text-xs md:text-sm uppercase tracking-widest font-bold pl-1 transition-colors duration-300 ${logoColor === "white" ? "text-lorenzo-text-light/80" : "text-lorenzo-dark/80"
-                }`}
-            >
-              Mechanical Engineering Undergraduate
-            </p>
-          </motion.div>
+        <div className="bg-[#162439] border border-white/10 rounded-full px-6 py-3 flex items-center shadow-2xl pointer-events-auto w-[95%] max-w-6xl justify-between">
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex items-center gap-4 mix-blend-difference"
-          >
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+          {/* Logo Section */}
+          <div className="flex items-center gap-2">
+            <span className="font-brier text-xl text-lorenzo-accent whitespace-nowrap tracking-widest pr-4">
+              FAHEEM ALI
+            </span>
+          </div>
+
+          {/* Desktop Navigation Links - Centered */}
+          <nav className="hidden md:flex items-center gap-10 px-6 bg-white/10 rounded-full py-2 border border-white/20 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+            {[
+              { name: "Home", href: "#" },
+              { name: "About", href: "#mission" },
+              { name: "Gallery", href: "#masonry-gallery" },
+              { name: "Insights", href: "#interactive-schedule" }
+            ].map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="relative text-xs font-bold uppercase tracking-widest text-[#e8e8e3]/60 hover:text-[#e8e8e3] transition-all duration-300 group py-2"
+              >
+                {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-lorenzo-accent transition-all duration-300 group-hover:w-full opacity-50" />
+              </a>
+            ))}
+          </nav>
+
+          {/* Action Button & Mobile Menu Toggle */}
+          <div className="flex items-center gap-3">
+            <a
+              href="#social-section"
+              className="hidden md:inline-flex bg-gradient-to-r from-lorenzo-accent to-[#d1d1cc] text-[#0a192f] rounded-full px-7 py-3 font-black text-xs uppercase tracking-widest hover:shadow-[0_0_20px_rgba(232,232,227,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 items-center gap-2 border border-white/20"
+            >
+              Let's Talk
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </a>
+
+            {/* Mobile Menu Button */}
+            <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 bg-lorenzo-dark/80 border border-white/30 hover:bg-lorenzo-dark rounded-lg transition-colors text-white px-3 py-2.5"
+              className="md:hidden p-2 bg-white/5 hover:bg-white/10 rounded-full text-lorenzo-text-light transition-colors border border-white/5"
               aria-label="Menu"
             >
-              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </motion.button>
-          </motion.div>
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </motion.header>
 
+      {/* Full Screen Menu Overlay for Mobile */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -142,9 +108,16 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-lorenzo-dark/95 backdrop-blur-xl z-40 flex items-center justify-center"
+            className="fixed inset-0 z-40 flex items-center justify-center bg-[#162439]/95 backdrop-blur-xl"
             onClick={() => setMenuOpen(false)}
           >
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-8 right-8 p-3 bg-white/5 hover:bg-white/10 rounded-full text-lorenzo-text-light transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
             <motion.nav
               initial="closed"
               animate="open"
@@ -155,21 +128,28 @@ export default function Header() {
               }}
               className="text-center"
             >
-              <motion.ul className="space-y-6 text-4xl md:text-6xl font-black uppercase text-white">
-                {["HOME", "MISSION", "GALLERY", "HELMETS", "STORE", "CONTACT"].map((item, index) => (
+              <motion.ul className="space-y-8">
+                {[
+                  { name: "HOME", href: "#" },
+                  { name: "MISSION", href: "#mission" },
+                  { name: "GALLERY", href: "#masonry-gallery" },
+                  { name: "HELMETS", href: "#helmets" },
+                  { name: "STORE", href: "#store" },
+                  { name: "CONTACT", href: "#social-section" }
+                ].map((item) => (
                   <motion.li
-                    key={item}
+                    key={item.name}
                     variants={{
-                      open: { opacity: 1, y: 0, rotate: 0 },
-                      closed: { opacity: 0, y: 20, rotate: -5 },
+                      open: { opacity: 1, y: 0 },
+                      closed: { opacity: 0, y: 20 },
                     }}
                   >
                     <a
-                      href={`#${item.toLowerCase()}`}
-                      className="inline-block hover:text-lorenzo-accent transition-colors duration-300 hover:scale-110 transform"
+                      href={item.href}
+                      className="text-4xl md:text-5xl font-black uppercase text-lorenzo-text-light hover:text-lorenzo-accent transition-colors duration-300 inline-block font-brier"
                       onClick={() => setMenuOpen(false)}
                     >
-                      {item}
+                      {item.name}
                     </a>
                   </motion.li>
                 ))}
@@ -180,17 +160,16 @@ export default function Header() {
                   open: { opacity: 1, y: 0 },
                   closed: { opacity: 0, y: 20 },
                 }}
-                className="mt-12 flex justify-center gap-6"
+                className="mt-16 flex justify-center gap-8"
               >
-                {["INSTAGRAM", "TIKTOK", "YOUTUBE"].map((social) => (
-                  <motion.a
+                {["Instagram", "TikTok", "YouTube"].map((social) => (
+                  <a
                     key={social}
-                    whileHover={{ scale: 1.1, color: "#e8e8e3" }}
                     href="#"
-                    className="text-sm font-bold text-white/60 hover:text-lorenzo-accent transition-colors"
+                    className="text-sm font-bold uppercase tracking-widest text-lorenzo-text-light/50 hover:text-lorenzo-accent transition-colors"
                   >
                     {social}
-                  </motion.a>
+                  </a>
                 ))}
               </motion.div>
             </motion.nav>
