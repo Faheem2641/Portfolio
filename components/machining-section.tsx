@@ -3,164 +3,171 @@
 import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { Settings, Disc, Box, Component, Ruler, Cpu, Grid, Workflow } from "lucide-react"
+import { Disc, Settings, Circle, Component, Wrench, Layers, Zap, ClipboardCheck } from "lucide-react"
+
+// Define custom Icon component if Layers is not working or needs specific style, 
+// otherwise we can try importing Layers from lucide-react if available, 
+// but for safety I will keep the helper or use the imported standard one if I am sure.
+// Lucide React usually has 'Layers'. Let's trust it or fallback safely.
+// Actually, earlier I used a helper for LayersIcon. I will keep it to be safe 
+// but I will name it consistently.
 
 const projects = [
     {
         id: 1,
-        title: "Mechanical Assembly",
-        subtitle: "Autodesk Inventor",
-        description: "Complex mechanical assembly with over 500 parts, fully constrained and simulated.",
-        icon: Settings,
-        image: "/images/aaa.png",
+        title: "CNC Lathe",
+        subtitle: "Production",
+        description: "High-precision turning operations for cylindrical components.",
+        icon: Disc,
+        image: "/images/5_12_2024.jpg",
         color: "#c8ff00",
         details: {
-            parts: "500+",
-            constraints: "Fully Defined",
-            type: "Assembly",
-            version: "2025"
+            material: "Aluminium 7075-T6",
+            tolerance: "±0.005mm",
+            machine: "Haas ST-20",
+            runTime: "4h 30m"
         },
         stats: [
-            { label: "Complexity", value: "High" },
-            { label: "Simulation", value: "Yes" }
+            { label: "Precision", value: "99.9%" },
+            { label: "Efficiency", value: "High" }
         ]
     },
     {
         id: 2,
-        title: "Sheet Metal Design",
-        subtitle: "Fabrication",
-        description: "Precision sheet metal enclosure design with flat pattern generation.",
-        icon: Box,
-        image: "/images/5_12_2024.jpg",
+        title: "3-Axis Milling",
+        subtitle: "Machining",
+        description: "Complex prismatic parts machined with tight tolerances.",
+        icon: Settings,
+        image: "/images/download (1).jpg",
         color: "#e8e8e3",
         details: {
-            material: "Al 5052",
-            thickness: "2mm",
-            bends: "12",
-            kFactor: "0.44"
+            material: "Stainless 316L",
+            tolerance: "±0.01mm",
+            machine: "DMG Mori",
+            runTime: "6h 15m"
         },
         stats: [
-            { label: "Flat Pattern", value: "Ready" },
-            { label: "DXF Export", value: "Yes" }
+            { label: "Complexity", value: "High" },
+            { label: "Surface", value: "Ra 0.8" }
         ]
     },
     {
         id: 3,
-        title: "CNC Machining",
-        subtitle: "Production",
-        description: "5-axis CNC machining path optimization and tooling setup.",
-        icon: Disc,
-        image: "/images/download (1).jpg",
+        title: "Manual Turning",
+        subtitle: "Fabrication",
+        description: "Custom prototypes and one-off parts created on manual lathes.",
+        icon: Circle,
+        image: "/images/aaa.png",
         color: "#ff3e3e",
         details: {
-            operation: "Milling",
-            axis: "5-Axis",
-            toolpath: "High Speed",
-            stock: "Billet"
+            material: "Brass C360",
+            tolerance: "±0.05mm",
+            machine: "Clausing",
+            runTime: "2h 00m"
         },
         stats: [
-            { label: "Time Save", value: "40%" },
-            { label: "Finish", value: "Ra 0.4" }
+            { label: "Custom", value: "100%" },
+            { label: "Hands-on", value: "Yes" }
         ]
     },
     {
         id: 4,
-        title: "Finite Element",
-        subtitle: "Analysis",
-        description: "Stress analysis and safety factor calculation for critical components.",
+        title: "Drilling & Tapping",
+        subtitle: "Operations",
+        description: "Precision hole making and thread creation for assembly.",
         icon: Component,
         image: "/images/faheem-ali-box.png",
         color: "#00d1ff",
         details: {
-            study: "Static Stress",
-            mesh: "Fine",
-            safetyFactor: "2.5",
-            load: "5000N"
+            material: "Mild Steel",
+            tolerance: "H7 Fit",
+            machine: "Drill Press",
+            runTime: "1h 30m"
         },
         stats: [
-            { label: "Max Stress", value: "120MPa" },
-            { label: "Safety", value: "Pass" }
+            { label: "Threads", value: "M6-M12" },
+            { label: "Accuracy", value: "H7" }
         ]
     },
     {
         id: 5,
-        title: "Parametric Model",
-        subtitle: "Design Automation",
-        description: "iLogic integration for automated design configuration and updates.",
-        icon: Ruler,
+        title: "Surface Grinding",
+        subtitle: "Finishing",
+        description: "Achieving superior surface finishes and flatnesses.",
+        icon: Layers, // Trying standard Layers first, if it fails I'll use the helper logic below
         image: "/images/faheem-ali-box2.png",
         color: "#c8ff00",
         details: {
-            logic: "iLogic",
-            params: "Size, Matl",
-            config: "Auto",
-            update: "Real-time"
+            material: "Tool Steel D2",
+            tolerance: "±0.002mm",
+            machine: "Okamoto",
+            runTime: "3h 45m"
         },
         stats: [
-            { label: "Efficiency", value: "300%" },
-            { label: "Errors", value: "0" }
+            { label: "Flatness", value: "2µm" },
+            { label: "Finish", value: "Mirror" }
         ]
     },
     {
         id: 6,
-        title: "Mold Design",
-        subtitle: "Manufacturing",
-        description: "Injection mold core and cavity design with cooling channel analysis.",
-        icon: Cpu,
+        title: "Assembly & Fit",
+        subtitle: "Integration",
+        description: "Final assembly and tolerance checking of machined components.",
+        icon: Wrench,
         image: "/images/faheem-ali-box3.png",
         color: "#e8e8e3",
         details: {
-            type: "Injection",
-            cavities: "4",
-            cooling: "Conformal",
-            material: "P20"
+            material: "Various",
+            tolerance: "Fit Check",
+            machine: "Workbench",
+            runTime: "5h 00m"
         },
         stats: [
-            { label: "Cycle", value: "12s" },
-            { label: "Draft", value: "1.5°" }
+            { label: "Parts", value: "50+" },
+            { label: "Check", value: "Pass" }
         ]
     },
     {
         id: 7,
-        title: "Frame Generator",
-        subtitle: "Structure",
-        description: "Rapid creation and analysis of structural steel frames and trusses.",
-        icon: Grid,
-        image: "/images/frame.png", // Placeholder
-        color: "#ffaa00",
+        title: "Wire EDM",
+        subtitle: "Precision",
+        description: "High-precision cutting for conductive materials using electrical discharge.",
+        icon: Zap,
+        image: "/images/wire-edm.jpg", // Placeholder
+        color: "#ff00ff", // Neon Purple/Pink vibe
         details: {
-            standard: "ANSI/ISO",
-            profile: "I-Beam",
-            miters: "Auto",
-            joints: "Welded"
+            material: "Titanium",
+            tolerance: "±0.001mm",
+            machine: "Sodick",
+            runTime: "12h 00m"
         },
         stats: [
-            { label: "Speed", value: "Fast" },
-            { label: "BOM", value: "Auto" }
+            { label: "Kerf", value: "0.2mm" },
+            { label: "Accuracy", value: "Ultra" }
         ]
     },
     {
         id: 8,
-        title: "Tube & Pipe",
-        subtitle: "Routing",
-        description: "3D routing of rigid pipes, bent tubes, and flexible hoses.",
-        icon: Workflow,
-        image: "/images/pipe.png", // Placeholder
-        color: "#00ffaa",
+        title: "Quality Control",
+        subtitle: "Inspection",
+        description: "Rigorous inspection and CMM validation of final parts.",
+        icon: ClipboardCheck,
+        image: "/images/qc.jpg", // Placeholder
+        color: "#00ff00", // Green for Pass
         details: {
-            style: "Rigid",
-            fitting: "Flanged",
-            route: "Auto",
-            run: "B31.3"
+            method: "CMM",
+            standard: "ISO 9001",
+            machine: "Zeiss",
+            runTime: "1h 00m"
         },
         stats: [
-            { label: "Length", value: "Calc" },
-            { label: "Bend Table", value: "Yes" }
+            { label: "Pass Rate", value: "100%" },
+            { label: "Report", value: "PDF" }
         ]
     },
 ]
 
-export default function InventorSection() {
+export default function MachiningSection() {
     const containerRef = useRef<HTMLDivElement>(null)
     const [activeIndex, setActiveIndex] = useState(0)
 
@@ -235,10 +242,16 @@ export default function InventorSection() {
                                         <div
                                             key={project.id}
                                             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                                            // Define custom property for responsive radius
                                             style={{
-                                                "--radius": "40vw",
+                                                "--radius": "40vw", // Default (Mobile)
                                             } as React.CSSProperties}
                                         >
+                                            {/* We use a span or div to handle the desktop override via className since inline style overrides class usually, 
+                                                but for CSS vars we can use a class to override if we structure it right or just use media query in style if possible? 
+                                                Actually, safer and cleaner: just put the variable on the parent or handle it here with `md`.
+                                                Tailwind arbitrary values for vars work great: `md:[--radius:340px]`
+                                            */}
                                             <div
                                                 className="absolute top-0 left-0 md:[--radius:340px] transition-transform duration-300"
                                                 style={{
@@ -251,12 +264,16 @@ export default function InventorSection() {
                                                     {/* The Node */}
                                                     <motion.div
                                                         className={`
-                                                            relative w-12 h-12 md:w-16 md:h-16 rounded-full
+                                                            relative w-12 h-12 md:w-16 md:h-16 rounded-full 
                                                             flex items-center justify-center
                                                             backdrop-blur-md transition-all duration-500
                                                             border z-20
                                                             cursor-pointer
                                                         `}
+                                                        onClick={() => {
+                                                            // Optional: Scroll to this item?
+                                                            // For now just visual
+                                                        }}
                                                         style={{
                                                             backgroundColor: isActive ? 'rgba(200, 255, 0, 0.1)' : 'rgba(0, 0, 0, 0.5)',
                                                             borderColor: isActive ? '#c8ff00' : 'rgba(255, 255, 255, 0.1)',

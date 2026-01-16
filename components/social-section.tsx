@@ -33,12 +33,12 @@ export default function SocialSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: index === currentIconIndex ? 1 : 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute inset-0"
+                className="absolute inset-0 flex items-center justify-center"
               >
                 <img
-                  src={icon || "/placeholder.svg"}
+                  src={icon}
                   className="h-full w-full object-contain"
-                  alt="Animated hand icon"
+                  alt={`Animated hand icon ${index + 1}`}
                 />
               </motion.div>
             ))}

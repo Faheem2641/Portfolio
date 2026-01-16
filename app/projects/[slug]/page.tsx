@@ -7,6 +7,8 @@ import ClubsSocietiesSection from "@/components/clubs-societies-section"
 import ResearchSection from "@/components/research-section"
 import WebDevelopmentSection from "@/components/web-development-section"
 import InventorSection from "@/components/inventor-section"
+import AnsysSection from "@/components/ansys-section"
+import MachiningSection from "@/components/machining-section"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
@@ -107,14 +109,44 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         )
     }
 
+    // Special handling for ansys page
+    if (slug === "ansys") {
+        return (
+            <main className="relative bg-lorenzo-dark min-h-screen">
+                <Header />
+
+                <div className="pt-20">
+                    <AnsysSection />
+                </div>
+
+                <Footer />
+            </main>
+        )
+    }
+
     // Special handling for autodesk inventor page
     if (slug === "autodesk-inventor") {
         return (
             <main className="relative bg-lorenzo-dark min-h-screen">
                 <Header />
 
-                <div className="pt-20">
+                <div className="">
                     <InventorSection />
+                </div>
+
+                <Footer />
+            </main>
+        )
+    }
+
+    // Special handling for machining pages
+    if (slug === "production-machining" || slug === "cnc-machining") {
+        return (
+            <main className="relative bg-lorenzo-dark min-h-screen">
+                <Header />
+
+                <div className="">
+                    <MachiningSection />
                 </div>
 
                 <Footer />
