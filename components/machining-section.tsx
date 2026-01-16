@@ -20,7 +20,7 @@ const projects = [
         description: "High-precision turning operations for cylindrical components.",
         icon: Disc,
         image: "/images/5_12_2024.jpg",
-        color: "#c8ff00",
+        color: "#e8e8e3",
         details: {
             material: "Aluminium 7075-T6",
             tolerance: "±0.005mm",
@@ -96,7 +96,7 @@ const projects = [
         description: "Achieving superior surface finishes and flatnesses.",
         icon: Layers, // Trying standard Layers first, if it fails I'll use the helper logic below
         image: "/images/faheem-ali-box2.png",
-        color: "#c8ff00",
+        color: "#e8e8e3",
         details: {
             material: "Tool Steel D2",
             tolerance: "±0.002mm",
@@ -215,7 +215,7 @@ export default function MachiningSection() {
             <div className="sticky top-0 h-screen w-full flex overflow-hidden bg-lorenzo-dark perspective-1000">
 
                 {/* Unified Atmospheric Background */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_50%,rgba(200,255,0,0.08),transparent_50%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_50%,rgba(232,232,227,0.08),transparent_50%)]" />
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.8),transparent,rgba(0,0,0,0.8))]" />
 
                 {/* Global Grid Decoration */}
@@ -223,7 +223,7 @@ export default function MachiningSection() {
                     style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '100px 100px' }}
                 />
 
-                <div className="relative w-full h-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-12 lg:px-24">
+                <div className="relative w-full h-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-12 lg:px-24 scale-95 lg:scale-[0.9] origin-center">
 
                     {/* LEFT SIDE: THE MACHINE DIAL (Immersive & Large) */}
                     <div className="relative w-full md:w-1/2 h-[50vh] md:h-full flex items-center justify-center md:justify-start order-2 md:order-1 z-10">
@@ -232,7 +232,7 @@ export default function MachiningSection() {
                             {/* Rotating Ring */}
                             <motion.div
                                 style={{ rotate: smoothRotation }}
-                                className="absolute w-full h-full rounded-full border border-white/5"
+                                className="absolute w-full h-full rounded-full border-2 border-[#e8e8e3]/30"
                             >
                                 {projects.map((project, index) => {
                                     const angle = (index * 360) / projects.length
@@ -275,32 +275,19 @@ export default function MachiningSection() {
                                                             // For now just visual
                                                         }}
                                                         style={{
-                                                            backgroundColor: isActive ? 'rgba(200, 255, 0, 0.1)' : 'rgba(0, 0, 0, 0.5)',
-                                                            borderColor: isActive ? '#c8ff00' : 'rgba(255, 255, 255, 0.1)',
-                                                            boxShadow: isActive ? '0 0 30px rgba(200, 255, 0, 0.3)' : 'none',
+                                                            backgroundColor: isActive ? 'rgba(232, 232, 227, 0.1)' : 'rgba(0, 0, 0, 0.5)',
+                                                            borderColor: isActive ? '#e8e8e3' : 'rgba(255, 255, 255, 0.1)',
+                                                            boxShadow: isActive ? '0 0 30px rgba(232, 232, 227, 0.3)' : 'none',
                                                             scale: isActive ? 1.5 : 1
                                                         }}
                                                     >
                                                         <project.icon
                                                             className={`w-5 h-5 md:w-6 md:h-6 transition-colors duration-300`}
-                                                            style={{ color: isActive ? '#c8ff00' : 'rgba(255, 255, 255, 0.4)' }}
+                                                            style={{ color: isActive ? '#e8e8e3' : 'rgba(255, 255, 255, 0.4)' }}
                                                         />
                                                     </motion.div>
 
-                                                    {/* LASER BEAM CONNECTOR (Only active) */}
-                                                    <motion.div
-                                                        className="absolute left-full top-1/2 h-[2px] bg-gradient-to-r from-lorenzo-accent to-transparent z-10 origin-left"
-                                                        initial={{ width: 0, opacity: 0 }}
-                                                        animate={{
-                                                            width: isActive ? '50vw' : 0,
-                                                            opacity: isActive ? 1 : 0
-                                                        }}
-                                                        transition={{ duration: 0.5, ease: "circOut" }}
-                                                        style={{
-                                                            boxShadow: '0 0 15px rgba(200, 255, 0, 0.5)',
-                                                            display: isActive ? 'block' : 'none'
-                                                        }}
-                                                    />
+
                                                 </div>
                                             </div>
                                         </div>
@@ -309,11 +296,11 @@ export default function MachiningSection() {
                             </motion.div>
 
                             {/* Static Decoration Rings */}
-                            <svg className="absolute w-[140%] h-[140%] pointer-events-none opacity-[0.03] animate-[spin_60s_linear_infinite]">
-                                <circle cx="50%" cy="50%" r="49%" stroke="currentColor" strokeWidth="1" strokeDasharray="20 20" className="text-white" />
+                            <svg className="absolute w-[140%] h-[140%] pointer-events-none opacity-30 animate-[spin_60s_linear_infinite]">
+                                <circle cx="50%" cy="50%" r="49%" stroke="#e8e8e3" strokeWidth="1" strokeDasharray="20 20" fill="none" />
                             </svg>
-                            <svg className="absolute w-[60%] h-[60%] pointer-events-none opacity-[0.05]">
-                                <circle cx="50%" cy="50%" r="48%" stroke="#c8ff00" strokeWidth="2" fill="none" />
+                            <svg className="absolute w-[60%] h-[60%] pointer-events-none opacity-40">
+                                <circle cx="50%" cy="50%" r="48%" stroke="#e8e8e3" strokeWidth="2" fill="none" />
                             </svg>
                         </div>
                     </div>
@@ -349,9 +336,7 @@ export default function MachiningSection() {
                                     }}
                                     className="relative z-20"
                                 >
-                                    {/* Connecting Dot (Visual termination of the beam) */}
-                                    <div className="absolute -left-4 md:-left-12 lg:-left-20 top-12 w-2 h-2 bg-lorenzo-accent rounded-full shadow-[0_0_10px_#c8ff00]" />
-                                    <div className="absolute -left-4 md:-left-12 lg:-left-20 top-12 h-full w-[1px] bg-gradient-to-b from-lorenzo-accent/50 to-transparent" />
+
 
                                     {/* Number / ID */}
                                     <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="text-lorenzo-accent/50 font-mono text-8xl md:text-[10rem] lg:text-[12rem] font-black absolute -top-20 md:-top-32 -left-8 md:-left-20 -z-10 select-none opacity-20">
@@ -372,52 +357,74 @@ export default function MachiningSection() {
                                     </div>
 
                                     {/* Glass Panel Content */}
+                                    {/* Tech Panel Content */}
+                                    {/* Open Spec Sheet Design */}
                                     <motion.div
-                                        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                                        className="bg-zinc-900/60 backdrop-blur-xl border border-white/10 p-8 rounded-3xl max-w-xl relative overflow-hidden group"
+                                        variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}
+                                        className="relative max-w-xl"
                                     >
-                                        {/* Scanline Effect REMOVED */}
-
-                                        <p className="text-xl text-white/80 font-light leading-relaxed mb-8">
-                                            {projects[activeIndex].description}
-                                        </p>
-
-                                        {/* Specs Matrix - Dynamic Slicing */}
-                                        <div className="grid grid-cols-2 gap-8 border-t border-white/5 pt-8">
-                                            {(() => {
-                                                const details = Object.entries(projects[activeIndex].details)
-                                                const half = Math.ceil(details.length / 2)
-                                                return (
-                                                    <>
-                                                        <div className="space-y-6">
-                                                            {details.slice(0, half).map(([key, value]) => (
-                                                                <div key={key}>
-                                                                    <span className="block text-[10px] text-white/40 uppercase tracking-widest mb-1">{key}</span>
-                                                                    <span className="font-mono text-lorenzo-accent text-lg">{value}</span>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                        <div className="space-y-6">
-                                                            {details.slice(half).map(([key, value]) => (
-                                                                <div key={key}>
-                                                                    <span className="block text-[10px] text-white/40 uppercase tracking-widest mb-1">{key}</span>
-                                                                    <span className="font-mono text-white text-lg">{value}</span>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </>
-                                                )
-                                            })()}
+                                        {/* Vertical Anchor Line */}
+                                        <div className="absolute top-0 left-0 w-[2px] h-full bg-[#e8e8e3]/10">
+                                            <motion.div
+                                                className="absolute top-0 left-0 w-full bg-[#e8e8e3]"
+                                                initial={{ height: 0 }}
+                                                animate={{ height: "100%" }}
+                                                transition={{ duration: 0.8, ease: "circOut" }}
+                                            />
                                         </div>
 
-                                        {/* Stats Row */}
-                                        <div className="flex gap-4 mt-8">
-                                            {projects[activeIndex].stats.map((stat, i) => (
-                                                <div key={i} className="bg-white/5 rounded px-4 py-2 border border-white/5">
-                                                    <span className="text-white font-bold">{stat.value}</span>
-                                                    <span className="text-xs text-white/40 ml-2">{stat.label}</span>
+                                        <div className="pl-10 py-2">
+                                            {/* Description - Large & Clean */}
+                                            <p className="text-2xl text-white/90 font-light leading-relaxed mb-10">
+                                                {projects[activeIndex].description}
+                                            </p>
+
+                                            {/* Technical Details Grid */}
+                                            <div className="mb-10">
+                                                <div className="h-[1px] w-full bg-[#e8e8e3]/10 mb-6" />
+
+                                                <div className="grid grid-cols-2 gap-x-12 gap-y-8">
+                                                    {(() => {
+                                                        const details = Object.entries(projects[activeIndex].details)
+                                                        const half = Math.ceil(details.length / 2)
+                                                        return (
+                                                            <>
+                                                                <div className="space-y-6">
+                                                                    {details.slice(0, half).map(([key, value]) => (
+                                                                        <div key={key} className="flex flex-col">
+                                                                            <span className="text-[10px] text-[#e8e8e3]/50 uppercase tracking-[0.2em] mb-1">{key}</span>
+                                                                            <span className="font-mono text-[#e8e8e3] text-xl">{value}</span>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                                <div className="space-y-6">
+                                                                    {details.slice(half).map(([key, value]) => (
+                                                                        <div key={key} className="flex flex-col">
+                                                                            <span className="text-[10px] text-[#e8e8e3]/50 uppercase tracking-[0.2em] mb-1">{key}</span>
+                                                                            <span className="font-mono text-white text-xl">{value}</span>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    })()}
                                                 </div>
-                                            ))}
+                                            </div>
+
+                                            {/* Key Stats - Horizontal Highlight */}
+                                            <div className="flex items-center gap-8">
+                                                {projects[activeIndex].stats.map((stat, i) => (
+                                                    <div key={i} className="flex items-center gap-4 group cursor-pointer">
+                                                        <div className="w-12 h-12 rounded-full border border-[#e8e8e3]/20 flex items-center justify-center bg-[#e8e8e3]/5 group-hover:bg-[#e8e8e3] group-hover:text-black transition-all duration-300">
+                                                            <span className="font-mono text-xs">{i + 1}</span>
+                                                        </div>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-2xl font-bold text-white group-hover:text-[#e8e8e3] transition-colors">{stat.value}</span>
+                                                            <span className="text-[10px] text-[#e8e8e3]/40 uppercase tracking-widest">{stat.label}</span>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </motion.div>
 
