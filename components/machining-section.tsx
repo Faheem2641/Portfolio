@@ -209,10 +209,10 @@ export default function MachiningSection() {
     return (
         <section
             ref={containerRef}
-            className="relative h-[800vh] z-10"
+            className="relative h-[700vh] z-10 bg-lorenzo-dark"
         >
             {/* Sticky Container - UNIFIED CANVAS */}
-            <div className="sticky top-0 h-screen w-full flex overflow-hidden bg-lorenzo-dark perspective-1000">
+            <div className="sticky top-0 left-0 h-screen w-full flex overflow-hidden bg-lorenzo-dark perspective-1000 z-0">
 
                 {/* Unified Atmospheric Background */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_50%,rgba(232,232,227,0.08),transparent_50%)]" />
