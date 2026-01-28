@@ -1,441 +1,448 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useRef, useState, useEffect } from "react"
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion"
+import { Thermometer, Activity, Wind, Waves, Radio, Cpu, Zap, TrendingUp } from "lucide-react"
 
-interface AnsysProject {
-    id: number;
-    title: string;
-    description: string;
-    category: string;
-    slug: string;
-}
+// Define custom Icon component or use Lucide directly
 
-const projects: AnsysProject[] = [
-    { id: 1, title: "Thermal Analysis", description: "Advanced heat transfer simulation", category: "CFD", slug: "thermal-analysis" },
-    { id: 2, title: "Structural Analysis", description: "Stress and strain modeling", category: "Structural", slug: "structural-analysis" },
-    { id: 3, title: "Fluid Dynamics", description: "Computational fluid dynamics study", category: "CFD", slug: "fluid-dynamics" },
-    { id: 4, title: "Modal Analysis", description: "Vibration and frequency analysis", category: "Dynamic", slug: "modal-analysis" },
-    { id: 5, title: "Fatigue Study", description: "Material fatigue life prediction", category: "Structural", slug: "fatigue-study" },
-    { id: 6, title: "Electromagnetics", description: "EM field simulation", category: "EM", slug: "electromagnetics" },
-];
+const projects = [
+    {
+        id: 1,
+        title: "Thermal Analysis",
+        subtitle: "CFD",
+        description: "Advanced heat transfer simulation to optimize thermal management systems.",
+        icon: Thermometer,
+        image: "/images/aaa.png", // Keeping placeholders/existing images
+        color: "#ff3e3e",
+        details: {
+            method: "Steady State",
+            mesh: "Polyhedral",
+            nodes: "2.5M",
+            solveTime: "4h 20m"
+        },
+        stats: [
+            { label: "Accuracy", value: "98%" },
+            { label: "Delta T", value: "-15°C" }
+        ]
+    },
+    {
+        id: 2,
+        title: "Structural Analysis",
+        subtitle: "Structural",
+        description: "Comprehensive stress and strain modeling for structural integrity verification.",
+        icon: Activity,
+        image: "/images/5_12_2024.jpg",
+        color: "#e8e8e3",
+        details: {
+            solver: "Mechanical",
+            material: "Steel 4340",
+            elements: "Tetrahedrons",
+            safetyFactor: "2.1"
+        },
+        stats: [
+            { label: "Max Stress", value: "250MPa" },
+            { label: "Deflection", value: "0.5mm" }
+        ]
+    },
+    {
+        id: 3,
+        title: "Fluid Dynamics",
+        subtitle: "CFD",
+        description: "Computational fluid dynamics study of internal and external flows.",
+        icon: Wind,
+        image: "/images/faheem-ali-box.png",
+        color: "#00d1ff",
+        details: {
+            turbulence: "k-epsilon",
+            domain: "External",
+            velocity: "Mach 0.3",
+            iterations: "5000"
+        },
+        stats: [
+            { label: "Drag", value: "-12%" },
+            { label: "Lift", value: "+5%" }
+        ]
+    },
+    {
+        id: 4,
+        title: "Modal Analysis",
+        subtitle: "Dynamic",
+        description: "Vibration and frequency analysis to prevent resonance failures.",
+        icon: Waves,
+        image: "/images/download (1).jpg",
+        color: "#e8e8e3",
+        details: {
+            modes: "First 6",
+            range: "0-2000Hz",
+            damping: "2%",
+            mass: "Distributed"
+        },
+        stats: [
+            { label: "Resonance", value: "Avoided" },
+            { label: "Stiffness", value: "High" }
+        ]
+    },
+    {
+        id: 5,
+        title: "Electromagnetics",
+        subtitle: "Maxwell",
+        description: "EM field simulation for motor and actuator performance optimization.",
+        icon: Zap,
+        image: "/images/faheem-ali-box2.png",
+        color: "#c8ff00",
+        details: {
+            solver: "Maxwell 3D",
+            mesh: "Adaptive",
+            current: "50A",
+            torque: "12Nm"
+        },
+        stats: [
+            { label: "Efficiency", value: "94%" },
+            { label: "Losses", value: "Low" }
+        ]
+    },
+    {
+        id: 6,
+        title: "Fatigue Study",
+        subtitle: "Durability",
+        description: "Material fatigue life prediction under cyclic loading conditions.",
+        icon: Radio,
+        image: "/images/faheem-ali-box3.png",
+        color: "#e8e8e3",
+        details: {
+            cycle: "High Cycle",
+            theory: "Goodman",
+            life: "1e6 Cycles",
+            prob: "99.9%"
+        },
+        stats: [
+            { label: "Life", value: "Infinite" },
+            { label: "Damage", value: "0.2" }
+        ]
+    },
+    {
+        id: 7,
+        title: "Explicit Dynamics",
+        subtitle: "Impact",
+        description: "Simulation of high-speed impact and severe deformation events.",
+        icon: Cpu,
+        image: "/images/wire-edm.jpg", // Placeholder
+        color: "#ff00ff",
+        details: {
+            solver: "LS-DYNA",
+            timeStep: "Explicit",
+            impact: "50 m/s",
+            energy: "Absorbed"
+        },
+        stats: [
+            { label: "Deform", value: "Plastic" },
+            { label: "Failure", value: "None" }
+        ]
+    },
+    {
+        id: 8,
+        title: "Optimization",
+        subtitle: "Design",
+        description: "Topological optimization to reduce weight while maintaining strength.",
+        icon: TrendingUp,
+        image: "/images/qc.jpg", // Placeholder
+        color: "#00ff00",
+        details: {
+            goal: "Mass Reduct",
+            constraint: "Stress",
+            method: "SIMP",
+            retain: "Faces"
+        },
+        stats: [
+            { label: "Mass", value: "-25%" },
+            { label: "Strength", value: "Equal" }
+        ]
+    },
+]
 
 export default function AnsysSection() {
-    const [isPaused, setIsPaused] = useState(false)
-    const scrollContainerRef = useRef<HTMLDivElement>(null)
-    const animationRef = useRef<number>()
-    const pauseTimeoutRef = useRef<NodeJS.Timeout>()
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [activeIndex, setActiveIndex] = useState(0)
 
+    // Track scroll progress of the section
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    })
+
+    // Map scroll progress to rotation (0 to 360 degrees)
+    // We rotate backwards to make it feel like we are scrolling through the items
+    // Using full range [0, 1] to ensure all 8 items are comfortably reachable
+    const rotation = useTransform(scrollYProgress, [0, 1], [180, -180])
+
+    // Add spring physics for smoother rotation
+    const smoothRotation = useSpring(rotation, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    })
+
+    // Calculate active index based on rotation
     useEffect(() => {
-        const container = scrollContainerRef.current
-        if (!container || isPaused) return
+        const unsubscribe = smoothRotation.on("change", (latest) => {
+            // Normalize rotation to positive 0-360
+            let normalizedRotation = Math.abs(latest) % 360
 
-        const scroll = () => {
-            if (container && !isPaused) {
-                container.scrollLeft += 1
+            // Calculate segment size (360 / number of items)
+            const segmentSize = 360 / projects.length
 
-                if (container.scrollLeft >= container.scrollWidth / 2) {
-                    container.scrollLeft = 0
-                }
-            }
-            animationRef.current = requestAnimationFrame(scroll)
-        }
-
-        animationRef.current = requestAnimationFrame(scroll)
-
-        return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current)
-            }
-        }
-    }, [isPaused])
-
-    const handleScroll = (direction: 'left' | 'right') => {
-        const container = scrollContainerRef.current
-        if (!container) return
-
-        const scrollAmount = 630
-
-        container.scrollBy({
-            left: direction === 'right' ? scrollAmount : -scrollAmount,
-            behavior: 'smooth'
+            // Determine active index (adjusting for offset if needed)
+            // Providing a small buffer for snapping feel
+            const index = Math.round(normalizedRotation / segmentSize) % projects.length
+            setActiveIndex(index)
         })
-
-        setIsPaused(true)
-
-        if (pauseTimeoutRef.current) {
-            clearTimeout(pauseTimeoutRef.current)
-        }
-
-        pauseTimeoutRef.current = setTimeout(() => {
-            setIsPaused(false)
-        }, 3000)
-    }
+        return () => unsubscribe()
+    }, [smoothRotation])
 
     return (
-        <section className="ansys-section">
-            {/* Header Section */}
-            <div className="ansys-header">
-                <h1 className="ansys-title">
-                    <span className="accent">ANSYS</span> Projects
-                </h1>
-                <p className="ansys-description">
-                    Computational analysis and engineering simulation projects
-                </p>
-            </div>
+        <section
+            ref={containerRef}
+            className="relative h-[700vh] z-10 bg-lorenzo-dark"
+        >
+            {/* Sticky Container - UNIFIED CANVAS */}
+            <div className="sticky top-0 left-0 h-screen w-full flex overflow-hidden bg-lorenzo-dark perspective-1000 z-0">
 
-            {/* Scrolling Cards Section */}
-            <div className="cards-wrapper">
-                <div
-                    ref={scrollContainerRef}
-                    className="cards-container"
-                >
-                    <div className="cards-track">
-                        {[...projects, ...projects, ...projects].map((project, index) => (
-                            <div key={`${project.id}-${index}`} className="project-card">
-                                <div className="card-image-placeholder">
-                                    <div className="image-overlay">
-                                        <span className="category-badge">{project.category}</span>
-                                    </div>
-                                </div>
-                                <div className="card-content">
-                                    <h3 className="card-title">{project.title}</h3>
-                                    <p className="card-description">{project.description}</p>
-                                    <a href={`/projects/ansys/${project.slug}`} className="card-button">View Project</a>
-                                </div>
-                            </div>
-                        ))}
+                {/* Unified Atmospheric Background */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_50%,rgba(232,232,227,0.08),transparent_50%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.8),transparent,rgba(0,0,0,0.8))]" />
+
+                {/* Global Grid Decoration */}
+                <div className="absolute inset-0 opacity-10"
+                    style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '100px 100px' }}
+                />
+
+                <div className="relative w-full h-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-12 lg:px-24 scale-95 lg:scale-[0.9] origin-center">
+
+                    {/* RIGHT SIDE: THE MACHINE DIAL (Immersive & Large) */}
+                    <div className="relative w-full md:w-1/2 h-[50vh] md:h-full flex items-center justify-center md:justify-end order-1 md:order-2 z-10">
+                        <div className="relative w-[90vw] h-[90vw] md:w-[800px] md:h-[800px] flex items-center justify-center -mr-[20vw] md:-mr-[300px]">
+
+                            {/* Rotating Ring */}
+                            <motion.div
+                                style={{ rotate: smoothRotation }}
+                                className="absolute w-full h-full rounded-full border-2 border-[#e8e8e3]/30"
+                            >
+                                {projects.map((project, index) => {
+                                    const angle = (index * 360) / projects.length
+                                    const isActive = activeIndex === index
+
+                                    return (
+                                        <div
+                                            key={project.id}
+                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                                            // Define custom property for responsive radius
+                                            style={{
+                                                "--radius": "40vw", // Default (Mobile)
+                                            } as React.CSSProperties}
+                                        >
+                                            <div
+                                                className="absolute top-0 left-0 md:[--radius:340px] transition-transform duration-300"
+                                                style={{
+                                                    transform: `rotate(${angle}deg) translate(var(--radius)) rotate(-${angle}deg)`
+                                                }}
+                                            >
+                                                {/* Item Container */}
+                                                <div className="relative flex items-center items-center justify-center -translate-x-1/2 -translate-y-1/2">
+
+                                                    {/* The Node */}
+                                                    <motion.div
+                                                        className={`
+                                                            relative w-12 h-12 md:w-16 md:h-16 rounded-full 
+                                                            flex items-center justify-center
+                                                            backdrop-blur-md transition-all duration-500
+                                                            border z-20
+                                                            cursor-pointer
+                                                        `}
+                                                        style={{
+                                                            backgroundColor: isActive ? 'rgba(232, 232, 227, 0.1)' : 'rgba(0, 0, 0, 0.5)',
+                                                            borderColor: isActive ? '#e8e8e3' : 'rgba(255, 255, 255, 0.1)',
+                                                            boxShadow: isActive ? '0 0 30px rgba(232, 232, 227, 0.3)' : 'none',
+                                                            scale: isActive ? 1.5 : 1
+                                                        }}
+                                                    >
+                                                        <project.icon
+                                                            className={`w-5 h-5 md:w-6 md:h-6 transition-colors duration-300`}
+                                                            style={{ color: isActive ? '#e8e8e3' : 'rgba(255, 255, 255, 0.4)' }}
+                                                        />
+                                                    </motion.div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </motion.div>
+
+                            {/* Static Decoration Rings */}
+                            <svg className="absolute w-[140%] h-[140%] pointer-events-none opacity-30 animate-[spin_60s_linear_infinite]">
+                                <circle cx="50%" cy="50%" r="49%" stroke="#e8e8e3" strokeWidth="1" strokeDasharray="20 20" fill="none" />
+                            </svg>
+                            <svg className="absolute w-[60%] h-[60%] pointer-events-none opacity-40">
+                                <circle cx="50%" cy="50%" r="48%" stroke="#e8e8e3" strokeWidth="2" fill="none" />
+                            </svg>
+                        </div>
                     </div>
+
+                    {/* LEFT SIDE: FLOATING TECH HUD */}
+                    <div className="relative w-full md:w-1/2 h-full flex flex-col justify-center order-2 md:order-1 pointer-events-none">
+                        <div className="pointer-events-auto pr-4 md:pr-12 lg:pr-20 pl-8">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activeIndex}
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="exit"
+                                    variants={{
+                                        hidden: { opacity: 0, x: 50, filter: "blur(10px)" },
+                                        visible: {
+                                            opacity: 1,
+                                            x: 0,
+                                            filter: "blur(0px)",
+                                            transition: {
+                                                type: "spring",
+                                                stiffness: 100,
+                                                damping: 20,
+                                                staggerChildren: 0.05
+                                            }
+                                        },
+                                        exit: {
+                                            opacity: 0,
+                                            x: -20,
+                                            filter: "blur(10px)",
+                                            transition: { duration: 0.2 }
+                                        }
+                                    }}
+                                    className="relative z-20"
+                                >
+
+
+                                    {/* Number / ID */}
+                                    <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="text-lorenzo-accent/50 font-mono text-8xl md:text-[10rem] lg:text-[12rem] font-black absolute -top-20 md:-top-32 -right-8 md:-right-20 -z-10 select-none opacity-20">
+                                        0{projects[activeIndex].id}
+                                    </motion.span>
+
+                                    {/* Titles */}
+                                    <div className="mb-8">
+                                        <motion.div variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }} className="flex items-center gap-3 mb-2">
+                                            <div className="h-[2px] w-8 bg-lorenzo-accent" />
+                                            <span className="text-lorenzo-accent font-mono text-sm uppercase tracking-[0.3em]">
+                                                {projects[activeIndex].subtitle}
+                                            </span>
+                                        </motion.div>
+                                        <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }} className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase leading-[0.9] tracking-tighter">
+                                            {projects[activeIndex].title}
+                                        </motion.h2>
+                                    </div>
+
+                                    {/* Tech Panel Content */}
+                                    <motion.div
+                                        variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}
+                                        className="relative max-w-xl"
+                                    >
+                                        {/* Vertical Anchor Line (Right Side) */}
+                                        <div className="absolute top-0 right-0 w-[2px] h-full bg-[#e8e8e3]/10">
+                                            <motion.div
+                                                className="absolute top-0 right-0 w-full bg-[#e8e8e3]"
+                                                initial={{ height: 0 }}
+                                                animate={{ height: "100%" }}
+                                                transition={{ duration: 0.8, ease: "circOut" }}
+                                            />
+                                        </div>
+
+                                        <div className="pr-10 py-2">
+                                            {/* Description - Large & Clean */}
+                                            <p className="text-2xl text-white/90 font-light leading-relaxed mb-10">
+                                                {projects[activeIndex].description}
+                                            </p>
+
+                                            {/* Technical Details Grid */}
+                                            <div className="mb-10">
+                                                <div className="h-[1px] w-full bg-[#e8e8e3]/10 mb-6" />
+
+                                                <div className="grid grid-cols-2 gap-x-12 gap-y-8">
+                                                    {(() => {
+                                                        const details = Object.entries(projects[activeIndex].details)
+                                                        const half = Math.ceil(details.length / 2)
+                                                        return (
+                                                            <>
+                                                                <div className="space-y-6">
+                                                                    {details.slice(0, half).map(([key, value]) => (
+                                                                        <div key={key} className="flex flex-col">
+                                                                            <span className="text-[10px] text-[#e8e8e3]/50 uppercase tracking-[0.2em] mb-1">{key}</span>
+                                                                            <span className="font-mono text-[#e8e8e3] text-xl">{value}</span>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                                <div className="space-y-6">
+                                                                    {details.slice(half).map(([key, value]) => (
+                                                                        <div key={key} className="flex flex-col">
+                                                                            <span className="text-[10px] text-[#e8e8e3]/50 uppercase tracking-[0.2em] mb-1">{key}</span>
+                                                                            <span className="font-mono text-white text-xl">{value}</span>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    })()}
+                                                </div>
+                                            </div>
+
+                                            {/* Key Stats - Horizontal Highlight */}
+                                            <div className="flex items-center gap-8">
+                                                {projects[activeIndex].stats.map((stat, i) => (
+                                                    <div key={i} className="flex items-center gap-4 group cursor-pointer">
+                                                        <div className="w-12 h-12 rounded-full border border-[#e8e8e3]/20 flex items-center justify-center bg-[#e8e8e3]/5 group-hover:bg-[#e8e8e3] group-hover:text-black transition-all duration-300">
+                                                            <span className="font-mono text-xs">{i + 1}</span>
+                                                        </div>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-2xl font-bold text-white group-hover:text-[#e8e8e3] transition-colors">{stat.value}</span>
+                                                            <span className="text-[10px] text-[#e8e8e3]/40 uppercase tracking-widest">{stat.label}</span>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </motion.div>
+
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    </div>
+
                 </div>
 
-                {/* Scroll Control Buttons */}
-                <div className="scroll-controls">
-                    <button
-                        className="scroll-btn scroll-btn-left"
-                        onClick={() => handleScroll('left')}
-                        aria-label="Scroll left"
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                            <path d="M15 18l-6-6 6-6" />
-                        </svg>
-                    </button>
+                {/* Footer Gradient Fade */}
+                <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-lorenzo-dark to-transparent pointer-events-none" />
 
-                    <button
-                        className="scroll-btn scroll-btn-right"
-                        onClick={() => handleScroll('right')}
-                        aria-label="Scroll right"
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                            <path d="M9 18l6-6-6-6" />
-                        </svg>
-                    </button>
-                </div>
+                {/* Scroll Prompt */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2, duration: 1 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                >
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Scroll to Rotate</span>
+                    <div className="w-[1px] h-12 bg-gradient-to-b from-lorenzo-accent to-transparent opacity-50" />
+                </motion.div>
 
-                {/* Navigation Button */}
-                <div className="nav-buttons">
-                    <a href="/" className="nav-btn home-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                            <polyline points="9 22 9 12 15 12 15 22" />
-                        </svg>
-                        HOME
-                    </a>
-                </div>
             </div>
 
-            <style jsx>{`
-                .ansys-section {
-                    margin: 0;
-                    background: #282c20;
-                    min-height: 100vh;
-                    position: relative;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: flex-start;
-                    padding-top: 20px;
-                    overflow: hidden;
-                    padding-bottom: 120px;
-                }
-                
-                .ansys-header {
-                    position: relative;
-                    z-index: 5;
-                    text-align: center;
-                    padding: 15px 20px 20px;
-                    margin-bottom: 30px;
-                }
-                
-                .ansys-title {
-                    font-size: 3.5rem;
-                    font-weight: 900;
-                    color: white;
-                    text-transform: uppercase;
-                    letter-spacing: -2px;
-                    margin-bottom: -10px;
-                }
-                
-                @media (min-width: 768px) {
-                    .ansys-title {
-                        font-size: 5rem;
-                    }
-                }
-                
-                @media (min-width: 1024px) {
-                    .ansys-title {
-                        font-size: 6rem;
-                    }
-                }
-                
-                .ansys-title .accent {
-                    color: #e8e8e3;
-                }
-                
-                .ansys-description {
-                    font-size: 1.125rem;
-                    color: rgba(255, 255, 255, 0.7);
-                    max-width: 800px;
-                    margin: 0 auto;
-                }
-                
-                @media (min-width: 768px) {
-                    .ansys-description {
-                        font-size: 1.25rem;
-                    }
-                }
+            {/* Content for Scrolling Height */}
+            <div className="absolute top-0 w-full h-full pointer-events-none" />
 
-                .cards-wrapper {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 30px;
-                }
-
-                .cards-container {
-                    width: 100%;
-                    overflow-x: scroll;
-                    overflow-y: hidden;
-                    position: relative;
-                    padding: 30px 0;
-                    scrollbar-width: none;
-                    -ms-overflow-style: none;
-                    mask-image: linear-gradient(
-                        to right,
-                        transparent,
-                        black 10%,
-                        black 90%,
-                        transparent
-                    );
-                    -webkit-mask-image: linear-gradient(
-                        to right,
-                        transparent,
-                        black 10%,
-                        black 90%,
-                        transparent
-                    );
-                }
-
-                .cards-container::-webkit-scrollbar {
-                    display: none;
-                }
-
-                .cards-track {
-                    display: flex;
-                    gap: 30px;
-                    width: fit-content;
-                    padding: 0 10%;
-                }
-
-                .project-card {
-                    flex-shrink: 0;
-                    width: 600px;
-                    background: rgba(58, 63, 50, 0.5);
-                    border-radius: 16px;
-                    overflow: hidden;
-                    border: 2px solid rgba(232, 232, 227, 0.2);
-                    transition: all 0.4s ease;
-                    backdrop-filter: blur(10px);
-                }
-
-                .project-card:hover {
-                    transform: translateY(-10px) scale(1.02);
-                    border-color: rgba(232, 232, 227, 0.6);
-                    box-shadow: 
-                        0 20px 40px rgba(0, 0, 0, 0.4),
-                        0 0 30px rgba(232, 232, 227, 0.2);
-                }
-
-                .card-image-placeholder {
-                    width: 100%;
-                    height: 400px;
-                    background: linear-gradient(135deg, #3a3f32 0%, #4a4f42 100%);
-                    position: relative;
-                    overflow: hidden;
-                }
-
-                .card-image-placeholder::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(
-                        90deg,
-                        transparent,
-                        rgba(232, 232, 227, 0.1),
-                        transparent
-                    );
-                    animation: shimmer 3s infinite;
-                }
-
-                @keyframes shimmer {
-                    0% {
-                        left: -100%;
-                    }
-                    100% {
-                        left: 100%;
-                    }
-                }
-
-                .image-overlay {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    display: flex;
-                    align-items: flex-start;
-                    justify-content: flex-end;
-                    padding: 16px;
-                }
-
-                .category-badge {
-                    background: rgba(232, 232, 227, 0.9);
-                    color: #282c20;
-                    padding: 6px 14px;
-                    border-radius: 20px;
-                    font-size: 0.75rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                }
-
-                .card-content {
-                    padding: 24px;
-                }
-
-                .card-title {
-                    font-size: 1.5rem;
-                    font-weight: 800;
-                    color: white;
-                    margin-bottom: 12px;
-                    text-transform: uppercase;
-                    letter-spacing: -0.5px;
-                }
-
-                .card-description {
-                    font-size: 0.95rem;
-                    color: rgba(255, 255, 255, 0.7);
-                    margin-bottom: 20px;
-                    line-height: 1.6;
-                }
-
-                .card-button {
-                    width: 100%;
-                    background: transparent;
-                    color: #e8e8e3;
-                    border: 2px solid #e8e8e3;
-                    padding: 12px 24px;
-                    borderRadius: 8px;
-                    font-weight: 700;
-                    font-size: 0.875rem;
-                    text-transform: uppercase;
-                    letter-spacing: 1.5px;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    display: block;
-                    text-align: center;
-                    text-decoration: none;
-                }
-
-                .card-button:hover {
-                    background: #e8e8e3;
-                    color: #282c20;
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 20px rgba(232, 232, 227, 0.4);
-                }
-
-                .scroll-controls {
-                    display: flex;
-                    gap: 20px;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: 100;
-                }
-
-                .scroll-btn {
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    background: rgba(40, 44, 32, 0.9);
-                    border: 2px solid rgba(232, 232, 227, 0.4);
-                    color: #e8e8e3;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    backdrop-filter: blur(10px);
-                }
-
-                .scroll-btn:hover {
-                    background: #e8e8e3;
-                    color: #282c20;
-                    border-color: #e8e8e3;
-                    transform: scale(1.1);
-                    box-shadow: 0 8px 25px rgba(232, 232, 227, 0.4);
-                }
-                
-                .nav-buttons {
-                    display: flex;
-                    gap: 20px;
-                    z-index: 100;
-                    justify-content: center;
-                }
-                
-                .nav-btn {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    background: rgba(40, 44, 32, 0.95);
-                    color: #e8e8e3;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 1.5px;
-                    padding: 12px 24px;
-                    border-radius: 8px;
-                    text-decoration: none;
-                    border: 2px solid rgba(200, 255, 0, 0.4);
-                    transition: all 0.3s ease;
-                    font-size: 0.875rem;
-                    backdrop-filter: blur(10px);
-                }
-                
-                .nav-btn:hover {
-                    background: #e8e8e3;
-                    color: #282c20;
-                    border-color: #e8e8e3;
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 20px rgba(200, 255, 0, 0.4);
-                }
-                
-                .nav-btn svg {
-                    transition: transform 0.3s ease;
-                }
-                
-                .home-btn:hover svg {
-                    transform: scale(1.1);
+            {/* Custom Animations */}
+            <style jsx global>{`
+                @keyframes scan {
+                    0% { transform: translateY(-100%); opacity: 0; }
+                    50% { opacity: 1; }
+                    100% { transform: translateY(400px); opacity: 0; }
                 }
             `}</style>
         </section>

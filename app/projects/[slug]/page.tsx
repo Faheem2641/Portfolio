@@ -115,7 +115,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <main className="relative bg-lorenzo-dark min-h-screen">
                 <Header />
 
-                <div className="pt-20">
+                <div className="">
                     <AnsysSection />
                 </div>
 
