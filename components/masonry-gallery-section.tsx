@@ -17,8 +17,8 @@ export default function MasonryGallerySection() {
   })
 
   // Y Movement: Move grid up to reveal all images
-  // Starts at 0vh and moves up to -80vh to show bottom images
-  const y = useTransform(scrollYProgress, [0, 1], ["0vh", "-80vh"])
+  // Starts at 0vh and moves up to -40vh to show bottom images
+  const y = useTransform(scrollYProgress, [0, 1], ["0vh", "-40vh"])
 
   const column1 = galleryImages.filter((_, i) => i % 3 === 0)
   const column2 = galleryImages.filter((_, i) => i % 3 === 1)
@@ -79,7 +79,6 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
           fill
           className={`${image.title === "CLUBS & SOCIETIES" ? "object-contain" : "object-cover"} transition-transform duration-700 group-hover:scale-110`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          quality={95}
         />
         <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10">
           <p className="text-white text-sm font-medium tracking-wide uppercase">{image.title}</p>

@@ -23,7 +23,7 @@ const webProjects: WebProject[] = [
         period: "Jun 2025",
         category: "Frontend Development",
         description: "Redesigned the Elexima website as a personal practice project after attending the founder’s workshop. Built a cleaner, more contemporary interface while maintaining the brand’s identity as an electronics solution provider.",
-        liveUrl: "https://elexima-jtml.vercel.app/",
+        liveUrl: "https://elexima-jtml.vercel.app/services/industrial-electronics-manufacturing",
         githubUrl: "https://github.com/Faheem2641/Elexima",
     },
     {

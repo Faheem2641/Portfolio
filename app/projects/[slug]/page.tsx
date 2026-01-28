@@ -10,8 +10,11 @@ import InventorSection from "@/components/inventor-section"
 import AnsysSection from "@/components/ansys-section"
 import MachiningSection from "@/components/machining-section"
 import Image from "next/image"
+import { CurveDivider } from "@/components/curve-divider"
+import LanguageSection from "@/components/language-section"
 import { notFound } from "next/navigation"
 
+// Force rebuild
 interface ProjectPageProps {
     params: Promise<{
         slug: string
@@ -44,6 +47,25 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <EducationSection />
                 </div>
 
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
+
+                <Footer />
+            </main>
+        )
+    }
+
+    // Special handling for language page
+    if (slug === "language") {
+        return (
+            <main className="relative bg-lorenzo-dark min-h-screen">
+                <Header />
+
+                <div className="pt-20">
+                    <LanguageSection />
+                </div>
+
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
+
                 <Footer />
             </main>
         )
@@ -58,6 +80,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="pt-20">
                     <VolunteerSection />
                 </div>
+
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
 
                 <Footer />
             </main>
@@ -74,6 +98,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <ClubsSocietiesSection />
                 </div>
 
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
+
                 <Footer />
             </main>
         )
@@ -88,6 +114,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="pt-20">
                     <ResearchSection />
                 </div>
+
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
 
                 <Footer />
             </main>
@@ -104,6 +132,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <WebDevelopmentSection />
                 </div>
 
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
+
                 <Footer />
             </main>
         )
@@ -118,6 +148,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="">
                     <AnsysSection />
                 </div>
+
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
 
                 <Footer />
             </main>
@@ -134,6 +166,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <InventorSection />
                 </div>
 
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
+
                 <Footer />
             </main>
         )
@@ -148,6 +182,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="">
                     <MachiningSection />
                 </div>
+
+                <CurveDivider topColor="#0a192f" bottomColor="#f5f1e8" />
 
                 <Footer />
             </main>

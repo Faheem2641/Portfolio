@@ -46,7 +46,7 @@ export default function Footer() {
           <div
             className="absolute inset-0 w-full h-full opacity-30"
             style={{
-              backgroundImage: 'url("/images/curv.svg")',
+              backgroundImage: 'url("/images/curveb.svg")',
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

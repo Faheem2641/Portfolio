@@ -8,6 +8,7 @@ const handIcons = [
   "/images/icon/icon-hand2.png",
   "/images/icon/icon-hand3.png",
   "/images/icon/icon-hand4.png",
+  "/images/icon/icon-hand5.png",
   "/images/icon/icon-hand6.png",
 ]
 
@@ -30,7 +31,7 @@ export default function SocialSection() {
             {handIcons.map((icon, index) => (
               <motion.div
                 key={icon}
-                initial={{ opacity: 0 }}
+                initial={{ opacity: index === 0 ? 1 : 0 }}
                 animate={{ opacity: index === currentIconIndex ? 1 : 0 }}
                 transition={{ duration: 0.8 }}
                 className="absolute inset-0 flex items-center justify-center"

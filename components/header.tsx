@@ -59,10 +59,10 @@ export default function Header() {
           {/* Desktop Navigation Links - Centered */}
           <nav className="hidden md:flex items-center gap-10 px-6 bg-white/10 rounded-full py-2 border border-white/20 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
             {[
-              { name: "Home", href: "#" },
-              { name: "About", href: "#mission" },
-              { name: "Gallery", href: "#masonry-gallery" },
-              { name: "Insights", href: "#interactive-schedule" }
+              { name: "Home", href: "/" },
+              { name: "About", href: "/#mission" },
+              { name: "Gallery", href: "/#masonry-gallery" },
+              { name: "Insights", href: "/#interactive-schedule" }
             ].map((item) => (
               <a
                 key={item.name}
@@ -130,12 +130,12 @@ export default function Header() {
             >
               <motion.ul className="space-y-8">
                 {[
-                  { name: "HOME", href: "#" },
-                  { name: "MISSION", href: "#mission" },
-                  { name: "GALLERY", href: "#masonry-gallery" },
-                  { name: "HELMETS", href: "#helmets" },
-                  { name: "STORE", href: "#store" },
-                  { name: "CONTACT", href: "#social-section" }
+                  { name: "HOME", href: "/" },
+                  { name: "MISSION", href: "/#mission" },
+                  { name: "GALLERY", href: "/#masonry-gallery" },
+                  { name: "HELMETS", href: "/#helmets" },
+                  { name: "STORE", href: "/#store" },
+                  { name: "CONTACT", href: "/#social-section" }
                 ].map((item) => (
                   <motion.li
                     key={item.name}

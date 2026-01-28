@@ -50,13 +50,7 @@ export default function EducationSection() {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-20"
                 >
-                    <div className="relative h-24 flex items-center justify-center mb-3">
-                        <img
-                            src="/images/icon/ico-helmet-w.png"
-                            className="h-full w-auto max-h-[50px] object-contain"
-                            alt="Education Icon"
-                        />
-                    </div>
+
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-balance leading-[1.1]">
                         <span className="text-lorenzo-accent font-brier">EDUCATION</span>
                     </h2>

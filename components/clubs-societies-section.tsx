@@ -143,8 +143,8 @@ export default function ClubsSocietiesSection() {
                                 }}
                             />
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
-                                {/* Left Column - Details */}
+                            <div className="grid grid-cols-1 gap-12 relative z-10">
+                                {/* Details - Full Width */}
                                 <div className="space-y-6 mb-20">
                                     <div>
                                         <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-2 whitespace-nowrap">
@@ -220,33 +220,6 @@ export default function ClubsSocietiesSection() {
                                                 </motion.li>
                                             ))}
                                         </ul>
-                                    </div>
-                                </div>
-
-                                {/* Right Column - Image Placeholder */}
-                                <div className="flex items-center justify-center">
-                                    <div className="relative w-full aspect-[4/3] bg-white/5 border-2 border-dashed border-white/20 rounded-2xl flex items-center justify-center group hover:border-lorenzo-accent/50 transition-all duration-300">
-                                        <div className="text-center p-8">
-                                            <svg
-                                                width="80"
-                                                height="80"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="1.5"
-                                                className="mx-auto mb-4 text-white/30 group-hover:text-lorenzo-accent/50 transition-colors duration-300"
-                                            >
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                                <polyline points="21 15 16 10 5 21" />
-                                            </svg>
-                                            <p className="text-white/50 font-semibold uppercase tracking-wider text-sm">
-                                                Club Image
-                                            </p>
-                                            <p className="text-white/30 text-xs mt-2">
-                                                Coming Soon
-                                            </p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

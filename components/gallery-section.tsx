@@ -74,7 +74,13 @@ function MasonryItem({ item, index }: { item: any; index: number }) {
 
       {item.type === "image" && (
         <div className="relative h-full min-h-[300px] md:min-h-[400px] rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl hover:scale-102 transition-transform duration-300">
-          <Image src={item.src || "/placeholder.svg"} alt="Gallery moment" fill className="object-cover" />
+          <Image
+            src={item.src || "/placeholder.svg"}
+            alt="Gallery moment"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
       )}
 

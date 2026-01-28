@@ -71,6 +71,7 @@ export const galleryImages = [
         slug: "language",
         description: "Computer-Aided Design projects showcasing technical skills. Creating precise 2D drafts and complex 3D models for engineering applications.",
     },
+    /*
     {
         src: "/images/faheem-ali-box.png",
         alt: "Motocross bike",
@@ -95,4 +96,5 @@ export const galleryImages = [
         slug: "cnc-machining",
         description: "Precision CNC machining projects and fabrication techniques. Programming and operating CNC machines for high-tolerance parts.",
     },
+    */
 ]

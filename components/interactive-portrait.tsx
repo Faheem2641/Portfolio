@@ -58,26 +58,31 @@ export default function InteractivePortrait() {
 
     class Blob {
       renderer: THREE.WebGLRenderer
-      fbTexture: { value: THREE.FramebufferTexture }
-      rtOutput: THREE.WebGLRenderTarget
+      rtA: THREE.WebGLRenderTarget
+      rtB: THREE.WebGLRenderTarget
+      result: { value: THREE.Texture }
       uniforms: {
         pointer: { value: THREE.Vector2 }
         pointerDown: { value: number }
         pointerRadius: { value: number }
         pointerDuration: { value: number }
+        fbTexture: { value: THREE.Texture | null }
       }
       rtScene: THREE.Mesh
       rtCamera: THREE.Camera
 
       constructor(renderer: THREE.WebGLRenderer) {
         this.renderer = renderer
-        this.fbTexture = { value: new THREE.FramebufferTexture(width, height) }
-        this.rtOutput = new THREE.WebGLRenderTarget(width, height)
+        this.rtA = new THREE.WebGLRenderTarget(width, height)
+        this.rtB = new THREE.WebGLRenderTarget(width, height)
+        this.result = { value: this.rtA.texture }
+
         this.uniforms = {
           pointer: { value: new THREE.Vector2().setScalar(10) },
           pointerDown: { value: 1 },
           pointerRadius: { value: 0.45 },
           pointerDuration: { value: 3.5 },
+          fbTexture: { value: null },
         }
 
         const handleMouseMove = (event: MouseEvent) => {
@@ -104,7 +109,7 @@ export default function InteractivePortrait() {
               shader.uniforms.pointerDown = this.uniforms.pointerDown
               shader.uniforms.pointerRadius = this.uniforms.pointerRadius
               shader.uniforms.pointerDuration = this.uniforms.pointerDuration
-              shader.uniforms.fbTexture = this.fbTexture
+              shader.uniforms.fbTexture = this.uniforms.fbTexture
               shader.uniforms.time = gu.time
               shader.fragmentShader = `
                 uniform float dTime, aspect, pointerDown, pointerRadius, pointerDuration, time;
@@ -140,20 +145,45 @@ export default function InteractivePortrait() {
                 rVal += f * 0.15;
                 rVal = clamp(rVal, 0., 1.);
                 diffuseColor.rgb = vec3(rVal);
-                `,
+                `
               )
             },
-          }),
+          })
         )
         this.rtScene.material.defines = { USE_UV: "" }
         this.rtCamera = new THREE.Camera()
       }
 
       render() {
-        this.renderer.setRenderTarget(this.rtOutput)
+        // Ping-pong: Read from rtA, Write to rtB
+        this.uniforms.fbTexture.value = this.rtA.texture
+        this.renderer.setRenderTarget(this.rtB)
         this.renderer.render(this.rtScene, this.rtCamera)
-        this.renderer.copyFramebufferToTexture(this.fbTexture.value)
         this.renderer.setRenderTarget(null)
+
+        // Swap buffers
+        const temp = this.rtA
+        this.rtA = this.rtB
+        this.rtB = temp
+
+        // Update result to point to the latest frame (now in rtA after swap)
+        this.result.value = this.rtA.texture
+      }
+
+      resize(w: number, h: number) {
+        this.rtA.setSize(w, h)
+        this.rtB.setSize(w, h)
+      }
+
+      dispose() {
+        this.rtA.dispose()
+        this.rtB.dispose()
+        this.rtScene.geometry.dispose()
+        if (Array.isArray(this.rtScene.material)) {
+          this.rtScene.material.forEach(m => m.dispose())
+        } else {
+          this.rtScene.material.dispose()
+        }
       }
     }
 
@@ -191,7 +221,8 @@ export default function InteractivePortrait() {
     bgPlaneMaterial.defines = { USE_UV: "" }
 
     bgPlaneMaterial.onBeforeCompile = (shader) => {
-      shader.uniforms.texBlob = { value: blob.rtOutput.texture }
+      // Use the shared result object which updates every frame
+      shader.uniforms.texBlob = blob.result
       shader.uniforms.time = gu.time
 
       let vertexShader = shader.vertexShader
@@ -264,7 +295,7 @@ export default function InteractivePortrait() {
 
         diffuseColor.rgb = finalColor;
         #include <clipping_planes_fragment>
-        `,
+        `
       )
     }
 
@@ -274,7 +305,8 @@ export default function InteractivePortrait() {
     const helmetImageMaterial = new THREE.MeshBasicMaterial({ map: helmetTexture, transparent: true, alphaTest: 0.0 })
 
     helmetImageMaterial.onBeforeCompile = (shader) => {
-      shader.uniforms.texBlob = { value: blob.rtOutput.texture }
+      // Use the shared result object
+      shader.uniforms.texBlob = blob.result
       let vertexShader = shader.vertexShader
       vertexShader = vertexShader.replace("void main() {", "varying vec4 vPosProj;\nvoid main() {")
       vertexShader = vertexShader.replace(
@@ -293,7 +325,7 @@ export default function InteractivePortrait() {
         // if(blobData.r<0.02)discard; // Removed hard discard
         diffuseColor.a *= smoothstep(0.0, 0.2, blobData.r); // Added smooth alpha transition
         #include <clipping_planes_fragment>
-        `,
+        `
       )
     }
 
@@ -328,6 +360,10 @@ export default function InteractivePortrait() {
       camera.bottom = newHeight / -2
       camera.updateProjectionMatrix()
       renderer.setSize(newWidth, newHeight)
+
+      // Resize blob buffers
+      blob.resize(newWidth, newHeight)
+
       gu.aspect.value = newWidth / newHeight
       if (baseTexture.image) {
         const img = baseTexture.image
@@ -374,7 +410,7 @@ export default function InteractivePortrait() {
       })
       baseTexture.dispose()
       helmetTexture.dispose()
-      blob.rtOutput.dispose()
+      blob.dispose()
     }
   }, [])
 
@@ -403,12 +439,7 @@ export default function InteractivePortrait() {
           />
 
           {/* Inspired by text */}
-          <img
-            src="/images/inspired-by-lando-norris.png"
-            alt="Inspired by Faheem Ali"
-            className="absolute bottom-4 left-4 z-10 pointer-events-none"
-            style={{ maxWidth: "120px", width: "120px", height: "auto" }}
-          />
+
 
         </div>
       </div>
@@ -421,12 +452,7 @@ export default function InteractivePortrait() {
       className="absolute inset-0 w-full h-full bg-[#1a1f1a] cursor-crosshair overflow-hidden"
       style={{ touchAction: "none" }}
     >
-      <img
-        src="/images/inspired-by-lando-norris.png"
-        alt="Inspired by Faheem Ali"
-        className="absolute bottom-4 left-4 z-10 pointer-events-none"
-        style={{ maxWidth: "120px", width: "120px", height: "auto" }}
-      />
+
     </div>
   )
 }
