@@ -1,60 +1,55 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Analytics } from "@vercel/analytics/next"
-import { Roboto, Libre_Baskerville, Alex_Brush, Oswald } from "next/font/google"
-import SmoothScroll from "@/components/smooth-scroll"
-import Preloader from "@/components/preloader"
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700", "900"],
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-roboto",
+  variable: "--font-inter",
   display: "swap",
 })
 
-const alexBrush = Alex_Brush({
-  weight: ["400"],
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-alex-brush",
+  variable: "--font-jetbrains-mono",
   display: "swap",
 })
 
-const libreBaskerville = Libre_Baskerville({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-libre-baskerville",
-  display: "swap",
-})
-
-const oswald = Oswald({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-oswald",
+  variable: "--font-space-grotesk",
   display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "Faheem Ali ",
-  description: "Official website of Faheem Ali - Redefining limits in motocross racing",
-  generator: "v0.app",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
+  title: "Faheem Ali - Full Stack AI Engineer | React TypeScript Next.js Developer",
+  description:
+    "Full Stack AI Engineer specializing in React, TypeScript, Next.js, Python, and LangChain. NUST graduate building innovative full-stack and AI applications.",
+  keywords: [
+    "Faheem Ali",
+    "Full Stack AI Engineer",
+    "React Developer",
+    "TypeScript",
+    "Next.js",
+    "Python",
+    "LangChain",
+    "NUST Islamabad",
+  ],
+  authors: [{ name: "Faheem Ali" }],
+  openGraph: {
+    title: "Faheem Ali - Full Stack AI Engineer | React TypeScript Developer",
+    description:
+      "Full Stack AI Engineer specializing in React, TypeScript, Next.js, Python, and LangChain. NUST graduate building innovative apps.",
+    url: "https://faheemali.dev/",
+    siteName: "Faheem Ali Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Faheem Ali - Full Stack AI Engineer",
+    description: "Full Stack AI Engineer specializing in React, TypeScript, Next.js, Python, and LangChain.",
+    creator: "@Faheem2641",
   },
 }
 
@@ -64,13 +59,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`font-sans antialiased ${roboto.variable} ${libreBaskerville.variable} ${alexBrush.variable} ${oswald.variable}`}
+        className={`bg-[#d8d8d8] text-[#1f2937] font-sans antialiased selection:bg-stone-400 selection:text-stone-900 ${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
       >
-        <Preloader />
-        <SmoothScroll>{children}</SmoothScroll>
-        <Analytics />
+        {children}
       </body>
     </html>
   )

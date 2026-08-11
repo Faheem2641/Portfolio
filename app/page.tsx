@@ -1,40 +1,23 @@
-import Header from "@/components/header"
-import HeroSection from "@/components/hero-section"
-import MissionSection from "@/components/mission-section"
-
-
-// import SignatureMarqueeSection from "@/components/signature-marquee-section"
-
-import SocialSection from "@/components/social-section"
-import Footer from "@/components/footer"
-import MasonryGallerySection from "@/components/masonry-gallery-section"
-import Image from "next/image"
-
-import { InteractiveSchedule } from "@/components/interactive-schedule"
-import { CurveDivider } from "@/components/curve-divider"
-
+import PortfolioNavbar from "@/components/portfolio-clone/navbar"
+import PortfolioHero from "@/components/portfolio-clone/hero"
+import PortfolioAbout from "@/components/portfolio-clone/about"
+import PortfolioExperience from "@/components/portfolio-clone/experience"
+import PortfolioProjects from "@/components/portfolio-clone/projects"
+import PortfolioSkills from "@/components/portfolio-clone/skills"
+import PortfolioContact from "@/components/portfolio-clone/contact"
+import PortfolioFooter from "@/components/portfolio-clone/footer"
 
 export default function Home() {
   return (
-    <main className="relative">
-      <Header />
-      <HeroSection />
-      <div className="relative z-10">
-        <MissionSection />
-
-        <CurveDivider topColor="#0a192f" bottomColor="#ffffff" />
-
-        <MasonryGallerySection />
-
-        <CurveDivider topColor="#ffffff" bottomColor="#0a192f" />
-
-        <InteractiveSchedule />
-
-        <CurveDivider topColor="#0a192f" bottomColor="#F5F1E8" />
-
-        <SocialSection />
-        <Footer />
-      </div>
+    <main className="min-h-screen bg-[#d8d8d8] text-[#1f2937] selection:bg-stone-400 selection:text-stone-900 overflow-x-hidden p-3 sm:p-6 md:pl-28 lg:pl-32 space-y-6">
+      <PortfolioNavbar />
+      <PortfolioHero />
+      <PortfolioAbout />
+      <PortfolioExperience />
+      <PortfolioProjects />
+      <PortfolioSkills />
+      <PortfolioContact />
+      <PortfolioFooter />
     </main>
   )
 }

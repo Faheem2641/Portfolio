@@ -73,7 +73,7 @@ export default function SocialSection() {
           <div className="flex justify-center mt-8">
             <div className="bg-[#162439] border border-white/10 rounded-full p-2 flex flex-wrap justify-center gap-2 shadow-2xl max-w-4xl mx-auto">
               {[
-                { label: "EMAIL", href: "mailto:fali.ug24smme@student.nust.edu.pk" },
+                { label: "EMAIL", href: "mailto:faheemali3724@gmail.com" },
                 { label: "GITHUB", href: "https://github.com/Faheem2641" },
                 { label: "LINKEDIN", href: "https://www.linkedin.com/in/faheem-ali-b87293373/" },
                 { label: "WHATSAPP", href: "https://wa.me/923304188776" },
