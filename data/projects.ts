@@ -18,7 +18,7 @@ export const projectsData: Project[] = [
     title: "Lab-Ledger",
     date: "Jul 2026",
     association: "Smart Agri Tech Lab",
-    description: "Built a web application to streamline budget tracking and receipt management for our lab. Lab Ledger lets team members log purchases with cost and purchaser details, attach receipt images directly to transactions, and monitor total allocated budget vs. remaining funds in real time with category breakdowns and monthly expense trends. Replaced spreadsheet-based tracking with a centralized, discrepancy-free system now used across the lab.",
+    description: "Built a web application to streamline <strong className=\"text-slate-900 font-bold\">budget tracking and receipt management</strong> for our lab. Lab Ledger lets team members log purchases with cost and purchaser details, attach receipt images directly to transactions, and monitor <strong className=\"text-slate-900 font-bold\">total allocated budget vs. remaining funds</strong> in real time with <strong className=\"text-slate-900 font-bold\">category breakdowns and monthly expense trends</strong>. Replaced spreadsheet-based tracking with a <strong className=\"text-slate-900 font-bold\">centralized, discrepancy-free system</strong> now used across the lab.",
     links: [
       { label: "GitHub Repository", url: "https://github.com/Faheem2641/lab-ledger" }
     ]
@@ -28,7 +28,7 @@ export const projectsData: Project[] = [
     date: "Apr 2026 – May 2026",
     association: "Academic Project",
     images: ["/images/Proteus.png"],
-    description: "Designed and built an ATmega328-based irrigation system that uses soil moisture sensors to monitor real-time soil conditions and automatically activates a water pump to deliver the right amount of water to plants, optimizing water usage and reducing manual intervention.",
+    description: "Designed and built an <strong className=\"text-slate-900 font-bold\">ATmega328-based irrigation system</strong> that uses <strong className=\"text-slate-900 font-bold\">soil moisture sensors</strong> to monitor real-time soil conditions and <strong className=\"text-slate-900 font-bold\">automatically activates a water pump</strong> to deliver the right amount of water to plants, <strong className=\"text-slate-900 font-bold\">optimizing water usage</strong> and reducing manual intervention.",
     links: [
       { label: "Proteus Simulation", url: "" },
       { label: "GitHub Repository", url: "https://github.com/Faheem2641/Irrigation-System" }
@@ -39,7 +39,7 @@ export const projectsData: Project[] = [
     date: "May 2026",
     association: "Academic Project",
     images: ["/images/Truss 2.jpg", "/images/Truss 1.jpg"],
-    description: "Designed a scaled cantilever storm surge gate using balsa wood, applying Mechanics of Materials principles to optimize structural performance under a 50 N horizontal surge load. Designs were analytically evaluated using Mathcad and SolidWorks; the final Quad Arm Lattice structure not only met the design criteria but handled a maximum load of 2,121 N.",
+    description: "Designed a scaled cantilever storm surge gate using balsa wood, applying <strong className=\"text-slate-900 font-bold\">Mechanics of Materials principles</strong> to optimize structural performance under a <strong className=\"text-slate-900 font-bold\">50 N horizontal surge load</strong>. Designs were analytically evaluated using <strong className=\"text-slate-900 font-bold\">Mathcad and SolidWorks</strong>; the final <strong className=\"text-slate-900 font-bold\">Quad Arm Lattice structure</strong> not only met the design criteria but handled a <strong className=\"text-slate-900 font-bold\">maximum load of 2,121 N</strong>.",
     links: [
       { label: "Side View", url: "" },
       { label: "Top View", url: "" }
@@ -49,7 +49,7 @@ export const projectsData: Project[] = [
     title: "Car Inventory & Recommendation System",
     date: null,
     association: "Academic Project",
-    description: "Developed a car inventory and recommendation system that accepts user requirements and processes them against a comprehensive vehicle database to select tailored car recommendations. The system streamlined the vehicle selection process by filtering and matching user preferences such as color, brand, torque specs, and features to the most suitable and relevant available options. This project showcased the integration of inventory data and logical decision-making to build a practical, real-world solution for automated vehicle selection.",
+    description: "Developed a <strong className=\"text-slate-900 font-bold\">car inventory and recommendation system</strong> that accepts user requirements and processes them against a <strong className=\"text-slate-900 font-bold\">comprehensive vehicle database</strong> to select <strong className=\"text-slate-900 font-bold\">tailored car recommendations</strong>. The system streamlined the vehicle selection process by filtering and matching user preferences such as <strong className=\"text-slate-900 font-bold\">color, brand, torque specs, and features</strong> to the most suitable available options.",
     links: [
       { label: "GitHub Repository", url: "https://github.com/Faheem2641/Car-Inventory-System" }
     ]
@@ -59,7 +59,7 @@ export const projectsData: Project[] = [
     date: null,
     association: "Academic Project",
     images: ["/images/car.jpeg", "/images/car 2.jpeg"],
-    description: "Built a mousetrap-powered car that converts the spring's elastic energy into rotational motion, transferring it through a shaft to wheel bearings fitted with CDs as wheels. Constructed using simple materials such as wood and CDs, the project demonstrated resourcefulness. One of the key challenges was balancing the car to ensure it moved in a straight, controlled direction, solved by carefully balancing the frame through added counterweights.",
+    description: "Built a mousetrap-powered car that converts the spring's <strong className=\"text-slate-900 font-bold\">elastic energy into rotational motion</strong>, transferring it through a shaft to wheel bearings fitted with <strong className=\"text-slate-900 font-bold\">CDs as wheels</strong>. Constructed using simple materials such as wood and CDs, the project demonstrated resourcefulness. One of the key challenges was <strong className=\"text-slate-900 font-bold\">balancing the car frame</strong> to ensure straight, controlled movement.",
     links: [
       { label: "Project Car", url: "" }
     ]
@@ -69,7 +69,7 @@ export const projectsData: Project[] = [
     date: null,
     association: "Personal Project",
     images: ["/images/Robort.jpeg"],
-    description: "Designed and implemented a self-balancing robot using PID control logic to maintain an upright position on two wheels. An MPU-6050 gyroscope and accelerometer module processed 6-axis motion data to deliver real-time orientation feedback, while an L298N H-Bridge motor driver transmitted control signals to regulate two DC motors accordingly. Experimental results confirmed successful autonomous balancing under various disturbances, demonstrating how control logic can be effectively integrated with electronic hardware to achieve stable, autonomous operation in bi-wheeled vehicles.",
+    description: "Designed and implemented a self-balancing robot using <strong className=\"text-slate-900 font-bold\">PID control logic</strong> to maintain an upright position on two wheels. An <strong className=\"text-slate-900 font-bold\">MPU-6050 gyroscope and accelerometer</strong> module processed <strong className=\"text-slate-900 font-bold\">6-axis motion data</strong> to deliver real-time orientation feedback, while an <strong className=\"text-slate-900 font-bold\">L298N H-Bridge motor driver</strong> transmitted control signals to regulate two DC motors for <strong className=\"text-slate-900 font-bold\">autonomous balancing</strong>.",
     links: [
       { label: "Technical Report", url: "https://drive.google.com/file/d/1_WcDgskrdinHJ4zmTuJ5_u0G29f3OZTa/view?usp=sharing" },
       { label: "Robot", url: "" },
@@ -80,7 +80,7 @@ export const projectsData: Project[] = [
     title: "Ultrasonic Radar System",
     date: null,
     association: "Personal Project",
-    description: "Developed a real-time data visualization system integrating an ATmega328 microcontroller with a servo motor and ultrasonic sensor to simulate radar functionality. The servo motor rotates the ultrasonic sensor across a 180-degree range, while the sensor continuously maps the surrounding area by emitting and receiving ultrasound waves to measure object distances. The collected data is transmitted to Processing IDE, which renders a live graphical visualization of the scanned environment, replicating the appearance and behavior of a real radar display. This project serves as a small-scale implementation of radar systems as used in aviation and military applications.",
+    description: "Developed a <strong className=\"text-slate-900 font-bold\">real-time data visualization system</strong> integrating an <strong className=\"text-slate-900 font-bold\">ATmega328 microcontroller</strong> with a <strong className=\"text-slate-900 font-bold\">servo motor and ultrasonic sensor</strong> to simulate radar functionality. The servo motor rotates the ultrasonic sensor across a 180-degree range while measuring object distances. Collected data is transmitted to <strong className=\"text-slate-900 font-bold\">Processing IDE</strong>, rendering a <strong className=\"text-slate-900 font-bold\">live graphical visualization</strong> of the scanned environment.",
     links: [
       { label: "GitHub Repository", url: "https://github.com/Faheem2641/Radar-System" }
     ]

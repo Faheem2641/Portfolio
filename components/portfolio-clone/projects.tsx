@@ -203,9 +203,8 @@ export default function PortfolioProjects() {
                           className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word] ${
                             !isExpanded ? "line-clamp-4" : ""
                           }`}
-                        >
-                          {project.description}
-                        </p>
+                          dangerouslySetInnerHTML={{ __html: project.description }}
+                        />
                         {project.description.length > 180 && (
                           <button
                             onClick={() => toggleExpand(idx)}

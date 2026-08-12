@@ -46,7 +46,6 @@ export const skillsData: SkillCategory[] = [
       { name: "Printed Circuit Board (PCB) Design" },
       { name: "Electrical Systems & Harness Assembly" },
       { name: "Automation" },
-      { name: "Electrical Troubleshooting" },
       { name: "Electronics Hardware Design" },
       { name: "Logic Design & Digital Systems" },
       { name: "Electronic Prototyping" },

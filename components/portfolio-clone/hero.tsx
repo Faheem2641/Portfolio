@@ -214,7 +214,7 @@ export default function PortfolioHero() {
 
                 {/* Bio text */}
                 <p className="text-slate-600 text-xs sm:text-base leading-relaxed font-normal max-w-xl text-justify [text-justify:inter-word]">
-                  Merging physical mechanical design, precision manufacturing, & thermal optimization with <strong className="text-slate-900 font-bold">embedded IoT robotics, C++ algorithms, & web systems</strong>. Focused on robust engineering and functional innovation.
+                  Merging physical mechanical design, precision manufacturing, & thermal optimization with embedded IoT robotics, C++ algorithms, & web systems. Focused on robust engineering and functional innovation.
                 </p>
 
                 {/* CTA Action Buttons */}
