@@ -171,7 +171,7 @@ export default function PortfolioProjects() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.3 }}
-                    className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between hover:scale-[1.01] transition-all duration-300 space-y-4 sm:space-y-5 h-full"
+                    className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full"
                   >
                     {/* Top Content Group */}
                     <div className="space-y-4">
@@ -255,7 +255,7 @@ export default function PortfolioProjects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-slate-950/85 flex items-center justify-center p-4 sm:p-6"
             onClick={closeLightbox}
           >
             <motion.div
@@ -287,7 +287,7 @@ export default function PortfolioProjects() {
               {/* Dynamic Fitting Image Container with Loader */}
               <div className="relative neu-inset rounded-[20px] p-2 flex items-center justify-center max-h-[72vh] max-w-full overflow-hidden bg-slate-900/5 min-h-[260px] min-w-[300px]">
                 {!imgLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#d8d8d8]/50 backdrop-blur-xs z-10">
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#d8d8d8]/50 z-10">
                     <Loader2 className="w-8 h-8 animate-spin text-slate-700" />
                   </div>
                 )}

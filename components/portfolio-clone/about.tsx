@@ -38,15 +38,15 @@ export default function PortfolioAbout() {
                 </h3>
               </div>
 
-              <p className="text-slate-700 text-xs sm:text-sm leading-relaxed font-normal text-justify [text-justify:inter-word]">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                 Studying at the <strong className="text-slate-900 font-bold">NUST School of Mechanical and Manufacturing Engineering (SMME)</strong>, Islamabad. I engineer solutions that bridge intelligent software with physical hardware, from full-stack web applications to embedded systems and functional engineering prototypes.
               </p>
 
-              <p className="text-slate-700 text-xs sm:text-sm leading-relaxed font-normal text-justify [text-justify:inter-word]">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                 My work spans <strong className="text-slate-900 font-bold">precision manufacturing</strong>, <strong className="text-slate-900 font-bold">thermal systems (Heat Exchangers)</strong>, and <strong className="text-slate-900 font-bold">embedded control (ATmega328 and Tensilica LX-6)</strong>. Alongside this, I bring hands-on experience in <strong className="text-slate-900 font-bold">CAD modeling</strong>, <strong className="text-slate-900 font-bold">digital manufacturing</strong>, <strong className="text-slate-900 font-bold">rapid prototyping</strong>, and <strong className="text-slate-900 font-bold">PCB design</strong>.
               </p>
 
-              <p className="text-slate-700 text-xs sm:text-sm leading-relaxed font-normal text-justify [text-justify:inter-word]">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                 My research interests align with <strong className="text-slate-900 font-bold">Machine Learning integration for Fluid Flow prediction</strong>, exploring data-driven models to reconstruct complex flow patterns for aerodynamics and fluid dynamics applications.
               </p>
             </div>

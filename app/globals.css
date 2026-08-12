@@ -344,8 +344,8 @@
 
   .neu-button:hover {
     box-shadow:
-      5px 5px 12px var(--shadow-dark),
-      -5px -5px 12px var(--shadow-light);
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
     transform: translateY(-1px);
   }
 

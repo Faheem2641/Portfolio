@@ -213,7 +213,7 @@ export default function PortfolioHero() {
                 </div>
 
                 {/* Bio text */}
-                <p className="text-slate-600 text-xs sm:text-base leading-relaxed font-normal max-w-xl text-justify [text-justify:inter-word]">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-xl text-justify [text-justify:inter-word]">
                   Merging physical mechanical design, precision manufacturing, & thermal optimization with embedded IoT robotics, C++ algorithms, & web systems. Focused on robust engineering and functional innovation.
                 </p>
 
@@ -244,30 +244,30 @@ export default function PortfolioHero() {
                   <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar max-w-full">
                     <button
                       onClick={() => setActiveCodeTab("mech")}
-                      className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
+                      className={`px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
                         activeCodeTab === "mech"
-                          ? "neu-button-active text-slate-900"
-                          : "text-slate-700 hover:text-slate-900"
+                          ? "neu-button-active text-slate-950"
+                          : "neu-raised-sm text-slate-700 hover:text-slate-950 active:scale-95"
                       }`}
                     >
                       mechanical-spec.ts
                     </button>
                     <button
                       onClick={() => setActiveCodeTab("fea")}
-                      className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
+                      className={`px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
                         activeCodeTab === "fea"
-                          ? "neu-button-active text-slate-900"
-                          : "text-slate-700 hover:text-slate-900"
+                          ? "neu-button-active text-slate-950"
+                          : "neu-raised-sm text-slate-700 hover:text-slate-950 active:scale-95"
                       }`}
                     >
                       3d-printing.ts
                     </button>
                     <button
                       onClick={() => setActiveCodeTab("cnc")}
-                      className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
+                      className={`px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
                         activeCodeTab === "cnc"
-                          ? "neu-button-active text-slate-900"
-                          : "text-slate-700 hover:text-slate-900"
+                          ? "neu-button-active text-slate-950"
+                          : "neu-raised-sm text-slate-700 hover:text-slate-950 active:scale-95"
                       }`}
                     >
                       cnc-milling.ts

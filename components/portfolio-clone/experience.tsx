@@ -33,7 +33,7 @@ export default function PortfolioExperience() {
               return (
                 <div
                   key={idx}
-                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col hover:scale-[1.01] transition-all duration-300 space-y-4 sm:space-y-5 h-auto"
+                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col transition-colors duration-200 space-y-4 sm:space-y-5 h-auto"
                 >
                   {/* Top Content Group */}
                   <div className="space-y-4">
@@ -86,9 +86,10 @@ export default function PortfolioExperience() {
 
                     {/* Single Role Description if no nested roles */}
                     {!hasRoles && exp.description && (
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
-                        {exp.description}
-                      </p>
+                      <p
+                        className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]"
+                        dangerouslySetInnerHTML={{ __html: exp.description }}
+                      />
                     )}
 
                     {/* Nested Roles Stack */}
@@ -123,9 +124,10 @@ export default function PortfolioExperience() {
                             </div>
 
                             {role.description && (
-                              <p className="text-xs text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
-                                {role.description}
-                              </p>
+                              <p
+                                className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]"
+                                dangerouslySetInnerHTML={{ __html: role.description }}
+                              />
                             )}
                           </div>
                         ))}

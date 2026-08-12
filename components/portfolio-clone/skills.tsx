@@ -47,7 +47,7 @@ export default function PortfolioSkills() {
               return (
                 <div
                   key={idx}
-                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 hover:scale-[1.005] transition-transform h-auto"
+                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 h-auto"
                 >
                   <div className="space-y-5">
                     {/* Category Header */}
@@ -71,10 +71,10 @@ export default function PortfolioSkills() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.2, delay: sIdx * 0.015 }}
-                          className="neu-inset-sm px-3 py-2 rounded-[14px] text-slate-800 text-[11px] sm:text-xs font-bold leading-snug flex items-center gap-2 hover:scale-[1.02] transition-transform cursor-default h-full"
+                          className="neu-inset-sm px-3.5 py-2.5 rounded-[14px] text-slate-800 text-[11px] sm:text-xs font-bold leading-snug flex items-start gap-2.5 cursor-default h-full"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-slate-800 shrink-0" />
-                          <span>{s.name}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-800 shrink-0 mt-1" />
+                          <span className="min-w-0 flex-1 break-normal [word-break:normal]">{s.name}</span>
                         </motion.div>
                       ))}
                     </div>
