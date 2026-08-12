@@ -49,7 +49,7 @@ export const experiencesData: ExperienceEntry[] = [
         type: "Part time",
         duration: "Sep 2025 – Present · 1 yr",
         location: "Hybrid",
-        description: null
+        description: "Researching machine learning approaches for flow reconstruction, evaluating how data-driven models predict and reconstruct complex fluid flow patterns from sparse measurement data for aerodynamic and fluid dynamics applications."
       },
       {
         title: "FYP Collaborator",

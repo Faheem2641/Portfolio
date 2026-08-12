@@ -12,8 +12,13 @@ import {
   Eye,
   Cpu,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Loader2
 } from "lucide-react"
+import { useEffect } from "react"
 import { projectsData, ProjectLink } from "@/data/projects"
 
 function getLinkIcon(label: string) {
@@ -27,9 +32,108 @@ function getLinkIcon(label: string) {
 
 export default function PortfolioProjects() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  const [lightbox, setLightbox] = useState<{
+    title: string
+    images: string[]
+    index: number
+  } | null>(null)
+  const [imgLoaded, setImgLoaded] = useState(false)
+
+  // Preload all project images into browser memory on mount to prevent any loading glitches
+  useEffect(() => {
+    projectsData.forEach((project) => {
+      if (project.images) {
+        project.images.forEach((src) => {
+          const img = new Image()
+          img.src = src
+        })
+      }
+    })
+  }, [])
 
   const toggleExpand = (idx: number) => {
     setExpandedIndex(expandedIndex === idx ? null : idx)
+  }
+
+  const openLightbox = (title: string, images: string[], index = 0) => {
+    setImgLoaded(false)
+    setLightbox({ title, images, index })
+  }
+
+  const closeLightbox = () => {
+    setLightbox(null)
+    setImgLoaded(false)
+  }
+
+  const nextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation()
+    if (!lightbox) return
+    setImgLoaded(false)
+    setLightbox({
+      ...lightbox,
+      index: (lightbox.index + 1) % lightbox.images.length,
+    })
+  }
+
+  const prevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation()
+    if (!lightbox) return
+    setImgLoaded(false)
+    setLightbox({
+      ...lightbox,
+      index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length,
+    })
+  }
+
+  const setImageIndexDirectly = (index: number) => {
+    if (!lightbox || lightbox.index === index) return
+    setImgLoaded(false)
+    setLightbox({ ...lightbox, index })
+  }
+
+  const renderLinkBtn = (link: ProjectLink, project: (typeof projectsData)[0], keyIdx: number) => {
+    const hasUrl = Boolean(link.url && link.url.trim() !== "")
+    const hasImages = Boolean(project.images && project.images.length > 0)
+
+    if (hasUrl) {
+      return (
+        <a
+          key={keyIdx}
+          href={link.url}
+          target="_blank"
+          rel="noreferrer"
+          className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-800 hover:text-slate-950 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+        >
+          {getLinkIcon(link.label)}
+          <span>{link.label}</span>
+        </a>
+      )
+    }
+
+    if (hasImages) {
+      const imgIdx = keyIdx < project.images!.length ? keyIdx : 0
+      return (
+        <button
+          key={keyIdx}
+          onClick={() => openLightbox(project.title, project.images!, imgIdx)}
+          className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-900 hover:text-black flex items-center gap-1.5 cursor-pointer active:scale-95 shrink-0 whitespace-nowrap"
+        >
+          {getLinkIcon(link.label)}
+          <span>{link.label}</span>
+        </button>
+      )
+    }
+
+    return (
+      <span
+        key={keyIdx}
+        className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-700 cursor-default flex items-center gap-1.5 opacity-90 shrink-0 whitespace-nowrap"
+        title="Link coming soon"
+      >
+        {getLinkIcon(link.label)}
+        <span>{link.label}</span>
+      </span>
+    )
   }
 
   return (
@@ -121,50 +225,31 @@ export default function PortfolioProjects() {
                     {/* Bottom Content Group: Skills & Links */}
                     <div className="space-y-4 pt-3 border-t border-slate-300/40">
                       
-                      {/* Skill Tags */}
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.skills.map((skill, sIdx) => (
-                          <span
-                            key={sIdx}
-                            className="neu-inset-sm px-2.5 py-1 rounded-[10px] text-slate-800 text-xs font-mono font-bold"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
+
 
                       {/* Resource Link Chips */}
                       {project.links && project.links.length > 0 && (
-                        <div className="flex flex-wrap items-center gap-2 pt-1">
-                          {project.links.map((link: ProjectLink, lIdx: number) => {
-                            const hasUrl = Boolean(link.url && link.url.trim() !== "")
-
-                            if (hasUrl) {
-                              return (
-                                <a
-                                  key={lIdx}
-                                  href={link.url}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="neu-button px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-800 hover:text-slate-950 flex items-center gap-1.5"
-                                >
-                                  {getLinkIcon(link.label)}
-                                  <span>{link.label}</span>
-                                </a>
-                              )
-                            }
-
-                            return (
-                              <span
-                                key={lIdx}
-                                className="neu-button px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-700 cursor-default flex items-center gap-1.5 opacity-90"
-                                title="Link coming soon"
-                              >
-                                {getLinkIcon(link.label)}
-                                <span>{link.label}</span>
-                              </span>
-                            )
-                          })}
+                        <div className="pt-1">
+                          {project.links.length === 3 ? (
+                            <div className="space-y-2">
+                              {/* Row 1: 1st button */}
+                              <div className="flex items-center">
+                                {renderLinkBtn(project.links[0], project, 0)}
+                              </div>
+                              {/* Row 2: 2nd and 3rd buttons side-by-side */}
+                              <div className="flex flex-row items-center gap-2 overflow-x-auto no-scrollbar">
+                                {project.links.slice(1).map((link: ProjectLink, lIdx: number) =>
+                                  renderLinkBtn(link, project, lIdx + 1)
+                                )}
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex flex-row items-center gap-2 overflow-x-auto no-scrollbar">
+                              {project.links.map((link: ProjectLink, lIdx: number) =>
+                                renderLinkBtn(link, project, lIdx)
+                              )}
+                            </div>
+                          )}
                         </div>
                       )}
 
@@ -179,6 +264,102 @@ export default function PortfolioProjects() {
         </div>
 
       </div>
+
+      {/* Lightbox Modal for Fullscreen Image Viewing */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+            onClick={closeLightbox}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 8 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 8 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="neu-raised rounded-[28px] bg-[#d8d8d8] max-w-5xl max-h-[90vh] w-auto p-4 sm:p-6 relative overflow-hidden flex flex-col items-center space-y-3"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="w-full flex items-center justify-between pb-2 border-b border-slate-300/60 gap-4">
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 leading-tight">
+                    {lightbox.title}
+                  </h3>
+                  <p className="text-xs font-mono font-bold text-slate-600 mt-0.5">
+                    Photo {lightbox.index + 1} of {lightbox.images.length}
+                  </p>
+                </div>
+                <button
+                  onClick={closeLightbox}
+                  className="w-9 h-9 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-900 transition-colors shrink-0"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Dynamic Fitting Image Container with Loader */}
+              <div className="relative neu-inset rounded-[20px] p-2 flex items-center justify-center max-h-[72vh] max-w-full overflow-hidden bg-slate-900/5 min-h-[260px] min-w-[300px]">
+                {!imgLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#d8d8d8]/50 backdrop-blur-xs z-10">
+                    <Loader2 className="w-8 h-8 animate-spin text-slate-700" />
+                  </div>
+                )}
+
+                <img
+                  key={lightbox.index}
+                  src={lightbox.images[lightbox.index]}
+                  alt={`${lightbox.title} view ${lightbox.index + 1}`}
+                  onLoad={() => setImgLoaded(true)}
+                  decoding="async"
+                  className={`max-h-[68vh] max-w-full w-auto h-auto object-contain rounded-[14px] transition-opacity duration-300 ${
+                    imgLoaded ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+
+                {/* Left / Right Nav Arrows if multiple images */}
+                {lightbox.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-3 w-10 h-10 rounded-full neu-button flex items-center justify-center text-slate-800 hover:text-black transition-transform active:scale-95 shadow-md z-20"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-3 w-10 h-10 rounded-full neu-button flex items-center justify-center text-slate-800 hover:text-black transition-transform active:scale-95 shadow-md z-20"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Thumbnails indicator bar if multiple images */}
+              {lightbox.images.length > 1 && (
+                <div className="flex items-center gap-2 pt-1">
+                  {lightbox.images.map((img, iIdx) => (
+                    <button
+                      key={iIdx}
+                      onClick={() => setImageIndexDirectly(iIdx)}
+                      className={`w-12 h-12 rounded-[10px] neu-inset p-1 overflow-hidden transition-all ${
+                        lightbox.index === iIdx ? "ring-2 ring-slate-800 scale-105" : "opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <img src={img} alt="thumbnail" className="w-full h-full object-cover rounded-[6px]" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
