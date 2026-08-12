@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Cpu, Code2, Wrench, Settings, Activity, ShieldCheck } from "lucide-react"
+import { Cpu, Code2, Wrench, Settings, Activity } from "lucide-react"
 import { skillsData, SkillCategory } from "@/data/skills"
 
 function getCategoryIcon(iconName: string) {
@@ -34,67 +34,47 @@ export default function PortfolioSkills() {
               <span>TECHNICAL CAPABILITIES</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
-              Skills & <span className="text-slate-900">Technologies</span>
+              Technical <span className="text-slate-900">Skills</span>
             </h2>
-            <p className="text-slate-600 text-sm font-normal">
-              Mechanical design, precision manufacturing, embedded IoT robotics, and software engineering.
-            </p>
           </div>
 
-          {/* Grid (Concentric 24px Radius Cards) */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Responsive 3-Column Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             {skillsData.map((group: SkillCategory, idx: number) => {
               return (
                 <div
                   key={idx}
-                  className="neu-raised rounded-[24px] p-6 flex flex-col justify-between space-y-6 hover:scale-[1.01] transition-transform"
+                  className="neu-raised rounded-[24px] p-6 flex flex-col justify-between space-y-6 hover:scale-[1.005] transition-transform h-auto"
                 >
-                  <div>
-                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-300/40">
-                      <div className="w-10 h-10 rounded-[16px] neu-button flex items-center justify-center text-slate-700">
-                        {getCategoryIcon(group.iconName)}
+                  <div className="space-y-5">
+                    {/* Category Header */}
+                    <div className="flex items-center justify-between pb-4 border-b border-slate-300/40">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-[16px] neu-button flex items-center justify-center text-slate-800">
+                          {getCategoryIcon(group.iconName)}
+                        </div>
+                        <h3 className="text-base font-black text-slate-900 leading-snug">
+                          {group.category}
+                        </h3>
                       </div>
-                      <h3 className="text-base font-bold text-slate-800">
-                        {group.category}
-                      </h3>
                     </div>
 
-                    <div className="space-y-4">
+                    {/* Side-by-side 2-Column Capsule Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                       {group.skills.map((s, sIdx) => (
-                        <div
+                        <motion.div
                           key={sIdx}
-                          className="neu-inset rounded-[16px] p-4 space-y-2"
+                          initial={{ opacity: 0, y: 4 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.2, delay: sIdx * 0.015 }}
+                          className="neu-inset-sm px-3 py-2 rounded-[14px] text-slate-800 text-[11px] sm:text-xs font-bold leading-snug flex items-center gap-2 hover:scale-[1.02] transition-transform cursor-default h-full"
                         >
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-bold text-slate-800">{s.name}</span>
-                            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full neu-button text-slate-900">
-                              {s.level}
-                            </span>
-                          </div>
-
-                          <div className="w-full h-2 rounded-full neu-inset overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              whileInView={{ width: s.level }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 1, delay: sIdx * 0.1 }}
-                              className="h-full bg-gradient-to-r from-zinc-700 to-zinc-900 rounded-full"
-                            ></motion.div>
-                          </div>
-
-                          <p className="text-xs text-slate-600 font-medium leading-relaxed">{s.desc}</p>
-                        </div>
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-800 shrink-0" />
+                          <span>{s.name}</span>
+                        </motion.div>
                       ))}
                     </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-slate-300/40 flex items-center justify-between text-xs text-slate-600 font-mono">
-                    <span className="flex items-center gap-1 text-xs font-medium text-slate-700">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Lab & Project Verified
-                    </span>
-                    <span className="text-xs font-bold text-slate-700">
-                      {group.skills.length} core competencies
-                    </span>
                   </div>
 
                 </div>
