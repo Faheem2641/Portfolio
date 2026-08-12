@@ -50,15 +50,20 @@
   /* Concentric Prominent Radius Scale & Dual Neumorphic Shadows */
   --neu-bg: #d8d8d8;
   /* Dark shadow: background darkened ~18%, 0.18 opacity  => rgba(178,178,178,0.72) ≈ */
-  --shadow-dark:  rgba(0, 0, 0, 0.16);
+  --shadow-dark: rgba(0, 0, 0, 0.16);
   /* Light shadow: background lightened ~18% => nearly white, 0.72 opacity */
   --shadow-light: rgba(255, 255, 255, 0.78);
 
-  --radius-xs: 8px;   /* Small badges / inner tags */
-  --radius-sm: 10px;  /* Buttons / small controls */
-  --radius-md: 16px;  /* Inner cards / inset panels */
-  --radius-lg: 26px;  /* Prominent mid-level container cards */
-  --radius-xl: 40px;  /* Prominent outer main section frames */
+  --radius-xs: 8px;
+  /* Small badges / inner tags */
+  --radius-sm: 10px;
+  /* Buttons / small controls */
+  --radius-md: 16px;
+  /* Inner cards / inset panels */
+  --radius-lg: 26px;
+  /* Prominent mid-level container cards */
+  --radius-xl: 40px;
+  /* Prominent outer main section frames */
 }
 
 /* Adding font-face definitions for local fonts Brier and Mona Sans */
@@ -260,18 +265,24 @@
 
   /* Concentric Radius Helpers */
   .neu-frame-container {
-    border-radius: var(--radius-xl); /* 56px */
-    padding: 1.5rem; /* 24px (p-6) symmetrical on all 4 sides */
+    border-radius: var(--radius-xl);
+    /* 56px */
+    padding: 1.5rem;
+    /* 24px (p-6) symmetrical on all 4 sides */
   }
 
   .neu-card-container {
-    border-radius: var(--radius-lg); /* 32px */
-    padding: 1rem; /* 16px (p-4) symmetrical on all 4 sides */
+    border-radius: var(--radius-lg);
+    /* 32px */
+    padding: 1rem;
+    /* 16px (p-4) symmetrical on all 4 sides */
   }
 
   .neu-panel-container {
-    border-radius: var(--radius-md); /* 16px */
-    padding: 0.75rem; /* 12px (p-3) */
+    border-radius: var(--radius-md);
+    /* 16px */
+    padding: 0.75rem;
+    /* 12px (p-3) */
   }
 
   /* ── Raised: dual shadow (dark bottom-right + light top-left) ── */
@@ -338,7 +349,8 @@
     transform: translateY(-1px);
   }
 
-  .neu-button:active, .neu-button-active {
+  .neu-button:active,
+  .neu-button-active {
     box-shadow:
       inset 3px 3px 6px var(--shadow-dark),
       inset -3px -3px 6px var(--shadow-light);

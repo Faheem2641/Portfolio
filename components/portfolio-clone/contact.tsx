@@ -32,7 +32,7 @@ export default function PortfolioContact() {
   }
 
   return (
-    <section id="contact" className="py-12 neu-bg">
+    <section id="contact" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}

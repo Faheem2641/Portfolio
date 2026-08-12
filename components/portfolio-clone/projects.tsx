@@ -33,7 +33,7 @@ export default function PortfolioProjects() {
   }
 
   return (
-    <section id="projects" className="py-12 neu-bg">
+    <section id="projects" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}
@@ -96,7 +96,7 @@ export default function PortfolioProjects() {
                       {/* Description with Expand / Line-clamp toggle */}
                       <div>
                         <p
-                          className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal ${
+                          className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word] ${
                             !isExpanded ? "line-clamp-4" : ""
                           }`}
                         >

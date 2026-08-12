@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
   ArrowRight,
-  Code2,
   Sparkles,
   Github,
   Linkedin,
@@ -77,7 +76,7 @@ export default function PortfolioHero() {
   const minuteDeg = minsNum * 6
 
   return (
-    <section className="pt-16 md:pt-4 pb-6 neu-bg">
+    <section className="pt-14 md:pt-3 pb-4 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Outer Frame with Concentric 56px Radius & Symmetrical 24px Padding (p-6) */}
@@ -172,11 +171,6 @@ export default function PortfolioHero() {
             <div className="lg:col-span-7 neu-raised rounded-[24px] p-6 sm:p-8 flex flex-col justify-between space-y-8">
               
               <div className="space-y-6">
-                {/* Status Pill Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-slate-800 font-bold text-xs font-mono">
-                  <Code2 className="w-3.5 h-3.5 text-slate-800" />
-                  <span>MECHANICAL & SYSTEMS ENGINEER</span>
-                </div>
 
                 {/* Main Headline */}
                 <div className="space-y-2">
@@ -192,7 +186,7 @@ export default function PortfolioHero() {
                 </div>
 
                 {/* Bio text */}
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal max-w-xl">
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal max-w-xl text-justify [text-justify:inter-word]">
                   Merging physical mechanical design, precision manufacturing, & thermal optimization with <strong className="text-slate-900 font-bold">embedded IoT robotics, C++ algorithms, & web systems</strong>. Focused on robust engineering and functional innovation.
                 </p>
 

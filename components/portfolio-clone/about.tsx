@@ -4,7 +4,7 @@ import { GraduationCap, Wrench, Cpu, Code2, Sparkles, Terminal } from "lucide-re
 
 export default function PortfolioAbout() {
   return (
-    <section id="about" className="py-12 neu-bg">
+    <section id="about" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}
@@ -38,11 +38,11 @@ export default function PortfolioAbout() {
                   </h3>
                 </div>
 
-                <p className="text-slate-600 leading-relaxed text-sm">
+                <p className="text-slate-600 leading-relaxed text-sm text-justify [text-justify:inter-word]">
                   Studying at the <strong className="text-slate-900 font-semibold">NUST School of Mechanical and Manufacturing Engineering (SMME)</strong>, Islamabad. My work bridges physical hardware design, precision machining, thermal optimization, and intelligent embedded software.
                 </p>
 
-                <p className="text-slate-600 leading-relaxed text-sm">
+                <p className="text-slate-600 leading-relaxed text-sm text-justify [text-justify:inter-word]">
                   Experienced across <strong className="text-slate-900">precision tool manufacturing, balsa cantilever surge gate structural analysis, Chevron heat exchanger solar panel cooling</strong>, and real-time <strong className="text-slate-900 font-semibold">ATmega328 / PID self-balancing robotics</strong> and web budget management systems.
                 </p>
               </div>
@@ -55,7 +55,7 @@ export default function PortfolioAbout() {
                 <div>
                   <h4 className="text-sm font-bold text-slate-800">NUST SMME</h4>
                   <p className="text-xs text-slate-700 font-mono font-semibold mt-0.5">Mechanical & Manufacturing Engineering</p>
-                  <p className="text-xs text-slate-600 font-medium mt-1">Specialized in Mechanics of Materials, Precision Tool Machining, Thermal Systems, and Mechatronics.</p>
+                  <p className="text-xs text-slate-600 font-medium mt-1 text-justify [text-justify:inter-word]">Specialized in Mechanics of Materials, Precision Tool Machining, Thermal Systems, and Mechatronics.</p>
                 </div>
               </div>
 
@@ -70,7 +70,7 @@ export default function PortfolioAbout() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-800">Precision Machining & CAD</h4>
-                  <p className="text-xs text-slate-600 mt-1 leading-relaxed font-medium">
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed font-medium text-justify [text-justify:inter-word]">
                     SolidWorks 3D CAD modeling, Mathcad structural stress analysis, manual lathe/mill operation, and cutting tool geometry optimization.
                   </p>
                 </div>
@@ -82,7 +82,7 @@ export default function PortfolioAbout() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-800">Embedded Control & IoT</h4>
-                  <p className="text-xs text-slate-600 mt-1 leading-relaxed font-medium">
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed font-medium text-justify [text-justify:inter-word]">
                     PID closed-loop control, 6-axis MPU-6050 motion processing, ATmega328 firmware, ultrasonic radar visualization, and automated irrigation.
                   </p>
                 </div>
@@ -94,7 +94,7 @@ export default function PortfolioAbout() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-800">Software & OOP Systems</h4>
-                  <p className="text-xs text-slate-600 mt-1 leading-relaxed font-medium">
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed font-medium text-justify [text-justify:inter-word]">
                     C++ inventory & decision-making recommendation algorithms, web budget tracking applications (Lab-Ledger), and Processing IDE real-time displays.
                   </p>
                 </div>

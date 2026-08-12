@@ -21,7 +21,7 @@ function getCategoryIcon(iconName: string) {
 
 export default function PortfolioSkills() {
   return (
-    <section id="skills" className="py-12 neu-bg">
+    <section id="skills" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}

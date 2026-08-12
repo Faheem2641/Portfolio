@@ -1,11 +1,11 @@
 "use client"
 
-import { Briefcase, MapPin, Calendar, Building2, Award, ChevronRight } from "lucide-react"
+import { Briefcase, MapPin, Calendar, Building2, ChevronRight } from "lucide-react"
 import { experiencesData, ExperienceEntry, ExperienceRole } from "@/data/experience"
 
 export default function PortfolioExperience() {
   return (
-    <section id="experience" className="py-12 neu-bg">
+    <section id="experience" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}
@@ -46,6 +46,11 @@ export default function PortfolioExperience() {
                           <span className="truncate">{exp.type}</span>
                         </span>
                       )}
+                      {exp.workType && (
+                        <span className="text-xs font-mono font-bold text-slate-800 bg-slate-300/80 px-2.5 py-1 rounded-full shrink-0">
+                          {exp.workType}
+                        </span>
+                      )}
                       {exp.duration && (
                         <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
                           <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
@@ -56,9 +61,14 @@ export default function PortfolioExperience() {
 
                     {/* Organization Title */}
                     <div className="space-y-1">
-                      <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight">
+                      <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight text-justify [text-justify:inter-word]">
                         {exp.organization}
                       </h3>
+                      {exp.subtitle && (
+                        <p className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider text-justify [text-justify:inter-word]">
+                          {exp.subtitle}
+                        </p>
+                      )}
 
                       <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-600 pt-1">
                         {exp.company && (
@@ -76,7 +86,7 @@ export default function PortfolioExperience() {
 
                     {/* Single Role Description if no nested roles */}
                     {!hasRoles && exp.description && (
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                         {exp.description}
                       </p>
                     )}
@@ -87,61 +97,35 @@ export default function PortfolioExperience() {
                         {exp.roles!.map((role: ExperienceRole, rIdx: number) => (
                           <div
                             key={rIdx}
-                            className="neu-inset p-3.5 rounded-[16px] space-y-2"
+                            className="neu-inset p-4 rounded-[16px] space-y-3"
                           >
-                            <div className="flex items-start justify-between gap-2">
-                              <div className="flex items-center gap-1.5">
-                                <ChevronRight className="w-3.5 h-3.5 text-slate-700 shrink-0 mt-0.5" />
-                                <h4 className="text-xs sm:text-sm font-bold text-slate-800 leading-tight">
-                                  {role.title}
-                                </h4>
-                              </div>
+                            {/* Role Title Header */}
+                            <div className="flex items-start gap-2">
+                              <ChevronRight className="w-4 h-4 text-slate-900 shrink-0 mt-0.5" />
+                              <h4 className="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight text-justify [text-justify:inter-word]">
+                                {role.title}
+                              </h4>
+                            </div>
+
+                            {/* Timeline & Work Type Row */}
+                            <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                              {role.duration && (
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full neu-raised-sm text-xs font-mono font-bold text-slate-800">
+                                  <Calendar className="w-3 h-3 text-slate-700 shrink-0" />
+                                  <span>{role.duration}</span>
+                                </span>
+                              )}
                               {role.type && (
-                                <span className="text-xs font-mono font-bold text-slate-800 bg-slate-300/80 px-2.5 py-0.5 rounded-full shrink-0">
+                                <span className="neu-raised-sm px-2.5 py-1 rounded-full text-xs font-mono font-bold text-slate-900 shrink-0">
                                   {role.type}
                                 </span>
                               )}
                             </div>
 
-                            {role.duration && (
-                              <p className="text-xs font-mono font-semibold text-slate-700 pl-5">
-                                {role.duration}
-                              </p>
-                            )}
-
                             {role.description && (
-                              <p className="text-xs text-slate-600 leading-relaxed pl-5 font-normal">
+                              <p className="text-xs text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                                 {role.description}
                               </p>
-                            )}
-
-                            {/* Attachments */}
-                            {role.attachments && role.attachments.length > 0 && (
-                              <div className="flex flex-wrap gap-1.5 pl-5 pt-1">
-                                {role.attachments.map((att: string, aIdx: number) => (
-                                  <span
-                                    key={aIdx}
-                                    className="neu-button px-3 py-1 rounded-full text-xs font-bold text-slate-900 flex items-center gap-1.5"
-                                  >
-                                    <Award className="w-3.5 h-3.5 text-amber-600" />
-                                    <span>{att}</span>
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-
-                            {/* Role Skills */}
-                            {role.skills && role.skills.length > 0 && (
-                              <div className="flex flex-wrap gap-1.5 pl-5 pt-1">
-                                {role.skills.map((skill: string, sIdx: number) => (
-                                  <span
-                                    key={sIdx}
-                                    className="neu-inset-sm px-2.5 py-1 rounded-[8px] text-xs font-mono font-bold text-slate-800"
-                                  >
-                                    {skill}
-                                  </span>
-                                ))}
-                              </div>
                             )}
                           </div>
                         ))}
