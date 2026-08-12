@@ -24,8 +24,8 @@ export default function PortfolioSkills() {
     <section id="skills" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}
-        <div className="neu-raised rounded-[40px] p-6 sm:p-8 space-y-10">
+        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical Padding) */}
+        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-8 space-y-6 sm:space-y-10">
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -33,21 +33,21 @@ export default function PortfolioSkills() {
               <Cpu className="w-3.5 h-3.5 text-slate-700" />
               <span>TECHNICAL CAPABILITIES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Technical <span className="text-slate-900">Skills</span>
             </h2>
-            <p className="text-slate-600 text-sm font-normal">
+            <p className="text-slate-600 text-xs sm:text-sm font-normal">
               What I know. What I build with.
             </p>
           </div>
 
           {/* Responsive 3-Column Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
             {skillsData.map((group: SkillCategory, idx: number) => {
               return (
                 <div
                   key={idx}
-                  className="neu-raised rounded-[24px] p-6 flex flex-col justify-between space-y-6 hover:scale-[1.005] transition-transform h-auto"
+                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 hover:scale-[1.005] transition-transform h-auto"
                 >
                   <div className="space-y-5">
                     {/* Category Header */}

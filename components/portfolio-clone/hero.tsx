@@ -12,6 +12,12 @@ import {
   ChevronRight,
   ChevronLeft,
   Terminal,
+  MapPin,
+  Check,
+  Copy,
+  Wrench,
+  BookOpen,
+  Cpu,
 } from "lucide-react"
 
 export default function PortfolioHero() {
@@ -20,14 +26,26 @@ export default function PortfolioHero() {
   const [loopNum, setLoopNum] = useState(0)
   const [typingSpeed, setTypingSpeed] = useState(100)
   const [time, setTime] = useState({ hours: "12", minutes: "00", seconds: "00", date: "" })
-  const [activeCodeTab, setActiveCodeTab] = useState<"stack" | "agent" | "config">("stack")
+  const [activeCodeTab, setActiveCodeTab] = useState<"mech" | "fea" | "cnc">("mech")
   const [asciiKey, setAsciiKey] = useState(0)
+  const [copiedEmail, setCopiedEmail] = useState(false)
+  const [sparkleToast, setSparkleToast] = useState(false)
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("faheemali.engr@gmail.com")
+    setCopiedEmail(true)
+    setTimeout(() => setCopiedEmail(false), 2500)
+  }
+
+  const handleSparkleClick = () => {
+    setSparkleToast(true)
+    setTimeout(() => setSparkleToast(false), 3000)
+  }
 
   const roles = [
-    "Mechanical & Manufacturing Engineer",
-    "Embedded Systems & IoT Specialist",
+    "Mechanical Engineer",
+    "Embedded Systems & IoT Trainee",
     "Precision Machining Trainee",
-    "NUST SMME Engineer",
   ]
 
   useEffect(() => {
@@ -72,28 +90,32 @@ export default function PortfolioHero() {
   // Calculate clock hands angle
   const hoursNum = parseInt(time.hours) % 12
   const minsNum = parseInt(time.minutes)
+  const secsNum = parseInt(time.seconds) || 0
   const hourDeg = (hoursNum + minsNum / 60) * 30
-  const minuteDeg = minsNum * 6
+  const minuteDeg = (minsNum + secsNum / 60) * 6
+  const secondDeg = secsNum * 6
+
+  const tickAngles = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
 
   return (
     <section className="pt-14 md:pt-3 pb-4 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Outer Frame with Concentric 56px Radius & Symmetrical 24px Padding (p-6) */}
+        {/* Outer Frame with Concentric 56px Radius & Symmetrical Padding */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="neu-raised rounded-[40px] p-6 sm:p-8 space-y-8"
+          className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-8 space-y-6 sm:space-y-8"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             
-            {/* Left Column - Concentric 32px Cards */}
-            <div className="lg:col-span-5 space-y-6 flex flex-col justify-between">
+            {/* Left Column - Concentric 24px Cards */}
+            <div className="lg:col-span-5 space-y-4 sm:space-y-6 flex flex-col justify-start">
               
-              {/* GitHub ASCII Art Portrait Container (Top Left Corner) */}
-              <div className="neu-raised rounded-[24px] p-6">
-                <div className="w-full neu-inset rounded-[16px] p-4 flex items-center justify-center overflow-hidden min-h-[240px]">
+              {/* GitHub ASCII Art Portrait Container */}
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6">
+                <div className="w-full neu-inset rounded-[14px] sm:rounded-[16px] p-3 sm:p-4 flex items-center justify-center overflow-hidden min-h-[200px] sm:min-h-[240px]">
                   <img
                     key={asciiKey}
                     src={`/images/ascii.svg?v=${asciiKey}`}
@@ -103,98 +125,103 @@ export default function PortfolioHero() {
                 </div>
               </div>
 
-              {/* Analogue & Digital Clock Widget (Under ASCII Portrait) */}
-              <div className="neu-raised rounded-[24px] p-6 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  {/* Analog Clock Dial */}
-                  <div className="w-20 h-20 rounded-full neu-inset flex items-center justify-center relative shrink-0">
-                    <div className="absolute top-1 text-[8px] font-mono text-slate-400 font-bold">12</div>
-                    <div className="absolute right-1 text-[8px] font-mono text-slate-400 font-bold">3</div>
-                    <div className="absolute bottom-1 text-[8px] font-mono text-slate-400 font-bold">6</div>
-                    <div className="absolute left-1 text-[8px] font-mono text-slate-400 font-bold">9</div>
 
-                    <div
-                      className="absolute w-1 h-5 bg-slate-800 rounded-full origin-bottom bottom-1/2 transition-transform duration-500"
-                      style={{ transform: `rotate(${hourDeg}deg)` }}
-                    ></div>
-                    <div
-                      className="absolute w-0.5 h-7 bg-slate-800 rounded-full origin-bottom bottom-1/2 transition-transform duration-300"
-                      style={{ transform: `rotate(${minuteDeg}deg)` }}
-                    ></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-slate-900 z-10 neu-raised"></div>
-                  </div>
 
-                  <div>
-                    <div className="text-xl font-black font-mono text-slate-800 tracking-tight">
-                      {time.hours}:{time.minutes}
-                      <span className="text-xs text-slate-700 font-normal ml-1">{time.seconds}s</span>
-                    </div>
-                    <p className="text-xs font-mono text-slate-500 font-semibold mt-0.5">{time.date}</p>
-                    <div className="flex items-center gap-1.5 mt-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                      <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-wider">
-                        Available For Projects
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-10 h-10 rounded-full neu-button flex items-center justify-center text-slate-600 shrink-0">
-                  <Sparkles className="w-4 h-4 text-amber-500" />
-                </div>
+              {/* Engineering Quote Container */}
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-4 text-center flex items-center justify-center">
+                <p className="text-[11px] sm:text-xs font-mono font-bold text-slate-700 italic tracking-tight">
+                  “Torque, tension, and a little stubbornness.”
+                </p>
               </div>
 
-              {/* Bottom Profile Summary Card (Radius: 24px, Symmetrical p-6 Padding) */}
-              <div className="neu-raised rounded-[24px] p-6 flex items-center justify-between">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-full neu-inset flex items-center justify-center text-slate-800 font-mono font-bold text-base">
-                    FA
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800">Faheem Ali</h4>
-                    <p className="text-xs text-slate-600 font-mono font-medium">Mechanical & Manufacturing • NUST SMME</p>
-                  </div>
+              {/* Neumorphic Social Buttons Row */}
+              <div className="flex items-center justify-around gap-2 sm:gap-3 py-1">
+                <a
+                  href="https://github.com/Faheem2641"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  aria-label="GitHub Profile"
+                  title="GitHub Profile"
+                >
+                  <Github className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 group-hover:scale-110 transition-transform" />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/faheem-ali-b87293373/?skipRedirect=true"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  aria-label="LinkedIn Profile"
+                  title="LinkedIn Profile"
+                >
+                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-sky-700 group-hover:scale-110 transition-transform" />
+                </a>
+
+                <div className="relative">
+                  <button
+                    onClick={handleCopyEmail}
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                    aria-label="Copy Email Address"
+                    title="Copy Email Address"
+                  >
+                    {copiedEmail ? (
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
+                    ) : (
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-rose-600 group-hover:scale-110 transition-transform" />
+                    )}
+                  </button>
+                  {copiedEmail && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="absolute -top-8 left-1/2 -translate-x-1/2 bg-emerald-700 text-white text-[10px] font-mono py-1 px-2.5 rounded-lg whitespace-nowrap shadow-md z-30"
+                    >
+                      Email copied!
+                    </motion.div>
+                  )}
                 </div>
 
                 <a
                   href="#contact"
-                  className="w-10 h-10 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-900"
-                  aria-label="Contact"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  aria-label="Contact Form"
+                  title="Send Message"
                 >
-                  <Mail className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 group-hover:translate-x-0.5 transition-transform" />
                 </a>
               </div>
 
             </div>
 
-            {/* Right Column - Hero Main Presentation (Radius: 24px, Symmetrical p-8 Padding) */}
-            <div className="lg:col-span-7 neu-raised rounded-[24px] p-6 sm:p-8 flex flex-col justify-between space-y-8">
+            {/* Right Column - Hero Main Presentation */}
+            <div className="lg:col-span-7 neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-8 flex flex-col justify-start space-y-4 sm:space-y-5">
               
-              <div className="space-y-6">
+              <div className="space-y-3 sm:space-y-3.5">
 
                 {/* Main Headline */}
-                <div className="space-y-2">
-                  <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-800 leading-none">
+                <div className="space-y-1">
+                  <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-tight">
                     Hi, I'm <span className="text-slate-900">Faheem Ali</span>
                   </h1>
-                  <div className="h-10 flex items-center">
-                    <span className="text-xl sm:text-3xl font-bold font-mono text-slate-700">
+                  <div className="h-7 sm:h-8 flex items-center overflow-hidden">
+                    <span className="text-sm sm:text-xl lg:text-2xl font-bold font-mono text-slate-700 leading-none truncate">
                       {typedText}
                     </span>
-                    <span className="w-0.5 h-7 bg-slate-800 animate-pulse ml-1"></span>
+                    <span className="w-0.5 h-4 sm:h-5 bg-slate-800 animate-pulse ml-1 shrink-0"></span>
                   </div>
                 </div>
 
                 {/* Bio text */}
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal max-w-xl text-justify [text-justify:inter-word]">
+                <p className="text-slate-600 text-xs sm:text-base leading-relaxed font-normal max-w-xl text-justify [text-justify:inter-word]">
                   Merging physical mechanical design, precision manufacturing, & thermal optimization with <strong className="text-slate-900 font-bold">embedded IoT robotics, C++ algorithms, & web systems</strong>. Focused on robust engineering and functional innovation.
                 </p>
 
                 {/* CTA Action Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-2">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
                   <a
                     href="#projects"
-                    className="neu-button px-6 py-3.5 rounded-full text-xs font-bold text-slate-800 hover:text-slate-900 flex items-center gap-2"
+                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-slate-800 hover:text-slate-900 flex items-center gap-2"
                   >
                     <span>View Showcase</span>
                     <ArrowRight className="w-4 h-4 text-slate-700" />
@@ -202,7 +229,7 @@ export default function PortfolioHero() {
 
                   <a
                     href="#contact"
-                    className="neu-button px-6 py-3.5 rounded-full text-xs font-bold text-slate-700 hover:text-slate-900 flex items-center gap-2"
+                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-slate-700 hover:text-slate-900 flex items-center gap-2"
                   >
                     <Download className="w-4 h-4 text-slate-500" />
                     <span>Download CV</span>
@@ -210,79 +237,79 @@ export default function PortfolioHero() {
                 </div>
               </div>
 
-              {/* Code Console Panel (Nested Inset: Concentric 16px Radius = 32px Card - 16px Padding) */}
-              <div className="neu-inset rounded-[16px] p-4 space-y-3">
+              {/* Engineering Console Panel (Mechanical, FEA & Manufacturing Spec) */}
+              <div className="neu-inset rounded-[16px] p-3 sm:p-4 space-y-3 max-w-full overflow-hidden">
                 {/* Console Tab Bar */}
-                <div className="flex items-center justify-between pb-3 border-b border-slate-300/40">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 pb-3 border-b border-slate-300/40">
+                  <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar max-w-full">
                     <button
-                      onClick={() => setActiveCodeTab("stack")}
-                      className={`px-3 py-1 rounded-full text-xs font-mono font-bold transition-all ${
-                        activeCodeTab === "stack"
+                      onClick={() => setActiveCodeTab("mech")}
+                      className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
+                        activeCodeTab === "mech"
                           ? "neu-button-active text-slate-900"
                           : "text-slate-700 hover:text-slate-900"
                       }`}
                     >
-                      developer-stack.ts
+                      mechanical-spec.ts
                     </button>
                     <button
-                      onClick={() => setActiveCodeTab("agent")}
-                      className={`px-3 py-1 rounded-full text-xs font-mono font-bold transition-all ${
-                        activeCodeTab === "agent"
+                      onClick={() => setActiveCodeTab("fea")}
+                      className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
+                        activeCodeTab === "fea"
                           ? "neu-button-active text-slate-900"
                           : "text-slate-700 hover:text-slate-900"
                       }`}
                     >
-                      ai-agent.py
+                      3d-printing.ts
                     </button>
                     <button
-                      onClick={() => setActiveCodeTab("config")}
-                      className={`px-3 py-1 rounded-full text-xs font-mono font-bold transition-all ${
-                        activeCodeTab === "config"
+                      onClick={() => setActiveCodeTab("cnc")}
+                      className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
+                        activeCodeTab === "cnc"
                           ? "neu-button-active text-slate-900"
                           : "text-slate-700 hover:text-slate-900"
                       }`}
                     >
-                      system.json
+                      cnc-milling.ts
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 shrink-0 hidden sm:flex">
                     <span className="w-2.5 h-2.5 rounded-full bg-rose-400/80"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
                   </div>
                 </div>
 
-                {/* Console Code View */}
-                <div className="font-mono text-xs text-slate-700 leading-relaxed min-h-[90px]">
-                  {activeCodeTab === "stack" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1">
-                      <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">engineer</span> = &#123;</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">name:</span> <span className="text-emerald-700 font-bold">"Faheem Ali"</span>,</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">education:</span> <span className="text-emerald-700 font-bold">"NUST Islamabad"</span>,</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">coreTech:</span> [<span className="text-amber-700 font-bold">"Next.js 15"</span>, <span className="text-amber-700 font-bold">"TypeScript"</span>, <span className="text-amber-700 font-bold">"Python"</span>, <span className="text-amber-700 font-bold">"LangChain"</span>],</p>
+                {/* Console Engineering View */}
+                <div className="font-mono text-[10px] sm:text-xs text-slate-700 leading-normal overflow-x-auto max-w-full no-scrollbar">
+                  {activeCodeTab === "mech" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-0.5">
+                      <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">mechanicalEngineer</span> = &#123;</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">cadTools:</span> [<span className="text-emerald-700 font-bold">"SolidWorks"</span>, <span className="text-emerald-700 font-bold">"Autodesk Inventor"</span>],</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">manufacturing:</span> [<span className="text-amber-700 font-bold">"Precision Machining"</span>, <span className="text-amber-700 font-bold">"Geometric Dimensioning & Tolerancing"</span>, <span className="text-amber-700 font-bold">"Design for Manufacturability"</span>],</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">embeddedIoT:</span> [<span className="text-purple-700 font-bold">"Embedded C++"</span>, <span className="text-purple-700 font-bold">"ESP32 LX6 / Arduino"</span>, <span className="text-purple-700 font-bold">"PID Control"</span>],</p>
                       <p>&#125;;</p>
                     </motion.div>
                   )}
 
-                  {activeCodeTab === "agent" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1">
-                      <p><span className="text-purple-600 font-bold">class</span> <span className="text-slate-900 font-bold">AIAgentWorkflow</span>:</p>
-                      <p className="pl-4"><span className="text-slate-700 font-bold">def</span> <span className="text-emerald-700 font-bold">execute_rag_pipeline</span>(query: str):</p>
-                      <p className="pl-8 text-slate-700 font-medium">embeddings = openai.embed(query)</p>
-                      <p className="pl-8 text-slate-700 font-medium">results = vector_db.similarity_search(embeddings)</p>
-                      <p className="pl-8 text-amber-700 font-bold">return langchain.synthesize(results)</p>
+                  {activeCodeTab === "fea" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-0.5">
+                      <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">additiveManufacturing</span> = &#123;</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">processes:</span> [<span className="text-emerald-700 font-bold">"FDM 3D Printing"</span>, <span className="text-emerald-700 font-bold">"Rapid Prototyping"</span>],</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">materials:</span> [<span className="text-amber-700 font-bold">"PETG Polymer"</span>, <span className="text-amber-700 font-bold">"PLA+"</span>, <span className="text-amber-700 font-bold">"ABS Carbon Fiber"</span>],</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">parameters:</span> [<span className="text-purple-700 font-bold">"0.16mm Layer Height"</span>, <span className="text-purple-700 font-bold">"30% Gyroid Infill"</span>],</p>
+                      <p>&#125;;</p>
                     </motion.div>
                   )}
 
-                  {activeCodeTab === "config" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1">
-                      <p>&#123;</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">"status":</span> <span className="text-emerald-700 font-bold">"Operational"</span>,</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">"availability":</span> <span className="text-slate-800 font-bold">"Immediate Contracts & Roles"</span>,</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">"location":</span> <span className="text-slate-800 font-bold">"Islamabad / Global Remote"</span></p>
-                      <p>&#125;</p>
+                  {activeCodeTab === "cnc" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-0.5">
+                      <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">cncMachining</span> = &#123;</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">operations:</span> [<span className="text-emerald-700 font-bold">"5-Axis CNC Milling"</span>, <span className="text-emerald-700 font-bold">"Precision Tooling"</span>],</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">machining:</span> [<span className="text-amber-700 font-bold">"Adaptive Roughing"</span>, <span className="text-amber-700 font-bold">"Carbide Endmilling"</span>, <span className="text-amber-700 font-bold">"Manual Lathe & Mill"</span>],</p>
+                      <p className="pl-4"><span className="text-slate-600 font-bold">qualityControl:</span> [<span className="text-purple-700 font-bold">"G-Code Verification"</span>, <span className="text-purple-700 font-bold">"Micrometer & Calipers"</span>],</p>
+                      <p>&#125;;</p>
                     </motion.div>
                   )}
                 </div>

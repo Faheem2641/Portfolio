@@ -102,10 +102,10 @@ export default function PortfolioProjects() {
           href={link.url}
           target="_blank"
           rel="noreferrer"
-          className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-800 hover:text-slate-950 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+          className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-800 hover:text-slate-950 flex items-center gap-1.5 max-w-full transition-transform hover:scale-105 active:scale-95"
         >
           {getLinkIcon(link.label)}
-          <span>{link.label}</span>
+          <span className="truncate">{link.label}</span>
         </a>
       )
     }
@@ -116,10 +116,10 @@ export default function PortfolioProjects() {
         <button
           key={keyIdx}
           onClick={() => openLightbox(project.title, project.images!, imgIdx)}
-          className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-900 hover:text-black flex items-center gap-1.5 cursor-pointer active:scale-95 shrink-0 whitespace-nowrap"
+          className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-900 hover:text-black flex items-center gap-1.5 cursor-pointer max-w-full transition-transform hover:scale-105 active:scale-95"
         >
           {getLinkIcon(link.label)}
-          <span>{link.label}</span>
+          <span className="truncate">{link.label}</span>
         </button>
       )
     }
@@ -127,11 +127,11 @@ export default function PortfolioProjects() {
     return (
       <span
         key={keyIdx}
-        className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-700 cursor-default flex items-center gap-1.5 opacity-90 shrink-0 whitespace-nowrap"
+        className="neu-button px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold text-slate-700 cursor-default flex items-center gap-1.5 opacity-90 max-w-full"
         title="Link coming soon"
       >
         {getLinkIcon(link.label)}
-        <span>{link.label}</span>
+        <span className="truncate">{link.label}</span>
       </span>
     )
   }
@@ -140,8 +140,8 @@ export default function PortfolioProjects() {
     <section id="projects" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}
-        <div className="neu-raised rounded-[40px] p-6 sm:p-8 space-y-10">
+        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical Padding) */}
+        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-8 space-y-6 sm:space-y-10">
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -149,10 +149,10 @@ export default function PortfolioProjects() {
               <FolderGit2 className="w-3.5 h-3.5 text-slate-700" />
               <span>PROJECT PORTFOLIO</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Featured <span className="text-slate-900">Projects</span>
             </h2>
-            <p className="text-slate-600 text-sm font-normal">
+            <p className="text-slate-600 text-xs sm:text-sm font-normal">
               Things I’ve built, explored, and brought to life.
             </p>
           </div>
@@ -171,7 +171,7 @@ export default function PortfolioProjects() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.3 }}
-                    className="neu-raised rounded-[24px] p-6 flex flex-col justify-between hover:scale-[1.01] transition-all duration-300 space-y-5 h-full"
+                    className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between hover:scale-[1.01] transition-all duration-300 space-y-4 sm:space-y-5 h-full"
                   >
                     {/* Top Content Group */}
                     <div className="space-y-4">
@@ -227,28 +227,11 @@ export default function PortfolioProjects() {
                       
 
 
-                      {/* Resource Link Chips */}
+                      {/* Resource Link Chips - Flex wrap naturally with clean spacing */}
                       {project.links && project.links.length > 0 && (
-                        <div className="pt-1">
-                          {project.links.length === 3 ? (
-                            <div className="space-y-2">
-                              {/* Row 1: 1st button */}
-                              <div className="flex items-center">
-                                {renderLinkBtn(project.links[0], project, 0)}
-                              </div>
-                              {/* Row 2: 2nd and 3rd buttons side-by-side */}
-                              <div className="flex flex-row items-center gap-2 overflow-x-auto no-scrollbar">
-                                {project.links.slice(1).map((link: ProjectLink, lIdx: number) =>
-                                  renderLinkBtn(link, project, lIdx + 1)
-                                )}
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="flex flex-row items-center gap-2 overflow-x-auto no-scrollbar">
-                              {project.links.map((link: ProjectLink, lIdx: number) =>
-                                renderLinkBtn(link, project, lIdx)
-                              )}
-                            </div>
+                        <div className="pt-2 flex flex-wrap items-center gap-2">
+                          {project.links.map((link: ProjectLink, lIdx: number) =>
+                            renderLinkBtn(link, project, lIdx)
                           )}
                         </div>
                       )}

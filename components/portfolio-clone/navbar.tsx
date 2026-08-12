@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { Menu, X, User, Briefcase, FolderGit2, Cpu, Mail } from "lucide-react"
 
 const navLinks = [
@@ -16,47 +17,69 @@ export default function PortfolioNavbar() {
   const [activeSection, setActiveSection] = useState("about")
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
+    const handleScroll = () => {
+      const sections = navLinks.map((link) => link.href.replace("#", ""))
+      const scrollPosition = window.scrollY + window.innerHeight / 3
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionEl = document.getElementById(sections[i])
+        if (sectionEl) {
+          const top = sectionEl.offsetTop
+          if (scrollPosition >= top) {
+            setActiveSection(sections[i])
+            break
           }
-        })
-      },
-      { threshold: 0.3 }
-    )
+        }
+      }
+    }
 
-    const sections = document.querySelectorAll("section[id]")
-    sections.forEach((sec) => observer.observe(sec))
-
-    return () => observer.disconnect()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace("#", "")
+    const targetEl = document.getElementById(targetId)
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: "smooth", block: "start" })
+      setActiveSection(targetId)
+    }
+  }
 
   return (
     <>
       {/* Desktop Left-Hand Side Vertical Neumorphic Navigation Dock */}
-      <aside className="hidden md:flex fixed left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 flex-col items-center justify-center neu-raised p-2 rounded-[28px] transition-all duration-300">
+      <aside className="hidden md:flex fixed left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 flex-col items-center justify-center neu-raised p-2 rounded-full shadow-xl">
         
-        {/* Single Internal Neumorphic Container for All Buttons */}
-        <div className="neu-inset px-2 py-4 rounded-[20px] flex flex-col items-center justify-center">
-          <nav className="flex flex-col items-center gap-1">
+        {/* Master Inner Concentric Pill Groove */}
+        <div className="neu-inset px-1.5 py-3 rounded-full flex flex-col items-center justify-center">
+          <nav className="flex flex-col items-center gap-1.5">
             {navLinks.map((link) => {
               const linkId = link.href.replace("#", "")
               const isActive = activeSection === linkId
+
               return (
-                <div key={link.name} className="h-28 w-10 flex items-center justify-center relative">
+                <div key={link.name} className="h-[105px] w-10 flex items-center justify-center relative">
+                  {/* Butter-Smooth Sliding Active Capsule */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavPill"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      className="absolute inset-x-0.5 inset-y-1 neu-button-active rounded-full bg-[#d8d8d8] z-0 shadow-sm"
+                    />
+                  )}
+
                   <a
                     href={link.href}
-                    onClick={() => setActiveSection(linkId)}
-                    className={`-rotate-90 whitespace-nowrap text-xs font-bold tracking-wider transition-all duration-300 py-1.5 px-4 rounded-full flex items-center gap-2 ${
-                      isActive
-                        ? "text-[#18181b] neu-button-active bg-[#d8d8d8]"
-                        : "text-zinc-600 hover:text-[#18181b]"
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`relative z-10 -rotate-90 whitespace-nowrap text-[11px] lg:text-xs font-bold tracking-wider transition-colors duration-200 py-1.5 px-3.5 rounded-full flex items-center gap-2 ${
+                      isActive ? "text-slate-950 font-black" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     {isActive && (
-                      <span className="w-3 h-0.5 rounded-full bg-slate-800 shrink-0"></span>
+                      <span className="w-2 h-0.5 rounded-full bg-slate-900 shrink-0" />
                     )}
                     <span>{link.name}</span>
                   </a>
@@ -86,14 +109,22 @@ export default function PortfolioNavbar() {
           <div className="mt-3 max-w-xs mx-auto neu-raised rounded-3xl p-4 space-y-2 animate-fadeIn">
             {navLinks.map((link) => {
               const Icon = link.icon
+              const linkId = link.href.replace("#", "")
+              const isActive = activeSection === linkId
+
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="neu-button flex items-center justify-center gap-2 py-3 text-xs font-bold text-slate-700 rounded-2xl"
+                  onClick={(e) => {
+                    handleNavClick(e, link.href)
+                    setMobileMenuOpen(false)
+                  }}
+                  className={`flex items-center justify-center gap-2 py-3 text-xs font-bold rounded-2xl transition-all ${
+                    isActive ? "neu-button-active text-slate-950" : "neu-button text-slate-700"
+                  }`}
                 >
-                  <Icon className="w-4 h-4 text-slate-500" />
+                  <Icon className="w-4 h-4 text-slate-700" />
                   <span>{link.name}</span>
                 </a>
               )

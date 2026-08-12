@@ -35,34 +35,34 @@ export default function PortfolioContact() {
     <section id="contact" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}
-        <div className="neu-raised rounded-[40px] p-6 sm:p-8 space-y-10">
+        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical Padding) */}
+        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-8 space-y-6 sm:space-y-10">
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full neu-inset text-slate-800 text-xs sm:text-sm font-mono font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full neu-inset text-slate-800 text-xs sm:text-sm font-mono font-bold uppercase tracking-wider">
               <MessageSquare className="w-4 h-4 text-slate-700" />
               <span>GET IN TOUCH</span>
             </div>
-            <p className="text-slate-600 text-sm font-normal pt-1">
+            <p className="text-slate-600 text-xs sm:text-sm font-normal pt-1">
               Have a project idea, a technical challenge, or a role to discuss? Let's talk!
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             
             {/* Direct Info Column */}
-            <div className="lg:col-span-5 space-y-6">
+            <div className="lg:col-span-5 space-y-4 sm:space-y-6">
               
-              {/* Direct Email Box (Concentric 24px Radius, Symmetrical p-6 Padding) */}
-              <div className="neu-raised rounded-[24px] p-6 space-y-4">
+              {/* Direct Email Box */}
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-[16px] neu-button flex items-center justify-center text-slate-700 shrink-0">
-                    <Mail className="w-6 h-6" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[14px] sm:rounded-[16px] neu-button flex items-center justify-center text-slate-700 shrink-0">
+                    <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-700 uppercase">Direct Email</h4>
-                    <p className="text-sm font-bold text-slate-800 mt-0.5">{emailAddress}</p>
+                  <div className="min-w-0">
+                    <h4 className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase">Direct Email</h4>
+                    <p className="text-xs sm:text-sm font-bold text-slate-800 mt-0.5 truncate">{emailAddress}</p>
                   </div>
                 </div>
 
@@ -135,7 +135,7 @@ export default function PortfolioContact() {
 
             {/* Form Column (Concentric 24px Radius, Symmetrical p-6 sm:p-8 Padding) */}
             <div className="lg:col-span-7">
-              <div className="neu-raised rounded-[24px] p-6 sm:p-8 space-y-6">
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-8 space-y-5 sm:space-y-6">
 
                 {submitted ? (
                   <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="py-12 text-center space-y-4">

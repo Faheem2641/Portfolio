@@ -8,7 +8,7 @@ export default function PortfolioAbout() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Outer Frame (Concentric 40px Radius & Symmetrical Padding) */}
-        <div className="neu-raised rounded-[40px] p-6 sm:p-10 space-y-8">
+        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-10 space-y-6 sm:space-y-8">
           
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -16,10 +16,10 @@ export default function PortfolioAbout() {
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />
               <span>BACKGROUND & EDUCATION</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               About <span className="text-slate-900">Me</span>
             </h2>
-            <p className="text-slate-600 text-sm font-normal">
+            <p className="text-slate-600 text-xs sm:text-sm font-normal">
               A story still being written.
             </p>
           </div>

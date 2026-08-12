@@ -8,8 +8,8 @@ export default function PortfolioExperience() {
     <section id="experience" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical 24px Padding) */}
-        <div className="neu-raised rounded-[40px] p-6 sm:p-8 space-y-10">
+        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical Padding) */}
+        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-8 space-y-6 sm:space-y-10">
           
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -17,10 +17,10 @@ export default function PortfolioExperience() {
               <Briefcase className="w-3.5 h-3.5 text-slate-700" />
               <span>CAREER TIMELINE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Work <span className="text-slate-900">Experience</span>
             </h2>
-            <p className="text-slate-600 text-sm font-normal">
+            <p className="text-slate-600 text-xs sm:text-sm font-normal">
               Engineering research, R&D internships, and hands-on manufacturing apprenticeships.
             </p>
           </div>
@@ -33,7 +33,7 @@ export default function PortfolioExperience() {
               return (
                 <div
                   key={idx}
-                  className="neu-raised rounded-[24px] p-6 flex flex-col hover:scale-[1.01] transition-all duration-300 space-y-5 h-auto"
+                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col hover:scale-[1.01] transition-all duration-300 space-y-4 sm:space-y-5 h-auto"
                 >
                   {/* Top Content Group */}
                   <div className="space-y-4">
