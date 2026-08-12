@@ -152,6 +152,9 @@ export default function PortfolioProjects() {
             <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Featured <span className="text-slate-900">Projects</span>
             </h2>
+            <p className="text-slate-600 text-sm font-normal">
+              Things I’ve built, explored, and brought to life.
+            </p>
           </div>
 
           {/* Responsive Grid (3 columns desktop, 2 columns tablet, 1 column mobile) */}

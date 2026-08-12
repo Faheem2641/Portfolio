@@ -36,6 +36,9 @@ export default function PortfolioSkills() {
             <h2 className="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Technical <span className="text-slate-900">Skills</span>
             </h2>
+            <p className="text-slate-600 text-sm font-normal">
+              What I know. What I build with.
+            </p>
           </div>
 
           {/* Responsive 3-Column Grid */}

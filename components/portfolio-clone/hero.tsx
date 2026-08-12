@@ -288,21 +288,7 @@ export default function PortfolioHero() {
                 </div>
               </div>
 
-              {/* Concentric Stat Pills Bar (Nested Insets: Concentric 16px Radius) */}
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-300/40">
-                <div className="neu-inset-sm p-4 rounded-[16px] text-center">
-                  <div className="text-lg font-black text-slate-800">15+</div>
-                  <div className="text-xs font-mono text-slate-700 font-bold uppercase">Projects Delivered</div>
-                </div>
-                <div className="neu-inset-sm p-4 rounded-[16px] text-center">
-                  <div className="text-lg font-black text-slate-800">3+</div>
-                  <div className="text-xs font-mono text-slate-700 font-bold uppercase">Years Exp</div>
-                </div>
-                <div className="neu-inset-sm p-4 rounded-[16px] text-center">
-                  <div className="text-lg font-black text-slate-800">100%</div>
-                  <div className="text-xs font-mono text-slate-700 font-bold uppercase">Satisfaction</div>
-                </div>
-              </div>
+
 
             </div>
 
