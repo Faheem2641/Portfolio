@@ -99,16 +99,29 @@ export default function PortfolioContact() {
     setErrors({})
 
     try {
-      const response = await fetch("/api/contact", {
+      // Send message directly to Web3Forms API from client browser
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "15df6855-e507-44a2-b47f-5de155ffa7ff"
+      
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim() ? `[Portfolio Inquiry] ${formData.subject.trim()}` : `New Portfolio Inquiry from ${formData.name}`,
+          message: formData.message.trim(),
+          from_name: `${formData.name.trim()} (Portfolio)`,
+        }),
       })
 
       const data = await response.json()
 
-      if (!response.ok || data.error) {
-        setErrors({ form: data.error || "Unable to send message. Please try again." })
+      if (!response.ok || !data.success) {
+        setErrors({ form: data.message || "Unable to send message. Please try again." })
         return
       }
 
