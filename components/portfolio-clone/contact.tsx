@@ -1,12 +1,26 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
-import { Mail, MapPin, Send, Copy, Check, Github, Linkedin, ExternalLink, MessageSquare } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  Mail,
+  MapPin,
+  Send,
+  Copy,
+  Check,
+  Github,
+  Linkedin,
+  ExternalLink,
+  MessageSquare,
+  Loader2,
+  AlertCircle,
+  AlertTriangle,
+} from "lucide-react"
 
 export default function PortfolioContact() {
   const [copied, setCopied] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,7 +28,59 @@ export default function PortfolioContact() {
     message: "",
   })
 
+  // Neumorphic Error state system for UI/UX alignment
+  const [errors, setErrors] = useState<{
+    name?: string
+    email?: string
+    subject?: string
+    message?: string
+    form?: string
+  }>({})
+
   const emailAddress = "faheemali3724@gmail.com"
+
+  const validateForm = () => {
+    const newErrors: { name?: string; email?: string; subject?: string; message?: string; form?: string } = {}
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Please enter your name"
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters"
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Please enter your email address"
+    } else if (!emailRegex.test(formData.email.trim())) {
+      newErrors.email = "Invalid email format (e.g. name@company.com)"
+    }
+
+    if (!formData.subject.trim()) {
+      newErrors.subject = "Please enter a subject"
+    } else if (formData.subject.trim().length < 3) {
+      newErrors.subject = "Subject must be at least 3 characters"
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Please write your message"
+    } else if (formData.message.trim().length < 5) {
+      newErrors.message = "Message must be at least 5 characters long"
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      newErrors.form = "Please resolve the highlighted fields below."
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleInputChange = (field: "name" | "email" | "subject" | "message", value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    if (errors[field] || errors.form) {
+      setErrors((prev) => ({ ...prev, [field]: undefined, form: undefined }))
+    }
+  }
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress)
@@ -22,13 +88,38 @@ export default function PortfolioContact() {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
+
+    if (!validateForm()) {
+      return
+    }
+
+    setIsSubmitting(true)
+    setErrors({})
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok || data.error) {
+        setErrors({ form: data.error || "Unable to send message. Please try again." })
+        return
+      }
+
+      setSubmitted(true)
       setFormData({ name: "", email: "", subject: "", message: "" })
-    }, 4000)
+    } catch (err) {
+      console.error("Submission error:", err)
+      setErrors({ form: "Network error while sending message. Please try again." })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -148,60 +239,114 @@ export default function PortfolioContact() {
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-5">
                     
+                    {/* Global Neumorphic Form Error Banner */}
+                    <AnimatePresence>
+                      {errors.form && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                          transition={{ duration: 0.2 }}
+                          className="neu-inset rounded-[18px] p-3.5 flex items-start gap-3 bg-rose-500/10 border border-rose-400/40 text-rose-800 shadow-inner"
+                        >
+                          <div className="w-7 h-7 rounded-full neu-button shrink-0 flex items-center justify-center text-rose-600 mt-0.5">
+                            <AlertTriangle className="w-4 h-4" />
+                          </div>
+                          <div className="space-y-0.5 min-w-0 flex-1">
+                            <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-rose-700">Notice</h5>
+                            <p className="text-xs font-medium text-rose-700/90 leading-tight">{errors.form}</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="space-y-2">
-                        <label className="text-xs font-mono font-bold text-slate-800">Your Name *</label>
-                        <div className="neu-inset rounded-[16px] px-4 py-3">
+                      {/* Name Field */}
+                      <div className="space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <label className="text-xs font-mono font-bold text-slate-800">Your Name *</label>
+                          {errors.name && (
+                            <span className="text-[11px] font-mono font-bold text-rose-600 flex items-center gap-1">
+                              <AlertCircle className="w-3 h-3 shrink-0" />
+                              <span>{errors.name}</span>
+                            </span>
+                          )}
+                        </div>
+                        <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all ${errors.name ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                           <input
                             type="text"
-                            required
                             value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            placeholder="John Doe"
+                            onChange={(e) => handleInputChange("name", e.target.value)}
+                            placeholder="e.g. Ali"
                             className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400"
                           />
                         </div>
                       </div>
 
-                      <div className="space-y-2">
-                        <label className="text-xs font-mono font-bold text-slate-800">Your Email *</label>
-                        <div className="neu-inset rounded-[16px] px-4 py-3">
+                      {/* Email Field */}
+                      <div className="space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <label className="text-xs font-mono font-bold text-slate-800">Your Email *</label>
+                          {errors.email && (
+                            <span className="text-[11px] font-mono font-bold text-rose-600 flex items-center gap-1">
+                              <AlertCircle className="w-3 h-3 shrink-0" />
+                              <span>{errors.email}</span>
+                            </span>
+                          )}
+                        </div>
+                        <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all ${errors.email ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                           <input
                             type="email"
-                            required
                             value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            placeholder="john@example.com"
+                            onChange={(e) => handleInputChange("email", e.target.value)}
+                            placeholder="name@company.com"
                             className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400"
                           />
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-mono font-bold text-slate-800">Subject</label>
-                      <div className="neu-inset rounded-[16px] px-4 py-3">
+                    {/* Subject Field */}
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-mono font-bold text-slate-800">Subject *</label>
+                        {errors.subject && (
+                          <span className="text-[11px] font-mono font-bold text-rose-600 flex items-center gap-1">
+                            <AlertCircle className="w-3 h-3 shrink-0" />
+                            <span>{errors.subject}</span>
+                          </span>
+                        )}
+                      </div>
+                      <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all ${errors.subject ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                         <input
                           type="text"
                           value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          placeholder="Project Inquiry / Engineering Consulting"
+                          onChange={(e) => handleInputChange("subject", e.target.value)}
+                          placeholder="e.g. Mechanical Design, Embedded IoT, Web Collaboration"
                           className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400"
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-mono font-bold text-slate-800">Message *</label>
-                      <div className="neu-inset rounded-[16px] px-4 py-3">
+                    {/* Message Field */}
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-mono font-bold text-slate-800">Message *</label>
+                        {errors.message && (
+                          <span className="text-[11px] font-mono font-bold text-rose-600 flex items-center gap-1">
+                            <AlertCircle className="w-3 h-3 shrink-0" />
+                            <span>{errors.message}</span>
+                          </span>
+                        )}
+                      </div>
+                      <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all ${errors.message ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                         <textarea
                           rows={4}
-                          required
                           value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          placeholder="Tell me about your project idea, requirements, or timeline..."
+                          onChange={(e) => handleInputChange("message", e.target.value)}
+                          placeholder="Share details about your project scope, technical requirements, timeline, or inquiry..."
                           className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400 resize-none"
                         ></textarea>
                       </div>
@@ -209,10 +354,20 @@ export default function PortfolioContact() {
 
                     <button
                       type="submit"
-                      className="w-full py-4 rounded-full neu-button font-bold text-xs text-slate-800 hover:text-slate-950 flex items-center justify-center gap-2"
+                      disabled={isSubmitting}
+                      className="w-full py-4 rounded-full neu-button font-bold text-xs text-slate-800 hover:text-slate-950 flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
                     >
-                      <Send className="w-4 h-4 text-slate-700" />
-                      <span>Send Message</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 text-slate-700 animate-spin" />
+                          <span>Sending Message...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 text-slate-700" />
+                          <span>Send Message</span>
+                        </>
+                      )}
                     </button>
 
                   </form>
@@ -229,3 +384,4 @@ export default function PortfolioContact() {
     </section>
   )
 }
+

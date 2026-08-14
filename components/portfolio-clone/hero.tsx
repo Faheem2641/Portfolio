@@ -32,7 +32,7 @@ export default function PortfolioHero() {
   const [sparkleToast, setSparkleToast] = useState(false)
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("faheemali.engr@gmail.com")
+    navigator.clipboard.writeText("faheemali3724@gmail.com")
     setCopiedEmail(true)
     setTimeout(() => setCopiedEmail(false), 2500)
   }
