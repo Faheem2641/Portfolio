@@ -31,6 +31,7 @@ function getLinkIcon(label: string) {
 }
 
 export default function PortfolioProjects() {
+  const [showAllProjects, setShowAllProjects] = useState(false)
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
   const [lightbox, setLightbox] = useState<{
     title: string
@@ -38,6 +39,9 @@ export default function PortfolioProjects() {
     index: number
   } | null>(null)
   const [imgLoaded, setImgLoaded] = useState(false)
+
+  const INITIAL_COUNT = 6
+  const visibleProjects = showAllProjects ? projectsData : projectsData.slice(0, INITIAL_COUNT)
 
   // Preload all project images into browser memory on mount to prevent any loading glitches
   useEffect(() => {
@@ -136,6 +140,80 @@ export default function PortfolioProjects() {
     )
   }
 
+  const renderProjectCard = (project: (typeof projectsData)[0], idx: number) => {
+    const isExpanded = expandedIndex === idx
+
+    return (
+      <div
+        key={project.title}
+        className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full hover:border-topping/30 border border-transparent"
+      >
+        {/* Top Content Group */}
+        <div className="space-y-4">
+          
+          {/* Association & Date Pills */}
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+            {project.association && (
+              <span className="neu-inset-sm px-3 py-1 rounded-full text-topping font-bold flex items-center gap-1.5 max-w-full truncate">
+                <Building2 className="w-3.5 h-3.5 text-topping shrink-0" />
+                <span className="truncate">{project.association}</span>
+              </span>
+            )}
+            {project.date && (
+              <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
+                <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+                <span>{project.date}</span>
+              </span>
+            )}
+          </div>
+
+          {/* Title */}
+          <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight">
+            {project.title}
+          </h3>
+
+          {/* Description with Expand / Line-clamp toggle */}
+          <div>
+            <p
+              className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word] ${
+                !isExpanded ? "line-clamp-4" : ""
+              }`}
+              dangerouslySetInnerHTML={{ __html: project.description }}
+            />
+            {project.description.length > 180 && (
+              <button
+                onClick={() => toggleExpand(idx)}
+                className="mt-1.5 text-xs font-bold text-slate-900 hover:text-black flex items-center gap-1 transition-colors"
+              >
+                <span>{isExpanded ? "Show less" : "Read more"}</span>
+                {isExpanded ? (
+                  <ChevronUp className="w-3.5 h-3.5" />
+                ) : (
+                  <ChevronDown className="w-3.5 h-3.5" />
+                )}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Bottom Content Group: Skills & Links */}
+        <div className="space-y-4 pt-3 border-t border-slate-300/40">
+          
+          {/* Resource Link Chips - Flex wrap naturally with clean spacing */}
+          {project.links && project.links.length > 0 && (
+            <div className="pt-2 flex flex-wrap items-center gap-2">
+              {project.links.map((link: ProjectLink, lIdx: number) =>
+                renderLinkBtn(link, project, lIdx)
+              )}
+            </div>
+          )}
+
+        </div>
+
+      </div>
+    )
+  }
+
   return (
     <section id="projects" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -145,103 +223,61 @@ export default function PortfolioProjects() {
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-slate-800 font-bold text-xs font-mono">
-              <FolderGit2 className="w-3.5 h-3.5 text-slate-700" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-topping font-bold text-xs font-mono">
+              <FolderGit2 className="w-3.5 h-3.5 text-topping" />
               <span>PROJECT PORTFOLIO</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
-              Featured <span className="text-slate-900">Projects</span>
+              Featured <span className="text-topping">Projects</span>
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm font-normal">
               Things I’ve built, explored, and brought to life.
             </p>
           </div>
 
-          {/* Responsive Grid (3 columns desktop, 2 columns tablet, 1 column mobile) */}
+          {/* Initial 6 Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-            <AnimatePresence>
-              {projectsData.map((project, idx) => {
-                const isExpanded = expandedIndex === idx
-
-                return (
-                  <motion.div
-                    key={project.title}
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
-                    className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full"
-                  >
-                    {/* Top Content Group */}
-                    <div className="space-y-4">
-                      
-                      {/* Association & Date Pills */}
-                      <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
-                        {project.association && (
-                          <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-900 font-bold flex items-center gap-1.5 max-w-full truncate">
-                            <Building2 className="w-3.5 h-3.5 text-slate-800 shrink-0" />
-                            <span className="truncate">{project.association}</span>
-                          </span>
-                        )}
-                        {project.date && (
-                          <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
-                            <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
-                            <span>{project.date}</span>
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight">
-                        {project.title}
-                      </h3>
-
-                      {/* Description with Expand / Line-clamp toggle */}
-                      <div>
-                        <p
-                          className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word] ${
-                            !isExpanded ? "line-clamp-4" : ""
-                          }`}
-                          dangerouslySetInnerHTML={{ __html: project.description }}
-                        />
-                        {project.description.length > 180 && (
-                          <button
-                            onClick={() => toggleExpand(idx)}
-                            className="mt-1.5 text-xs font-bold text-slate-900 hover:text-black flex items-center gap-1 transition-colors"
-                          >
-                            <span>{isExpanded ? "Show less" : "Read more"}</span>
-                            {isExpanded ? (
-                              <ChevronUp className="w-3.5 h-3.5" />
-                            ) : (
-                              <ChevronDown className="w-3.5 h-3.5" />
-                            )}
-                          </button>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Bottom Content Group: Skills & Links */}
-                    <div className="space-y-4 pt-3 border-t border-slate-300/40">
-                      
-
-
-                      {/* Resource Link Chips - Flex wrap naturally with clean spacing */}
-                      {project.links && project.links.length > 0 && (
-                        <div className="pt-2 flex flex-wrap items-center gap-2">
-                          {project.links.map((link: ProjectLink, lIdx: number) =>
-                            renderLinkBtn(link, project, lIdx)
-                          )}
-                        </div>
-                      )}
-
-                    </div>
-
-                  </motion.div>
-                )
-              })}
-            </AnimatePresence>
+            {projectsData.slice(0, INITIAL_COUNT).map((project, idx) =>
+              renderProjectCard(project, idx)
+            )}
           </div>
+
+          {/* Smooth Collapsible Section for Remaining Projects (Zero Shadow Clipping & Smooth 120fps GPU Transition) */}
+          <div
+            className={`transition-all duration-500 ease-in-out overflow-hidden p-6 -m-6 ${
+              showAllProjects
+                ? "max-h-[5000px] opacity-100 py-6"
+                : "max-h-0 opacity-0 pointer-events-none"
+            }`}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch pt-2">
+              {projectsData.slice(INITIAL_COUNT).map((project, idx) =>
+                renderProjectCard(project, INITIAL_COUNT + idx)
+              )}
+            </div>
+          </div>
+
+          {/* Centered Show Remaining Projects Toggle Button */}
+          {projectsData.length > INITIAL_COUNT && (
+            <div className="flex justify-center pt-2">
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => setShowAllProjects(!showAllProjects)}
+                type="button"
+                className="neu-button px-7 py-3.5 rounded-full text-xs font-mono font-bold text-topping hover:text-slate-900 flex items-center gap-2.5 cursor-pointer border border-topping/30 transition-all"
+              >
+                <span>
+                  {showAllProjects ? "View Fewer Projects" : "View All Projects"}
+                </span>
+                {showAllProjects ? (
+                  <ChevronUp className="w-4 h-4 text-topping" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-topping animate-bounce" />
+                )}
+              </motion.button>
+            </div>
+          )}
 
         </div>
 

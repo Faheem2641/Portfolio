@@ -54,6 +54,7 @@
     "expo-file-system": "latest",
     "expo-gl": "latest",
     "framer-motion": "latest",
+    "geist": "^1.7.2",
     "gsap": "^3.13.0",
     "input-otp": "1.4.1",
     "lenis": "latest",

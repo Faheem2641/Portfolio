@@ -29,31 +29,31 @@ export default function PortfolioSkills() {
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-slate-800 font-bold text-xs font-mono">
-              <Cpu className="w-3.5 h-3.5 text-slate-700" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-topping font-bold text-xs font-mono">
+              <Cpu className="w-3.5 h-3.5 text-topping" />
               <span>TECHNICAL CAPABILITIES</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
-              Technical <span className="text-slate-900">Skills</span>
+              Technical <span className="text-topping">Skills</span>
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm font-normal">
               What I know. What I build with.
             </p>
           </div>
 
-          {/* Responsive 3-Column Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+          {/* Responsive 3-Column Grid (Equal Height Category Cards) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
             {skillsData.map((group: SkillCategory, idx: number) => {
               return (
                 <div
                   key={idx}
-                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 h-auto"
+                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 h-full hover:border-topping/30 border border-transparent"
                 >
-                  <div className="space-y-5">
+                  <div className="space-y-5 flex-1 flex flex-col justify-start">
                     {/* Category Header */}
                     <div className="flex items-center justify-between pb-4 border-b border-slate-300/40">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-[16px] neu-button flex items-center justify-center text-slate-800">
+                        <div className="w-10 h-10 rounded-[16px] neu-button flex items-center justify-center text-topping shadow-topping-glow">
                           {getCategoryIcon(group.iconName)}
                         </div>
                         <h3 className="text-base font-black text-slate-900 leading-snug">
@@ -73,7 +73,7 @@ export default function PortfolioSkills() {
                           transition={{ duration: 0.2, delay: sIdx * 0.015 }}
                           className="neu-inset-sm px-3.5 py-2.5 rounded-[14px] text-slate-800 text-[11px] sm:text-xs font-bold leading-snug flex items-start gap-2.5 cursor-default h-full"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-slate-800 shrink-0 mt-1" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-topping shrink-0 mt-1" />
                           <span className="min-w-0 flex-1 break-normal [word-break:normal]">{s.name}</span>
                         </motion.div>
                       ))}

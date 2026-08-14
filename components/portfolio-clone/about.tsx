@@ -12,12 +12,12 @@ export default function PortfolioAbout() {
           
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-slate-800 font-bold text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-topping font-bold text-xs font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-topping" />
               <span>BACKGROUND & EDUCATION</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
-              About <span className="text-slate-900">Me</span>
+              About <span className="text-topping">Me</span>
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm font-normal">
               A story still being written.
@@ -30,8 +30,8 @@ export default function PortfolioAbout() {
             {/* Left: Bio & Story (Col 7) */}
             <div className="lg:col-span-7 space-y-2.5 text-left">
               <div className="flex items-center gap-3 mb-1">
-                <div className="w-9 h-9 rounded-[12px] neu-button flex items-center justify-center text-slate-800 shrink-0">
-                  <Terminal className="w-4 h-4" />
+                <div className="w-9 h-9 rounded-[12px] neu-button flex items-center justify-center text-topping shrink-0 shadow-topping-glow">
+                  <Terminal className="w-4 h-4 text-topping" />
                 </div>
                 <h3 className="text-lg font-black text-slate-800">
                   Mechanical Engineering Undergraduate
@@ -39,7 +39,7 @@ export default function PortfolioAbout() {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
-                Studying at the <strong className="text-slate-900 font-bold">NUST School of Mechanical and Manufacturing Engineering (SMME)</strong>, Islamabad. I engineer solutions that bridge intelligent software with physical hardware, from full-stack web applications to embedded systems and functional engineering prototypes.
+                Studying at the <strong className="text-topping font-bold">NUST School of Mechanical and Manufacturing Engineering (SMME)</strong>, Islamabad. I engineer solutions that bridge intelligent software with physical hardware, from full-stack web applications to embedded systems and functional engineering prototypes.
               </p>
 
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
@@ -47,19 +47,19 @@ export default function PortfolioAbout() {
               </p>
 
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
-                My research interests align with <strong className="text-slate-900 font-bold">Machine Learning integration for Fluid Flow prediction</strong>, exploring data-driven models to reconstruct complex flow patterns for aerodynamics and fluid dynamics applications.
+                My research interests align with <strong className="text-topping font-bold">Machine Learning integration for Fluid Flow prediction</strong>, exploring data-driven models to reconstruct complex flow patterns for aerodynamics and fluid dynamics applications.
               </p>
             </div>
 
             {/* Right: Education Card (Col 5) */}
             <div className="lg:col-span-5">
-              <div className="neu-inset rounded-[20px] p-4 sm:p-5 space-y-3">
+              <div className="neu-inset rounded-[20px] p-4 sm:p-5 space-y-3 border border-topping/20">
                 <div className="flex items-center gap-2.5 pb-2 border-b border-slate-300/40">
-                  <div className="w-9 h-9 rounded-[12px] neu-button flex items-center justify-center text-slate-800 shrink-0">
-                    <GraduationCap className="w-5 h-5 text-slate-800" />
+                  <div className="w-9 h-9 rounded-[12px] neu-button flex items-center justify-center text-topping shrink-0">
+                    <GraduationCap className="w-5 h-5 text-topping" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">Education</h4>
+                    <h4 className="text-xs font-mono font-bold text-topping uppercase tracking-wider">Education</h4>
                   </div>
                 </div>
 

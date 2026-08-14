@@ -75,11 +75,11 @@ export default function PortfolioNavbar() {
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
                     className={`relative z-10 -rotate-90 whitespace-nowrap text-[11px] lg:text-xs font-bold tracking-wider transition-colors duration-200 py-1.5 px-3.5 rounded-full flex items-center gap-2 ${
-                      isActive ? "text-slate-950 font-black" : "text-slate-600 hover:text-slate-900"
+                      isActive ? "text-topping font-black" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     {isActive && (
-                      <span className="w-2 h-0.5 rounded-full bg-slate-900 shrink-0" />
+                      <span className="w-2 h-0.5 rounded-full bg-topping shrink-0" />
                     )}
                     <span>{link.name}</span>
                   </a>

@@ -202,13 +202,13 @@ export default function PortfolioHero() {
                 {/* Main Headline */}
                 <div className="space-y-1">
                   <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-                    Hi, I'm <span className="text-slate-900">Faheem Ali</span>
+                    Hi, I'm <span className="text-topping">Faheem Ali</span>
                   </h1>
                   <div className="h-7 sm:h-8 flex items-center overflow-hidden">
-                    <span className="text-sm sm:text-xl lg:text-2xl font-bold font-mono text-slate-700 leading-none truncate">
+                    <span className="text-sm sm:text-xl lg:text-2xl font-bold font-mono text-topping leading-none truncate">
                       {typedText}
                     </span>
-                    <span className="w-0.5 h-4 sm:h-5 bg-slate-800 animate-pulse ml-1 shrink-0"></span>
+                    <span className="w-0.5 h-4 sm:h-5 bg-topping animate-pulse ml-1 shrink-0"></span>
                   </div>
                 </div>
 
@@ -221,10 +221,10 @@ export default function PortfolioHero() {
                 <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
                   <a
                     href="#projects"
-                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-slate-800 hover:text-slate-900 flex items-center gap-2"
+                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-topping hover:scale-105 transition-transform flex items-center gap-2 border border-topping/30"
                   >
                     <span>View Showcase</span>
-                    <ArrowRight className="w-4 h-4 text-slate-700" />
+                    <ArrowRight className="w-4 h-4 text-topping" />
                   </a>
 
                   <a

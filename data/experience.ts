@@ -33,7 +33,7 @@ export const experiencesData: ExperienceEntry[] = [
         type: "Full time",
         duration: "Jun 2026 – Present · 3 mos",
         location: "Islamabad, Pakistan",
-        description: "Worked across diverse engineering projects, mastering <strong className=\"text-slate-900 font-bold\">design iteration and rapid prototyping</strong>. Gained hands-on experience in manufacturing processes, including <strong className=\"text-slate-900 font-bold\">3D printing, laser cutting, and engraving</strong>, alongside <strong className=\"text-slate-900 font-bold\">IoT systems integration, PCB design, and chemical etching</strong>. Applied analytical problem-solving throughout the prototyping lifecycle to deliver designs optimized for manufacturing constraints."
+        description: 'Worked across diverse engineering projects, mastering <strong class="text-topping font-bold">design iteration and rapid prototyping</strong>. Gained hands-on experience in manufacturing processes, including <strong class="text-topping font-bold">3D printing, laser cutting, and engraving</strong>, alongside <strong class="text-topping font-bold">IoT systems integration, PCB design, and chemical etching</strong>. Applied analytical problem-solving throughout the prototyping lifecycle to deliver designs optimized for manufacturing constraints.'
       }
     ]
   },
@@ -49,14 +49,14 @@ export const experiencesData: ExperienceEntry[] = [
         type: "Part time",
         duration: "Sep 2025 – Present · 1 yr",
         location: "Hybrid",
-        description: "Researching <strong className=\"text-slate-900 font-bold\">Machine Learning approaches for Fluid Flow reconstruction</strong>, evaluating how data-driven models predict and reconstruct complex flow patterns from sparse measurement data for <strong className=\"text-slate-900 font-bold\">aerodynamic and fluid dynamics applications</strong>."
+        description: 'Researching <strong class="text-topping font-bold">Machine Learning approaches for Fluid Flow reconstruction</strong>, evaluating how data-driven models predict and reconstruct complex flow patterns from sparse measurement data for <strong class="text-topping font-bold">aerodynamic and fluid dynamics applications</strong>.'
       },
       {
         title: "FYP Collaborator",
         type: "Part time",
         duration: "Mar 2026 – May 2026 · 3 mos",
         location: "On site",
-        description: "Collaborated with final year students on an FYP focused on enhancing <strong className=\"text-slate-900 font-bold\">PV solar panel efficiency</strong> through the integration of a <strong className=\"text-slate-900 font-bold\">chevron type heat exchanger</strong>. Played a primary role in the <strong className=\"text-slate-900 font-bold\">fabrication process</strong>."
+        description: 'Collaborated with final year students on an FYP focused on enhancing <strong class="text-topping font-bold">PV solar panel efficiency</strong> through the integration of a <strong class="text-topping font-bold">chevron type heat exchanger</strong>. Played a primary role in the <strong class="text-topping font-bold">fabrication process</strong>.'
       }
     ]
   },
@@ -71,14 +71,14 @@ export const experiencesData: ExperienceEntry[] = [
         type: "Part time",
         duration: "Jul 2025 – Aug 2025 · 2 mos",
         location: "Islamabad, Pakistan",
-        description: "Specialized in <strong className=\"text-slate-900 font-bold\">precision cutting tool manufacturing</strong>, transforming raw materials including <strong className=\"text-slate-900 font-bold\">steel bars and carbide blanks</strong> into high-performance cutting tools through <strong className=\"text-slate-900 font-bold\">comprehensive machining processes</strong>."
+        description: 'Specialized in <strong class="text-topping font-bold">precision cutting tool manufacturing</strong>, transforming raw materials including <strong class="text-topping font-bold">steel bars and carbide blanks</strong> into high-performance cutting tools through <strong class="text-topping font-bold">comprehensive machining processes</strong>.'
       },
       {
         title: "Production Machining Trainee",
         type: "Full time",
         duration: "Jun 2025 – Aug 2025 · 3 mos",
         location: "Islamabad, Pakistan",
-        description: "Developed foundational machining skills through hands-on training in <strong className=\"text-slate-900 font-bold\">precision manufacturing operations</strong>. Gained practical experience in <strong className=\"text-slate-900 font-bold\">manual lathe and mill operations</strong> while building proficiency with <strong className=\"text-slate-900 font-bold\">precision tools</strong>."
+        description: 'Developed foundational machining skills through hands-on training in <strong class="text-topping font-bold">precision manufacturing operations</strong>. Gained practical experience in <strong class="text-topping font-bold">manual lathe and mill operations</strong> while building proficiency with <strong class="text-topping font-bold">precision tools</strong>.'
       }
     ]
   }
