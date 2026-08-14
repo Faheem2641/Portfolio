@@ -93,8 +93,9 @@ export async function POST(request: Request) {
       }
     }
 
-    // Option 3: Web3Forms API (If WEB3FORMS_ACCESS_KEY environment variable is configured)
-    if (process.env.WEB3FORMS_ACCESS_KEY) {
+    // Option 3: Web3Forms API (Uses WEB3FORMS_ACCESS_KEY env variable or default key fallback for production deployment)
+    const web3AccessKey = process.env.WEB3FORMS_ACCESS_KEY || "15df6855-e507-44a2-b47f-5de155ffa7ff"
+    if (web3AccessKey) {
       const web3res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -103,7 +104,7 @@ export async function POST(request: Request) {
           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         },
         body: JSON.stringify({
-          access_key: process.env.WEB3FORMS_ACCESS_KEY,
+          access_key: web3AccessKey,
           name: name,
           email: email,
           subject: `[Portfolio Inquiry] ${emailSubject}`,
