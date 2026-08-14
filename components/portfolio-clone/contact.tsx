@@ -223,8 +223,8 @@ export default function PortfolioContact() {
                 >
                   {copied ? (
                     <>
-                      <Check className="w-4 h-4 text-emerald-600" />
-                      <span className="text-emerald-600 font-bold">Email Copied to Clipboard!</span>
+                      <Check className="w-4 h-4 text-topping" />
+                      <span className="text-topping font-bold">Email Copied to Clipboard!</span>
                     </>
                   ) : (
                     <>
@@ -486,7 +486,7 @@ export default function PortfolioContact() {
                         whileTap={{ scale: 0.98 }}
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-4 rounded-full neu-button font-bold text-xs text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all border border-topping/30"
+                        className="w-full py-4 rounded-full neu-button font-bold text-xs text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all"
                       >
                         {isSubmitting ? (
                           <>

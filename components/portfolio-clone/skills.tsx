@@ -47,7 +47,7 @@ export default function PortfolioSkills() {
               return (
                 <div
                   key={idx}
-                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 h-full hover:border-topping/30 border border-transparent"
+                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 h-full"
                 >
                   <div className="space-y-5 flex-1 flex flex-col justify-start">
                     {/* Category Header */}

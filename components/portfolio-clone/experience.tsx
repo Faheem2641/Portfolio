@@ -15,7 +15,7 @@ export default function PortfolioExperience() {
     return (
       <div
         key={idx}
-        className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full hover:border-topping/30 border border-transparent"
+        className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full"
       >
         {/* Top Content Group */}
         <div className="space-y-4 flex-1 flex flex-col justify-start">
@@ -179,7 +179,7 @@ export default function PortfolioExperience() {
                 whileTap={{ scale: 0.96 }}
                 onClick={() => setShowAllExperiences(!showAllExperiences)}
                 type="button"
-                className="neu-button px-7 py-3.5 rounded-full text-xs font-mono font-bold text-topping hover:text-slate-900 flex items-center gap-2.5 cursor-pointer border border-topping/30 transition-all"
+                className="neu-button px-7 py-3.5 rounded-full text-xs font-mono font-bold text-topping hover:text-slate-900 flex items-center gap-2.5 cursor-pointer transition-all"
               >
                 <span>
                   {showAllExperiences ? "View Fewer Experiences" : "View All Experiences"}
