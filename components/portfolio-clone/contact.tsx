@@ -197,10 +197,10 @@ export default function PortfolioContact() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
             
             {/* Direct Info Column */}
-            <div className="lg:col-span-5 space-y-4 sm:space-y-6">
+            <div className="lg:col-span-5 space-y-4 sm:space-y-5 flex flex-col justify-between">
               
               {/* Direct Email Box */}
               <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 space-y-4">
@@ -236,22 +236,27 @@ export default function PortfolioContact() {
               </div>
 
               {/* Location & Availability */}
-              <div className="neu-raised rounded-[20px] p-3.5 space-y-1">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-[12px] neu-button flex items-center justify-center text-topping shrink-0">
-                    <MapPin className="w-4 h-4 text-topping" />
+              <div className="neu-raised rounded-[20px] p-3.5 sm:p-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-[12px] neu-button flex items-center justify-center text-topping shrink-0 mt-0.5">
+                    <MapPin className="w-4.5 h-4.5 text-topping" />
                   </div>
-                  <div className="leading-none">
-                    <h4 className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-0.5">Location & Status</h4>
-                    <p className="text-xs font-bold text-slate-800">Islamabad, Pakistan <span className="text-[10px] font-mono font-normal text-slate-500 ml-1">PKT (UTC+5)</span></p>
+                  <div className="space-y-1.5 min-w-0 flex-1">
+                    <div>
+                      <h4 className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-wider">Location & Status</h4>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800 flex flex-wrap items-center gap-1.5 mt-0.5">
+                        <span>Islamabad, Pakistan</span>
+                        <span className="text-[10px] font-mono font-normal text-slate-500">PKT (UTC+5)</span>
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-topping font-medium">
+                      <span className="relative flex h-2 w-2 shrink-0">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-topping opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-topping"></span>
+                      </span>
+                      <span>Available for Remote Contracts, Internships & Part-time Roles</span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-1.5 text-[11px] text-topping font-medium leading-none pt-0.5">
-                  <span className="relative flex h-2 w-2 shrink-0">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-topping opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-topping"></span>
-                  </span>
-                  <span>Available for Remote Contracts, Internships & Part-time Roles</span>
                 </div>
               </div>
 
@@ -293,8 +298,8 @@ export default function PortfolioContact() {
             </div>
 
             {/* Form Column */}
-            <div className="lg:col-span-7">
-              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-8 space-y-5 sm:space-y-6">
+            <div className="lg:col-span-7 h-full">
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 h-full flex flex-col justify-between space-y-4">
 
                 <AnimatePresence mode="wait">
                   {submitted ? (
@@ -335,7 +340,7 @@ export default function PortfolioContact() {
                       exit={{ opacity: 0 }}
                       onSubmit={handleSubmit}
                       noValidate
-                      className="space-y-5"
+                      className="flex-1 flex flex-col justify-between space-y-3.5 sm:space-y-4"
                     >
                       
                       {/* Global Neumorphic Form Error Banner */}
@@ -359,9 +364,9 @@ export default function PortfolioContact() {
                         )}
                       </AnimatePresence>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Name Field */}
-                        <div className="space-y-1.5">
+                        <div className="space-y-1">
                           <div className="flex items-center justify-between">
                             <label htmlFor="contact-name" className="text-xs font-mono font-bold text-slate-800">Your Name *</label>
                             <AnimatePresence>
@@ -378,7 +383,7 @@ export default function PortfolioContact() {
                               )}
                             </AnimatePresence>
                           </div>
-                          <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.name ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                          <div className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.name ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                             <input
                               id="contact-name"
                               type="text"
@@ -391,7 +396,7 @@ export default function PortfolioContact() {
                         </div>
 
                         {/* Email Field */}
-                        <div className="space-y-1.5">
+                        <div className="space-y-1">
                           <div className="flex items-center justify-between">
                             <label htmlFor="contact-email" className="text-xs font-mono font-bold text-slate-800">Your Email *</label>
                             <AnimatePresence>
@@ -408,7 +413,7 @@ export default function PortfolioContact() {
                               )}
                             </AnimatePresence>
                           </div>
-                          <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.email ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                          <div className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.email ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                             <input
                               id="contact-email"
                               type="email"
@@ -422,7 +427,7 @@ export default function PortfolioContact() {
                       </div>
 
                       {/* Subject Field */}
-                      <div className="space-y-1.5">
+                      <div className="space-y-1">
                         <div className="flex items-center justify-between">
                           <label htmlFor="contact-subject" className="text-xs font-mono font-bold text-slate-800">Subject *</label>
                           <AnimatePresence>
@@ -439,7 +444,7 @@ export default function PortfolioContact() {
                             )}
                           </AnimatePresence>
                         </div>
-                        <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.subject ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                        <div className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.subject ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                           <input
                             id="contact-subject"
                             type="text"
@@ -452,7 +457,7 @@ export default function PortfolioContact() {
                       </div>
 
                       {/* Message Field */}
-                      <div className="space-y-1.5">
+                      <div className="space-y-1 flex-1 flex flex-col min-h-0">
                         <div className="flex items-center justify-between">
                           <label htmlFor="contact-message" className="text-xs font-mono font-bold text-slate-800">Message *</label>
                           <AnimatePresence>
@@ -469,14 +474,13 @@ export default function PortfolioContact() {
                             )}
                           </AnimatePresence>
                         </div>
-                        <div className={`neu-inset rounded-[16px] px-4 py-3 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.message ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                        <div className={`neu-inset rounded-[16px] px-4 py-2.5 flex-1 flex flex-col transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.message ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
                           <textarea
                             id="contact-message"
-                            rows={4}
                             value={formData.message}
                             onChange={(e) => handleInputChange("message", e.target.value)}
                             placeholder="Share details about your project scope, technical requirements, timeline, or inquiry..."
-                            className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400 resize-none"
+                            className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400 resize-none flex-1 min-h-[60px]"
                           ></textarea>
                         </div>
                       </div>
@@ -486,7 +490,7 @@ export default function PortfolioContact() {
                         whileTap={{ scale: 0.98 }}
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-4 rounded-full neu-button font-bold text-xs text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all"
+                        className="w-full py-3 sm:py-3.5 rounded-full neu-button font-bold text-xs text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all"
                       >
                         {isSubmitting ? (
                           <>

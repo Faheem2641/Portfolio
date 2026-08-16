@@ -1,6 +1,6 @@
 "use client"
 
-import { GraduationCap, Sparkles, Terminal, Calendar, Award } from "lucide-react"
+import { GraduationCap, Terminal, Calendar, Award } from "lucide-react"
 
 export default function PortfolioAbout() {
   return (
@@ -12,10 +12,6 @@ export default function PortfolioAbout() {
           
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-topping font-bold text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-topping" />
-              <span>BACKGROUND & EDUCATION</span>
-            </div>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               About <span className="text-topping">Me</span>
             </h2>

@@ -8,35 +8,35 @@ import "./globals.css"
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta",
-  display: "swap",
+  display: "block",
   weight: ["300", "400", "500", "600", "700", "800"],
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
-  display: "swap",
+  display: "block",
   weight: ["400", "500", "600", "700"],
 })
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
-  display: "swap",
+  display: "block",
   weight: ["400", "500", "600", "700"],
 })
 
 const pixelifySans = Pixelify_Sans({
   subsets: ["latin"],
   variable: "--font-geist-pixel",
-  display: "swap",
+  display: "block",
   weight: ["400", "500", "600", "700"],
 })
 
 const silkscreen = Silkscreen({
   subsets: ["latin"],
   variable: "--font-silkscreen",
-  display: "swap",
+  display: "block",
   weight: ["400", "700"],
 })
 

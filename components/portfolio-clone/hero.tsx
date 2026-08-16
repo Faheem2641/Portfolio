@@ -19,59 +19,19 @@ import {
   BookOpen,
   Cpu,
 } from "lucide-react"
-import InteractivePortrait from "@/components/interactive-portrait"
 
-export default function PortfolioHero() {
+// Hero section component with portrait image display
+function TypedRoleText() {
   const [typedText, setTypedText] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
   const [loopNum, setLoopNum] = useState(0)
   const [typingSpeed, setTypingSpeed] = useState(100)
-  const [time, setTime] = useState({ hours: "12", minutes: "00", seconds: "00", date: "" })
-  const [activeCodeTab, setActiveCodeTab] = useState<"mech" | "fea" | "cnc">("mech")
-  const [asciiKey, setAsciiKey] = useState(0)
-  const [portraitMode, setPortraitMode] = useState<"interactive" | "ascii">("interactive")
-  const [copiedEmail, setCopiedEmail] = useState(false)
-  const [sparkleToast, setSparkleToast] = useState(false)
-
-  // Auto-reload ASCII drawing animation every 15 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAsciiKey((prev) => prev + 1)
-    }, 15000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText("faheemali3724@gmail.com")
-    setCopiedEmail(true)
-    setTimeout(() => setCopiedEmail(false), 2500)
-  }
-
-  const handleSparkleClick = () => {
-    setSparkleToast(true)
-    setTimeout(() => setSparkleToast(false), 3000)
-  }
 
   const roles = [
     "Mechanical Engineer",
     "Embedded Systems & IoT Trainee",
     "Precision Machining Trainee",
   ]
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date()
-      setTime({
-        hours: String(now.getHours()).padStart(2, "0"),
-        minutes: String(now.getMinutes()).padStart(2, "0"),
-        seconds: String(now.getSeconds()).padStart(2, "0"),
-        date: now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }),
-      })
-    }
-    updateClock()
-    const timer = setInterval(updateClock, 1000)
-    return () => clearInterval(timer)
-  }, [])
 
   useEffect(() => {
     const handleType = () => {
@@ -97,15 +57,31 @@ export default function PortfolioHero() {
     return () => clearTimeout(timer)
   }, [typedText, isDeleting, loopNum, typingSpeed])
 
-  // Calculate clock hands angle
-  const hoursNum = parseInt(time.hours) % 12
-  const minsNum = parseInt(time.minutes)
-  const secsNum = parseInt(time.seconds) || 0
-  const hourDeg = (hoursNum + minsNum / 60) * 30
-  const minuteDeg = (minsNum + secsNum / 60) * 6
-  const secondDeg = secsNum * 6
+  return (
+    <div className="h-7 sm:h-8 flex items-center overflow-hidden">
+      <span className="text-sm sm:text-xl lg:text-2xl font-bold font-mono text-topping leading-none truncate">
+        {typedText}
+      </span>
+      <span className="w-0.5 h-4 sm:h-5 bg-topping animate-pulse ml-1 shrink-0"></span>
+    </div>
+  )
+}
 
-  const tickAngles = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+export default function PortfolioHero() {
+  const [activeCodeTab, setActiveCodeTab] = useState<"mech" | "fea" | "cnc">("mech")
+  const [copiedEmail, setCopiedEmail] = useState(false)
+  const [sparkleToast, setSparkleToast] = useState(false)
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("faheemali3724@gmail.com")
+    setCopiedEmail(true)
+    setTimeout(() => setCopiedEmail(false), 2500)
+  }
+
+  const handleSparkleClick = () => {
+    setSparkleToast(true)
+    setTimeout(() => setSparkleToast(false), 3000)
+  }
 
   return (
     <section className="pt-14 md:pt-3 pb-4 neu-bg">
@@ -123,65 +99,16 @@ export default function PortfolioHero() {
             {/* Left Column - Concentric 24px Cards */}
             <div className="lg:col-span-5 space-y-4 sm:space-y-6 flex flex-col justify-start">
               
-              {/* Dual-Mode Interactive Portrait / ASCII Terminal Container */}
-              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-5 space-y-2.5">
-                {/* Centered Mode Selector Bar (Desktop Only) */}
-                <div className="hidden sm:flex items-center justify-center px-1 pb-0.5">
-                  <div className="flex items-center gap-1 neu-inset px-1.5 py-1 rounded-full text-[9px] font-mono font-bold">
-                    <button
-                      onClick={() => setPortraitMode("interactive")}
-                      className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                        portraitMode === "interactive"
-                          ? "neu-button-active text-topping font-black shadow-sm"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      WebGL Fluid
-                    </button>
-                    <button
-                      onClick={() => setPortraitMode("ascii")}
-                      className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                        portraitMode === "ascii"
-                          ? "neu-button-active text-topping font-black shadow-sm"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      ASCII Terminal
-                    </button>
-                  </div>
-                </div>
-
-                {/* Mobile View: Force ASCII portrait only, no top buttons */}
-                <div
-                  onClick={() => setAsciiKey((prev) => prev + 1)}
-                  title="Click to replay ASCII text drawing animation"
-                  className="sm:hidden w-full neu-inset rounded-[14px] p-2 flex items-center justify-center overflow-hidden h-[260px] cursor-pointer group"
-                >
+              {/* Portrait Image Container */}
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-5">
+                <div className="relative w-full h-[280px] sm:h-[320px] neu-inset rounded-[16px] overflow-hidden p-2">
                   <img
-                    key={`mobile-${asciiKey}`}
-                    src={`/images/ascii.svg?v=${asciiKey}`}
-                    alt="Faheem Ali ASCII Text Portrait"
-                    className="w-auto h-full max-h-[245px] max-w-[310px] object-contain block mx-auto shrink-0 group-hover:scale-105 transition-transform duration-300"
+                    src="/images/Generated Image November 15, 2025 - 4_50PM.png"
+                    alt="Faheem Ali Portrait"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top rounded-[12px] shadow-sm transition-transform duration-300 hover:scale-[1.02]"
                   />
-                </div>
-
-                {/* Desktop View: Persistent Interactive WebGL Fluid & ASCII toggle */}
-                <div className="hidden sm:block">
-                  <div className={`relative w-full h-[320px] neu-inset rounded-[16px] overflow-hidden ${portraitMode === "interactive" ? "block" : "hidden"}`}>
-                    <InteractivePortrait />
-                  </div>
-                  <div
-                    onClick={() => setAsciiKey((prev) => prev + 1)}
-                    title="Click to replay ASCII text drawing animation"
-                    className={`w-full neu-inset rounded-[16px] p-3 flex items-center justify-center overflow-hidden h-[320px] cursor-pointer group ${portraitMode === "ascii" ? "flex" : "hidden"}`}
-                  >
-                    <img
-                      key={`desktop-${asciiKey}`}
-                      src={`/images/ascii.svg?v=${asciiKey}`}
-                      alt="Faheem Ali ASCII Text Portrait"
-                      className="w-auto h-full max-h-[295px] max-w-[380px] object-contain block mx-auto shrink-0 group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
                 </div>
               </div>
 
@@ -262,12 +189,7 @@ export default function PortfolioHero() {
                   <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-tight">
                     Hi, I'm <span className="text-topping">Faheem Ali</span>
                   </h1>
-                  <div className="h-7 sm:h-8 flex items-center overflow-hidden">
-                    <span className="text-sm sm:text-xl lg:text-2xl font-bold font-mono text-topping leading-none truncate">
-                      {typedText}
-                    </span>
-                    <span className="w-0.5 h-4 sm:h-5 bg-topping animate-pulse ml-1 shrink-0"></span>
-                  </div>
+                  <TypedRoleText />
                 </div>
 
                 {/* Bio text */}

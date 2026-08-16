@@ -29,10 +29,6 @@ export default function PortfolioSkills() {
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-topping font-bold text-xs font-mono">
-              <Cpu className="w-3.5 h-3.5 text-topping" />
-              <span>TECHNICAL CAPABILITIES</span>
-            </div>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Technical <span className="text-topping">Skills</span>
             </h2>

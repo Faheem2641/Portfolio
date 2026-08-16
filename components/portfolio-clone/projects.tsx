@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  FolderGit2,
   Github,
   ExternalLink,
   Calendar,
@@ -223,10 +222,6 @@ export default function PortfolioProjects() {
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-inset text-topping font-bold text-xs font-mono">
-              <FolderGit2 className="w-3.5 h-3.5 text-topping" />
-              <span>PROJECT PORTFOLIO</span>
-            </div>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Featured <span className="text-topping">Projects</span>
             </h2>
