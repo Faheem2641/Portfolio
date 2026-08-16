@@ -8,7 +8,7 @@ import * as THREE from "three"
 export default function InteractivePortrait() {
   const containerRef = useRef<HTMLDivElement>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
   const [webGLAvailable, setWebGLAvailable] = useState(true)
 
 
@@ -37,7 +37,7 @@ export default function InteractivePortrait() {
     }
 
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color(0xffffff)
+    scene.background = new THREE.Color(0xd8d8d8)
 
     const camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0.1, 1000)
     camera.position.z = 1
@@ -102,7 +102,7 @@ export default function InteractivePortrait() {
           new THREE.PlaneGeometry(2, 2),
           new THREE.MeshBasicMaterial({
             color: 0x000000,
-            onBeforeCompile: (shader) => {
+            onBeforeCompile: (shader: any) => {
               shader.uniforms.dTime = gu.dTime
               shader.uniforms.aspect = gu.aspect
               shader.uniforms.pointer = this.uniforms.pointer
@@ -150,7 +150,7 @@ export default function InteractivePortrait() {
             },
           })
         )
-        this.rtScene.material.defines = { USE_UV: "" }
+        ;(this.rtScene.material as any).defines = { USE_UV: "" }
         this.rtCamera = new THREE.Camera()
       }
 
@@ -194,13 +194,14 @@ export default function InteractivePortrait() {
       const img = texture.image
       const imgAspect = img.width / img.height
       const containerAspect = width / height
-      let planeWidth, planeHeight
+      let planeWidth: number, planeHeight: number
+      const zoomFactor = 1.15
       if (imgAspect > containerAspect) {
-        planeWidth = width
-        planeHeight = width / imgAspect
+        planeWidth = width * zoomFactor
+        planeHeight = (width / imgAspect) * zoomFactor
       } else {
-        planeHeight = height
-        planeWidth = height * imgAspect
+        planeHeight = height * zoomFactor
+        planeWidth = (height * imgAspect) * zoomFactor
       }
       baseImage.geometry.dispose()
       baseImage.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight)
@@ -217,8 +218,8 @@ export default function InteractivePortrait() {
     const baseImage = new THREE.Mesh(new THREE.PlaneGeometry(width, height), baseImageMaterial)
     scene.add(baseImage)
 
-    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x1a1f1a, transparent: true })
-    bgPlaneMaterial.defines = { USE_UV: "" }
+    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0xd8d8d8, transparent: true })
+    ;(bgPlaneMaterial as any).defines = { USE_UV: "" }
 
     bgPlaneMaterial.onBeforeCompile = (shader) => {
       // Use the shared result object which updates every frame
@@ -265,10 +266,10 @@ export default function InteractivePortrait() {
 
         // <<< LÓGICA ATUALIZADA PARA ANIMAÇÃO LÍQUIDA (DOMAIN WARPING) >>>
 
-        // 1. Define as cores
-        vec3 colorBg = vec3(1.0);
-        vec3 colorSoftShape = vec3(0.92);
-        vec3 colorLine = vec3(0.8);
+        // 1. Define as cores (Matching #d8d8d8 web page base tone)
+        vec3 colorBg = vec3(0.847, 0.847, 0.847);
+        vec3 colorSoftShape = vec3(0.78, 0.78, 0.78);
+        vec3 colorLine = vec3(0.60, 0.60, 0.60);
 
         // 2. Coordenada base da textura (controla o "zoom")
         vec2 uv = vUv * 3.5;
@@ -322,8 +323,8 @@ export default function InteractivePortrait() {
         `
         vec2 blobUV=((vPosProj.xy/vPosProj.w)+1.)*0.5;
         vec4 blobData=texture(texBlob,blobUV);
-        // if(blobData.r<0.02)discard; // Removed hard discard
-        diffuseColor.a *= smoothstep(0.0, 0.2, blobData.r); // Added smooth alpha transition
+        diffuseColor.rgb *= vec3(0.847, 0.847, 0.847);
+        diffuseColor.a *= smoothstep(0.0, 0.2, blobData.r);
         #include <clipping_planes_fragment>
         `
       )
@@ -369,13 +370,14 @@ export default function InteractivePortrait() {
         const img = baseTexture.image
         const imgAspect = img.width / img.height
         const containerAspect = newWidth / newHeight
-        let planeWidth, planeHeight
+        const zoomFactor = 1.15
+        let planeWidth: number, planeHeight: number
         if (imgAspect > containerAspect) {
-          planeWidth = newWidth
-          planeHeight = newWidth / imgAspect
+          planeWidth = newWidth * zoomFactor
+          planeHeight = (newWidth / imgAspect) * zoomFactor
         } else {
-          planeHeight = newHeight
-          planeWidth = newHeight * imgAspect
+          planeHeight = newHeight * zoomFactor
+          planeWidth = (newHeight * imgAspect) * zoomFactor
         }
         baseImage.geometry.dispose()
         baseImage.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight)
@@ -389,8 +391,14 @@ export default function InteractivePortrait() {
 
     window.addEventListener("resize", handleResize)
 
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize()
+    })
+    resizeObserver.observe(container)
+
     return () => {
       window.removeEventListener("resize", handleResize)
+      resizeObserver.disconnect()
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
       if (rendererRef.current) {
         container.removeChild(rendererRef.current.domElement)
@@ -433,7 +441,7 @@ export default function InteractivePortrait() {
           {/* Optional overlay image */}
           <img
             src="/images/2.png"
-            alt="Helmet overlay"
+            alt="Engineering equipment overlay"
             className="absolute max-w-full max-h-full object-contain"
             style={{ mixBlendMode: "normal", opacity: 0.9 }}
           />
@@ -449,7 +457,7 @@ export default function InteractivePortrait() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full bg-[#1a1f1a] cursor-crosshair overflow-hidden"
+      className="absolute inset-0 w-full h-full bg-[#d8d8d8] cursor-crosshair overflow-hidden"
       style={{ touchAction: "none" }}
     >
 

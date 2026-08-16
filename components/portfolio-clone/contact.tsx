@@ -236,22 +236,22 @@ export default function PortfolioContact() {
               </div>
 
               {/* Location & Availability */}
-              <div className="neu-raised rounded-[24px] p-6 space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-[16px] neu-button flex items-center justify-center text-topping shrink-0">
-                    <MapPin className="w-5 h-5 text-topping" />
+              <div className="neu-raised rounded-[20px] p-3.5 space-y-1">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-[12px] neu-button flex items-center justify-center text-topping shrink-0">
+                    <MapPin className="w-4 h-4 text-topping" />
                   </div>
-                  <div>
-                    <h4 className="text-xs font-mono font-bold text-slate-700 uppercase">Location & Status</h4>
-                    <p className="text-sm font-bold text-slate-800">Islamabad, Pakistan</p>
+                  <div className="leading-none">
+                    <h4 className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-0.5">Location & Status</h4>
+                    <p className="text-xs font-bold text-slate-800">Islamabad, Pakistan <span className="text-[10px] font-mono font-normal text-slate-500 ml-1">PKT (UTC+5)</span></p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 pt-1 text-xs text-topping font-medium">
-                  <span className="relative flex h-2.5 w-2.5">
+                <div className="flex items-center gap-1.5 text-[11px] text-topping font-medium leading-none pt-0.5">
+                  <span className="relative flex h-2 w-2 shrink-0">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-topping opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-topping"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-topping"></span>
                   </span>
-                  <span>Available for Remote Contracts & Full-time Engineering Roles</span>
+                  <span>Available for Remote Contracts, Internships & Part-time Roles</span>
                 </div>
               </div>
 

@@ -199,6 +199,24 @@
     font-family: "Geist Pixel", var(--font-geist-pixel), var(--font-geist-sans), sans-serif;
   }
 
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  .neu-button,
+  .neu-button-active,
+  .neu-raised,
+  .neu-raised-sm,
+  .hover-scale {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+  }
+
   body {
     font-family: "Geist Pixel", var(--font-geist-pixel), var(--font-sans), sans-serif !important;
     @apply bg-background text-foreground;
@@ -289,11 +307,12 @@
   }
 
   .hover-scale {
-    transition: transform 0.3s ease;
+    transition: transform 0.15s ease;
+    will-change: transform;
   }
 
   .hover-scale:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(0);
   }
 
   .transition-smooth {
@@ -381,14 +400,19 @@
       3px 3px 8px var(--shadow-dark),
       -3px -3px 8px var(--shadow-light);
     border: none;
-    transition: all 0.2s ease-in-out;
+    transition: box-shadow 0.15s ease-out, transform 0.15s ease-out, background-color 0.15s ease-out, color 0.15s ease-out, opacity 0.15s ease-out;
+    will-change: transform, box-shadow;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   .neu-button:hover {
     box-shadow:
       4px 4px 8px var(--shadow-dark),
       -4px -4px 8px var(--shadow-light);
-    transform: translateY(-1px);
+    transform: translateY(-1px) translateZ(0);
   }
 
   .neu-button:active,
@@ -396,12 +420,48 @@
     box-shadow:
       inset 3px 3px 6px var(--shadow-dark),
       inset -3px -3px 6px var(--shadow-light);
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
+  }
+
+  /* Hide scrollbar utility */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
 }
 
-.simteste {
-  color: #e8e8e3;
-  font-size: 1050px;
-  line-height: 600px;
+/* ── Custom Neumorphic Scrollbar System ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neu-bg, #d8d8d8);
+  border-radius: 9999px;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 9999px;
+  border: 1px solid var(--neu-bg, #d8d8d8);
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neu-accent, #2a9d8f);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--neu-bg, #d8d8d8);
+}
+
+/* Firefox Scrollbar Styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a8a8a8 var(--neu-bg, #d8d8d8);
 }

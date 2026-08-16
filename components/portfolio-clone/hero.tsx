@@ -19,6 +19,7 @@ import {
   BookOpen,
   Cpu,
 } from "lucide-react"
+import InteractivePortrait from "@/components/interactive-portrait"
 
 export default function PortfolioHero() {
   const [typedText, setTypedText] = useState("")
@@ -28,8 +29,17 @@ export default function PortfolioHero() {
   const [time, setTime] = useState({ hours: "12", minutes: "00", seconds: "00", date: "" })
   const [activeCodeTab, setActiveCodeTab] = useState<"mech" | "fea" | "cnc">("mech")
   const [asciiKey, setAsciiKey] = useState(0)
+  const [portraitMode, setPortraitMode] = useState<"interactive" | "ascii">("interactive")
   const [copiedEmail, setCopiedEmail] = useState(false)
   const [sparkleToast, setSparkleToast] = useState(false)
+
+  // Auto-reload ASCII drawing animation every 15 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAsciiKey((prev) => prev + 1)
+    }, 15000)
+    return () => clearInterval(interval)
+  }, [])
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("faheemali3724@gmail.com")
@@ -103,9 +113,9 @@ export default function PortfolioHero() {
         
         {/* Outer Frame with Concentric 56px Radius & Symmetrical Padding */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
           className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-8 space-y-6 sm:space-y-8"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
@@ -113,19 +123,67 @@ export default function PortfolioHero() {
             {/* Left Column - Concentric 24px Cards */}
             <div className="lg:col-span-5 space-y-4 sm:space-y-6 flex flex-col justify-start">
               
-              {/* GitHub ASCII Art Portrait Container */}
-              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6">
-                <div className="w-full neu-inset rounded-[14px] sm:rounded-[16px] p-3 sm:p-4 flex items-center justify-center overflow-hidden min-h-[200px] sm:min-h-[240px]">
+              {/* Dual-Mode Interactive Portrait / ASCII Terminal Container */}
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-5 space-y-2.5">
+                {/* Centered Mode Selector Bar (Desktop Only) */}
+                <div className="hidden sm:flex items-center justify-center px-1 pb-0.5">
+                  <div className="flex items-center gap-1 neu-inset px-1.5 py-1 rounded-full text-[9px] font-mono font-bold">
+                    <button
+                      onClick={() => setPortraitMode("interactive")}
+                      className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
+                        portraitMode === "interactive"
+                          ? "neu-button-active text-topping font-black shadow-sm"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      WebGL Fluid
+                    </button>
+                    <button
+                      onClick={() => setPortraitMode("ascii")}
+                      className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
+                        portraitMode === "ascii"
+                          ? "neu-button-active text-topping font-black shadow-sm"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      ASCII Terminal
+                    </button>
+                  </div>
+                </div>
+
+                {/* Mobile View: Force ASCII portrait only, no top buttons */}
+                <div
+                  onClick={() => setAsciiKey((prev) => prev + 1)}
+                  title="Click to replay ASCII text drawing animation"
+                  className="sm:hidden w-full neu-inset rounded-[14px] p-2 flex items-center justify-center overflow-hidden h-[260px] cursor-pointer group"
+                >
                   <img
-                    key={asciiKey}
+                    key={`mobile-${asciiKey}`}
                     src={`/images/ascii.svg?v=${asciiKey}`}
-                    alt="Faheem Ali ASCII Portrait"
-                    className="w-full h-auto max-w-[460px] object-contain block mx-auto shrink-0"
+                    alt="Faheem Ali ASCII Text Portrait"
+                    className="w-auto h-full max-h-[245px] max-w-[310px] object-contain block mx-auto shrink-0 group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
+
+                {/* Desktop View: Persistent Interactive WebGL Fluid & ASCII toggle */}
+                <div className="hidden sm:block">
+                  <div className={`relative w-full h-[320px] neu-inset rounded-[16px] overflow-hidden ${portraitMode === "interactive" ? "block" : "hidden"}`}>
+                    <InteractivePortrait />
+                  </div>
+                  <div
+                    onClick={() => setAsciiKey((prev) => prev + 1)}
+                    title="Click to replay ASCII text drawing animation"
+                    className={`w-full neu-inset rounded-[16px] p-3 flex items-center justify-center overflow-hidden h-[320px] cursor-pointer group ${portraitMode === "ascii" ? "flex" : "hidden"}`}
+                  >
+                    <img
+                      key={`desktop-${asciiKey}`}
+                      src={`/images/ascii.svg?v=${asciiKey}`}
+                      alt="Faheem Ali ASCII Text Portrait"
+                      className="w-auto h-full max-h-[295px] max-w-[380px] object-contain block mx-auto shrink-0 group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
               </div>
-
-
 
               {/* Engineering Quote Container */}
               <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-4 text-center flex items-center justify-center">
