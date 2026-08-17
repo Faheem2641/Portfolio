@@ -151,15 +151,15 @@ export default function PortfolioProjects() {
         <div className="space-y-4">
           
           {/* Association & Date Pills */}
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+          <div className="flex items-center gap-2 text-xs font-mono flex-nowrap overflow-x-auto no-scrollbar pb-0.5">
             {project.association && (
-              <span className="neu-inset-sm px-3 py-1 rounded-full text-topping font-bold flex items-center gap-1.5 max-w-full truncate">
+              <span className="neu-inset-sm px-3 py-1 rounded-full text-topping font-bold flex items-center gap-1.5 shrink-0 whitespace-nowrap">
                 <Building2 className="w-3.5 h-3.5 text-topping shrink-0" />
-                <span className="truncate">{project.association}</span>
+                <span>{project.association}</span>
               </span>
             )}
             {project.date && (
-              <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
+              <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0 whitespace-nowrap">
                 <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
                 <span>{project.date}</span>
               </span>
