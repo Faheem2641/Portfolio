@@ -35,7 +35,7 @@ export const projectsData: Project[] = [
     ]
   },
   {
-    title: "Design and Structural Analysis of a Cantilever Storm Surge Gate",
+    title: "Design and fabrication of a Cantilever Storm Surge Gate",
     date: "May 2026",
     association: "Academic Project",
     images: ["/images/Truss 2.jpg", "/images/Truss 1.jpg"],
