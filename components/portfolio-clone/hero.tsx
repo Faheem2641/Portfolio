@@ -107,7 +107,7 @@ export default function PortfolioHero() {
                     alt="Faheem Ali Portrait"
                     fetchPriority="high"
                     decoding="async"
-                    className="w-full h-full object-cover object-top rounded-[12px] shadow-sm transition-transform duration-300 hover:scale-[1.02]"
+                    className="w-full h-full object-cover object-top rounded-[12px] shadow-sm transition-transform duration-300 scale-[1.15] hover:scale-[1.20]"
                   />
                 </div>
               </div>
