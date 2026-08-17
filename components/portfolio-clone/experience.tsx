@@ -18,65 +18,70 @@ export default function PortfolioExperience() {
         className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full"
       >
         {/* Top Content Group */}
-        <div className="space-y-4 flex-1 flex flex-col justify-start">
+        <div className="space-y-4 flex-1 flex flex-col justify-between">
           
-          {/* Type & Duration Pills */}
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
-            {exp.type && (
-              <span className="neu-inset-sm px-3 py-1 rounded-full text-topping font-bold flex items-center gap-1.5 max-w-full truncate">
-                <Briefcase className="w-3.5 h-3.5 text-topping shrink-0" />
-                <span className="truncate">{exp.type}</span>
-              </span>
-            )}
-            {exp.workType && (
-              <span className="text-xs font-mono font-bold text-slate-800 bg-slate-300/80 px-2.5 py-1 rounded-full shrink-0">
-                {exp.workType}
-              </span>
-            )}
-            {exp.duration && (
-              <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
-                <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
-                <span>{exp.duration}</span>
-              </span>
-            )}
-          </div>
-
-          {/* Organization Title */}
-          <div className="space-y-1">
-            <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight text-justify [text-justify:inter-word]">
-              {exp.organization}
-            </h3>
-            {exp.subtitle && (
-              <p className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider text-justify [text-justify:inter-word]">
-                {exp.subtitle}
-              </p>
-            )}
-
-            <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-600 pt-1">
-              {exp.company && (
-                <span className="flex items-center gap-1.5 font-bold text-slate-900">
-                  <Building2 className="w-3.5 h-3.5 text-slate-800" /> {exp.company}
+          {/* Header Info Area - Fixed min-height ensures all role containers start on the exact same horizontal line */}
+          <div className="space-y-3.5 min-h-[145px] sm:min-h-[165px] flex flex-col justify-start">
+            
+            {/* Type & Duration Pills */}
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+              {exp.type && (
+                <span className="neu-inset-sm px-3 py-1 rounded-full text-topping font-bold flex items-center gap-1.5 max-w-full truncate">
+                  <Briefcase className="w-3.5 h-3.5 text-topping shrink-0" />
+                  <span className="truncate">{exp.type}</span>
                 </span>
               )}
-              {exp.location && (
-                <span className="flex items-center gap-1 text-slate-700 font-medium">
-                  <MapPin className="w-3.5 h-3.5 text-slate-500" /> {exp.location}
+              {exp.workType && (
+                <span className="text-xs font-mono font-bold text-slate-800 bg-slate-300/80 px-2.5 py-1 rounded-full shrink-0">
+                  {exp.workType}
+                </span>
+              )}
+              {exp.duration && (
+                <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
+                  <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+                  <span>{exp.duration}</span>
                 </span>
               )}
             </div>
+
+            {/* Organization Title */}
+            <div className="space-y-1">
+              <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight text-left">
+                {exp.organization}
+              </h3>
+              {exp.subtitle && (
+                <p className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider text-left">
+                  {exp.subtitle}
+                </p>
+              )}
+
+              <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-600 pt-1">
+                {exp.company && (
+                  <span className="flex items-center gap-1.5 font-bold text-slate-900">
+                    <Building2 className="w-3.5 h-3.5 text-slate-800" /> {exp.company}
+                  </span>
+                )}
+                {exp.location && (
+                  <span className="flex items-center gap-1 text-slate-700 font-medium">
+                    <MapPin className="w-3.5 h-3.5 text-slate-500" /> {exp.location}
+                  </span>
+                )}
+              </div>
+            </div>
+
           </div>
 
           {/* Single Role Description if no nested roles */}
           {!hasRoles && exp.description && (
             <p
-              className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]"
+              className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left"
               dangerouslySetInnerHTML={{ __html: exp.description }}
             />
           )}
 
           {/* Nested Roles Stack */}
           {hasRoles && (
-            <div className="space-y-3 pt-1 flex-1 flex flex-col justify-start">
+            <div className="space-y-3 pt-1 flex-1 flex flex-col justify-between">
               {exp.roles!.map((role: ExperienceRole, rIdx: number) => {
                 const isLastRole = rIdx === exp.roles!.length - 1
                 return (
@@ -89,7 +94,7 @@ export default function PortfolioExperience() {
                     {/* Role Title Header */}
                     <div className="flex items-start gap-2">
                       <ChevronRight className="w-4 h-4 text-slate-900 shrink-0 mt-0.5 text-topping" />
-                      <h4 className="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight text-justify [text-justify:inter-word]">
+                      <h4 className="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight text-left">
                         {role.title}
                       </h4>
                     </div>
@@ -111,7 +116,7 @@ export default function PortfolioExperience() {
 
                     {role.description && (
                       <p
-                        className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]"
+                        className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left"
                         dangerouslySetInnerHTML={{ __html: role.description }}
                       />
                     )}
