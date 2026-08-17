@@ -171,8 +171,8 @@ export default function PortfolioProjects() {
             {project.title}
           </h3>
 
-          {/* Description with Expand / Line-clamp toggle */}
-          <div>
+          {/* Description in Inset Container */}
+          <div className="neu-inset p-4 rounded-[16px] space-y-2 flex flex-col justify-start">
             <p
               className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word] ${
                 !isExpanded ? "line-clamp-4" : ""
@@ -182,7 +182,7 @@ export default function PortfolioProjects() {
             {project.description.length > 180 && (
               <button
                 onClick={() => toggleExpand(idx)}
-                className="mt-1.5 text-xs font-bold text-slate-900 hover:text-black flex items-center gap-1 transition-colors"
+                className="mt-1 text-xs font-bold text-slate-900 hover:text-black flex items-center gap-1 transition-colors cursor-pointer"
               >
                 <span>{isExpanded ? "Show less" : "Read more"}</span>
                 {isExpanded ? (
