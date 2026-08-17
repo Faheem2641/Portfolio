@@ -21,7 +21,7 @@ export default function PortfolioExperience() {
         <div className="space-y-4 flex-1 flex flex-col justify-between">
           
           {/* Header Info Area - Fixed min-height ensures all role containers start on the exact same horizontal line */}
-          <div className="space-y-3 min-h-[110px] sm:min-h-[125px] flex flex-col justify-start">
+          <div className="space-y-3 min-h-[155px] lg:min-h-[165px] flex flex-col justify-start">
             
             {/* Type & Duration Pills */}
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
