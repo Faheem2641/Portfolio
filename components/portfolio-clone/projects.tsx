@@ -166,10 +166,12 @@ export default function PortfolioProjects() {
             )}
           </div>
 
-          {/* Title */}
-          <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight">
-            {project.title}
-          </h3>
+          {/* Title Container - Fixed min-height ensures all description boxes align on the exact same horizontal line */}
+          <div className="min-h-[3.5rem] sm:min-h-[4.25rem] flex items-center">
+            <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight">
+              {project.title}
+            </h3>
+          </div>
 
           {/* Description in Inset Container */}
           <div className="neu-inset p-4 rounded-[16px] space-y-2 flex flex-col justify-start">
