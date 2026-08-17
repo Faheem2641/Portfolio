@@ -21,10 +21,10 @@ export default function PortfolioAbout() {
           </div>
 
           {/* Clean 2-Column Split */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-stretch pt-2">
             
             {/* Left: Bio & Story Card in Neu-Inset Container (Col 7) */}
-            <div className="lg:col-span-7">
+            <div className="md:col-span-7">
               <div className="neu-inset rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 space-y-4 h-full flex flex-col justify-between">
                 <div className="space-y-3.5">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-300/40">
@@ -57,7 +57,7 @@ export default function PortfolioAbout() {
             </div>
 
             {/* Right: Education Card (Col 5) */}
-            <div className="lg:col-span-5 flex flex-col">
+            <div className="md:col-span-5 flex flex-col">
               <div className="neu-inset rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 space-y-4 h-full flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-300/40">
