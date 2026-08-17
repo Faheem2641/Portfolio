@@ -24,7 +24,6 @@ export const experiencesData: ExperienceEntry[] = [
   {
     organization: "Smart Agri Tech Lab",
     subtitle: "Embedded AI IoT",
-    company: "National University of Sciences & Technology (NUST)",
     type: "Internship",
     duration: "3 mos",
     location: "Islamabad, Pakistan · On site",
@@ -40,7 +39,6 @@ export const experiencesData: ExperienceEntry[] = [
   },
   {
     organization: "School of Mechanical and Manufacturing Engineering (SMME)",
-    subtitle: "National University of Sciences & Technology (NUST)",
     type: "Apprenticeship",
     duration: "1 yr",
     location: "Islamabad, Pakistan · Hybrid",
@@ -63,7 +61,6 @@ export const experiencesData: ExperienceEntry[] = [
   },
   {
     organization: "Manufacturing Resource Center (MRC)",
-    subtitle: "National University of Sciences & Technology (NUST)",
     type: "Internship",
     duration: "3 mos",
     location: "Islamabad, Pakistan · On site",

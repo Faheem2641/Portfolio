@@ -21,7 +21,7 @@ export default function PortfolioExperience() {
         <div className="space-y-4 flex-1 flex flex-col justify-between">
           
           {/* Header Info Area - Fixed min-height ensures all role containers start on the exact same horizontal line */}
-          <div className="space-y-3.5 min-h-[145px] sm:min-h-[165px] flex flex-col justify-start">
+          <div className="space-y-3 min-h-[110px] sm:min-h-[125px] flex flex-col justify-start">
             
             {/* Type & Duration Pills */}
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
@@ -55,7 +55,7 @@ export default function PortfolioExperience() {
                 </p>
               )}
 
-              <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-600 pt-1">
+              <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-600 pt-0.5">
                 {exp.company && (
                   <span className="flex items-center gap-1.5 font-bold text-slate-900">
                     <Building2 className="w-3.5 h-3.5 text-slate-800" /> {exp.company}
@@ -83,13 +83,10 @@ export default function PortfolioExperience() {
           {hasRoles && (
             <div className="space-y-3 pt-1 flex-1 flex flex-col justify-between">
               {exp.roles!.map((role: ExperienceRole, rIdx: number) => {
-                const isLastRole = rIdx === exp.roles!.length - 1
                 return (
                   <div
                     key={rIdx}
-                    className={`neu-inset p-4 rounded-[16px] space-y-3 flex flex-col justify-start ${
-                      isLastRole ? "flex-1" : ""
-                    }`}
+                    className="neu-inset p-4 rounded-[16px] space-y-3 flex flex-col justify-start flex-1"
                   >
                     {/* Role Title Header */}
                     <div className="flex items-start gap-2">
