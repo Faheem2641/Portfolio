@@ -208,7 +208,10 @@ export default function PortfolioHero() {
                   </a>
 
                   <a
-                    href="#contact"
+                    href="https://drive.google.com/uc?export=download&id=1wOKwnKCxhvRQqV4KReUoyvERvtRya_lN"
+                    target="_blank"
+                    rel="noreferrer"
+                    download="Faheem_Ali_CV.pdf"
                     className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-slate-700 hover:text-slate-900 flex items-center gap-2"
                   >
                     <Download className="w-4 h-4 text-slate-500" />
