@@ -31,6 +31,7 @@ const geistPixel = localFont({
   src: "../public/fonts/GeistPixel-Regular-VariableFont_ELSH.ttf",
   variable: "--font-geist-pixel",
   display: "swap",
+  weight: "100 900",
 })
 
 const silkscreen = Silkscreen({

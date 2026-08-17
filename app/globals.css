@@ -196,7 +196,6 @@
   * {
     border-style: none;
     outline: none;
-    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif !important;
   }
 
   button,
@@ -218,7 +217,7 @@
   }
 
   body {
-    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif !important;
+    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif;
     @apply bg-background text-foreground;
   }
 
@@ -232,7 +231,7 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif !important;
+    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif;
     @apply uppercase tracking-wide font-bold;
     letter-spacing: 0.04em;
   }
@@ -257,7 +256,7 @@
   .font-geist-pixel,
   .font-mono,
   .font-sans {
-    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif !important;
+    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif;
   }
 
   /* Dynamic Topping Color System Classes */
