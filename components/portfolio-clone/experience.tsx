@@ -18,10 +18,10 @@ export default function PortfolioExperience() {
         className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full"
       >
         {/* Top Content Group */}
-        <div className="space-y-4 flex-1 flex flex-col justify-between">
+        <div className="space-y-3 flex-1 flex flex-col justify-between">
           
-          {/* Header Info Area - Fixed min-height ensures all role containers start on the exact same horizontal line */}
-          <div className="space-y-3 min-h-[155px] lg:min-h-[165px] flex flex-col justify-start">
+          {/* Header Info Area */}
+          <div className="space-y-2.5 flex flex-col justify-start">
             
             {/* Type & Duration Pills */}
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
