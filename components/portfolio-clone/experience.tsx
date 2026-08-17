@@ -18,10 +18,10 @@ export default function PortfolioExperience() {
         className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between transition-colors duration-200 space-y-4 sm:space-y-5 h-full"
       >
         {/* Top Content Group */}
-        <div className="space-y-3 flex-1 flex flex-col justify-between">
+        <div className="space-y-4 flex-1 flex flex-col justify-between">
           
-          {/* Header Info Area */}
-          <div className="space-y-2.5 flex flex-col justify-start">
+          {/* Header Info Area - Compact height removes wasted whitespace while keeping role containers aligned on exact same horizontal line */}
+          <div className="space-y-2.5 min-h-[110px] sm:min-h-[120px] flex flex-col justify-start">
             
             {/* Type & Duration Pills */}
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
@@ -45,10 +45,12 @@ export default function PortfolioExperience() {
             </div>
 
             {/* Organization Title */}
-            <div className="space-y-1">
-              <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight text-left">
-                {exp.organization}
-              </h3>
+            <div className="space-y-0.5">
+              <div className="min-h-[2.75rem] sm:min-h-[3.25rem] flex items-center">
+                <h3 className="text-base sm:text-lg font-black text-slate-800 leading-snug tracking-tight text-left">
+                  {exp.organization}
+                </h3>
+              </div>
               {exp.subtitle && (
                 <p className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider text-left">
                   {exp.subtitle}
