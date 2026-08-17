@@ -166,9 +166,9 @@ export default function PortfolioProjects() {
             )}
           </div>
 
-          {/* Title Container - Fixed min-height ensures all description boxes align on the exact same horizontal line */}
-          <div className="min-h-[3.5rem] sm:min-h-[4.25rem] flex items-center">
-            <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight">
+          {/* Title Container - Top-aligned title with fixed height ensures titles and description boxes align perfectly */}
+          <div className="min-h-[3.5rem] sm:min-h-[4.25rem] flex items-start">
+            <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight text-left">
               {project.title}
             </h3>
           </div>
@@ -176,7 +176,7 @@ export default function PortfolioProjects() {
           {/* Description in Inset Container */}
           <div className="neu-inset p-4 rounded-[16px] space-y-2 flex flex-col justify-start">
             <p
-              className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word] ${
+              className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left ${
                 !isExpanded ? "line-clamp-4" : ""
               }`}
               dangerouslySetInnerHTML={{ __html: project.description }}
