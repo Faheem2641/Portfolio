@@ -221,6 +221,11 @@
     @apply bg-background text-foreground;
   }
 
+  strong, b {
+    font-weight: 800;
+    color: #0f172a;
+  }
+
   html {
     scroll-behavior: smooth;
   }
