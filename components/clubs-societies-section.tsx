@@ -187,7 +187,7 @@ export default function ClubsSocietiesSection() {
 
                                     <div className="h-1 w-20 bg-lorenzo-accent rounded-full" />
 
-                                    <p className="text-lg md:text-xl font-light leading-relaxed opacity-90 text-justify">
+                                    <p className="text-lg md:text-xl font-light leading-relaxed opacity-90 text-left">
                                         {activeExperience.description}
                                     </p>
 

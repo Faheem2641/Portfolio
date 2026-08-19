@@ -113,7 +113,7 @@ export default function WebDevelopmentSection() {
                             <div className="h-0.5 w-12 bg-lorenzo-accent rounded-full mb-4" />
 
                             {/* Description */}
-                            <p className="text-sm font-light leading-relaxed opacity-90 mb-6 flex-grow text-justify">
+                            <p className="text-sm font-light leading-relaxed opacity-90 mb-6 flex-grow text-left">
                                 {project.description}
                             </p>
 

@@ -41,15 +41,15 @@ export default function PortfolioAbout() {
                     </div>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                     Studying at the <strong className="text-topping font-bold">NUST School of Mechanical and Manufacturing Engineering (SMME)</strong>, Islamabad. I engineer solutions that bridge intelligent software with physical hardware, from full-stack web applications to embedded systems and functional engineering prototypes.
                   </p>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                     My work spans <strong className="text-topping font-bold">precision manufacturing</strong>, <strong className="text-topping font-bold">thermal systems (Heat Exchangers)</strong>, and <strong className="text-topping font-bold">embedded control (ATmega328 and Tensilica LX-6)</strong>. Alongside this, I bring hands-on experience in <strong className="text-topping font-bold">CAD modeling</strong>, <strong className="text-topping font-bold">digital manufacturing</strong>, <strong className="text-topping font-bold">rapid prototyping</strong>, and <strong className="text-topping font-bold">PCB design</strong>.
                   </p>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]">
                     My research interests align with <strong className="text-topping font-bold">Machine Learning integration for Fluid Flow prediction</strong>, exploring data-driven models to reconstruct complex flow patterns for aerodynamics and fluid dynamics applications.
                   </p>
                 </div>

@@ -131,7 +131,7 @@ export default function EducationSection() {
                                                             <>Higher Secondary Education</>
                                                         ) : item.title}
                                                     </h3>
-                                                    <p className="text-lorenzo-text-light/80 text-base md:text-lg leading-relaxed text-justify whitespace-pre-line">
+                                                    <p className="text-lorenzo-text-light/80 text-base md:text-lg leading-relaxed text-left whitespace-pre-line">
                                                         {item.description}
                                                     </p>
                                                 </motion.div>
@@ -158,7 +158,7 @@ export default function EducationSection() {
                                                             <>Higher Secondary Education</>
                                                         ) : item.title}
                                                     </h3>
-                                                    <p className="text-lorenzo-text-light/80 text-base md:text-lg leading-relaxed text-justify whitespace-pre-line">
+                                                    <p className="text-lorenzo-text-light/80 text-base md:text-lg leading-relaxed text-left whitespace-pre-line">
                                                         {item.description}
                                                     </p>
                                                 </motion.div>

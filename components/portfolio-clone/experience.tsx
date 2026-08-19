@@ -74,7 +74,7 @@ export default function PortfolioExperience() {
           {/* Single Role Description if no nested roles */}
           {!hasRoles && exp.description && (
             <p
-              className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left"
+              className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]"
               dangerouslySetInnerHTML={{ __html: exp.description }}
             />
           )}
@@ -113,7 +113,7 @@ export default function PortfolioExperience() {
 
                     {role.description && (
                       <p
-                        className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left"
+                        className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word]"
                         dangerouslySetInnerHTML={{ __html: role.description }}
                       />
                     )}

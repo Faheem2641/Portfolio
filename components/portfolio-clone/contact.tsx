@@ -11,7 +11,6 @@ import {
   Github,
   Linkedin,
   ExternalLink,
-  MessageSquare,
   Loader2,
   AlertCircle,
   AlertTriangle,
@@ -185,11 +184,7 @@ export default function PortfolioContact() {
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full neu-inset text-topping text-xs sm:text-sm font-mono font-bold uppercase tracking-wider">
-              <MessageSquare className="w-4 h-4 text-topping" />
-              <span>GET IN TOUCH</span>
-            </div>
-            <h2 className="text-xl sm:text-3xl font-black text-slate-800 tracking-tight pt-1">
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Let's Build Something <span className="text-topping">Remarkable</span>
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm font-normal">

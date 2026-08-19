@@ -152,7 +152,7 @@ export default function ResearchSection() {
 
                                     <div className="h-1 w-20 bg-lorenzo-accent rounded-full" />
 
-                                    <p className="text-lg md:text-xl font-light leading-relaxed opacity-90 text-justify whitespace-pre-line">
+                                    <p className="text-lg md:text-xl font-light leading-relaxed opacity-90 text-left whitespace-pre-line">
                                         {activeExperience.description}
                                     </p>
 
@@ -180,7 +180,7 @@ export default function ResearchSection() {
                                                         <h6 className="text-xs font-semibold text-lorenzo-text-light/90 uppercase">
 
                                                         </h6>
-                                                        <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-justify">
+                                                        <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-left">
                                                             Some method for fluid visulization are very commmon like CFD(Comuputational Fluid Dynamics) and LES( Large Eddy Simulation) in the experimental analysis one of them is PIV(Particle Image Velocimetry) as they are use full so do they come with the problems of their own. Requiring a lot of resources and time.
                                                         </p>
                                                     </div>
@@ -217,7 +217,7 @@ export default function ResearchSection() {
                                                         <h6 className="text-xs font-semibold text-lorenzo-text-light/90 uppercase">
 
                                                         </h6>
-                                                        <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-justify">
+                                                        <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-left">
                                                             Various machine learning models are trained and tested based on a experimental and DNS(Direct Numerical Simulation)
                                                             datasets and are utilized to predict the flow behavior. This eliminates the need of the generation of a new datasets for every new analysis. Machine learning models being effective once trained can be used for new senerios and conditions.
                                                         </p>
@@ -256,7 +256,7 @@ export default function ResearchSection() {
                                                         <h6 className="text-xs font-semibold text-lorenzo-text-light/90 uppercase">
 
                                                         </h6>
-                                                        <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-justify">
+                                                        <p className="text-sm md:text-base font-light leading-relaxed opacity-90 text-left">
                                                             The process for fluid analysis in modern development becomes comparatively easier, reducing costs significantly and making the overall workflow more efficient.
                                                             Moreover, this methodology helps improve the quality of fluid visualization by removing noise and accounting for additional influencing factors.
                                                             Therefore, this approach is a better option for fluid analysis, offering both accuracy and affordability.

@@ -176,7 +176,7 @@ export default function PortfolioProjects() {
           {/* Description in Inset Container */}
           <div className="neu-inset p-4 rounded-[16px] space-y-2 flex flex-col justify-start">
             <p
-              className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-left ${
+              className={`text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify [text-justify:inter-word] ${
                 !isExpanded ? "line-clamp-4" : ""
               }`}
               dangerouslySetInnerHTML={{ __html: project.description }}
