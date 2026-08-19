@@ -15,7 +15,6 @@ import {
   AlertCircle,
   AlertTriangle,
   RotateCcw,
-  Sparkles,
 } from "lucide-react"
 
 export default function PortfolioContact() {
@@ -308,7 +307,6 @@ export default function PortfolioContact() {
                     >
                       <div className="relative w-20 h-20 rounded-full neu-button text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
                         <Check className="w-10 h-10 text-emerald-600" />
-                        <Sparkles className="w-5 h-5 text-emerald-500 absolute -top-1 -right-1 animate-bounce" />
                       </div>
                       <div className="space-y-2">
                         <h3 className="text-xl sm:text-2xl font-black text-slate-800">Message Sent Successfully!</h3>

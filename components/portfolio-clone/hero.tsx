@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
   ArrowRight,
-  Sparkles,
   Github,
   Linkedin,
   Mail,
@@ -113,8 +112,8 @@ export default function PortfolioHero() {
               </div>
 
               {/* Engineering Quote Container */}
-              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-4 text-center flex items-center justify-center">
-                <p className="text-[11px] sm:text-xs font-mono font-bold text-slate-700 italic tracking-tight">
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-5 text-center flex items-center justify-center">
+                <p className="text-xs sm:text-sm md:text-base font-mono font-extrabold text-topping italic tracking-tight">
                   “Torque, tension, and a little stubbornness.”
                 </p>
               </div>
