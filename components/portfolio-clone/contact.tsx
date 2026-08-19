@@ -98,7 +98,7 @@ export default function PortfolioContact() {
     setIsSubmitting(true)
     setErrors({})
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "115622a0-4f42-4f36-95cc-e0dffbf2a0f8"
     const payload = {
       access_key: accessKey,
       name: formData.name.trim(),
@@ -112,56 +112,56 @@ export default function PortfolioContact() {
       let success = false
       let errorMessage = ""
 
-      // Attempt 1: Server API route (/api/contact)
+      // Attempt 1: Direct Client Web3Forms API (Supported on Free tier for browser clients)
       try {
-        const serverRes = await fetch("/api/contact", {
+        const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            subject: formData.subject.trim(),
-            message: formData.message.trim(),
-          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
         })
 
-        const serverData = await serverRes.json().catch(() => null)
-        if (serverRes.ok && serverData?.success) {
-          success = true
-        } else if (serverData?.error) {
-          errorMessage = serverData.error
+        const textResp = await response.text()
+        let data: any = null
+        try {
+          data = JSON.parse(textResp)
+        } catch {
+          // Non-JSON response
         }
-      } catch (serverErr) {
-        console.warn("Server route call failed:", serverErr)
+
+        if (response.ok && data?.success) {
+          success = true
+        } else if (data?.message) {
+          errorMessage = data.message
+        }
+      } catch (clientErr) {
+        console.warn("Direct Web3Forms client submission error:", clientErr)
       }
 
-      // Attempt 2: Direct Client Web3Forms API (Only if client key is configured in env)
-      if (!success && accessKey && !accessKey.includes("your_")) {
+      // Attempt 2: Server API route (/api/contact) fallback
+      if (!success) {
         try {
-          const response = await fetch("https://api.web3forms.com/submit", {
+          const serverRes = await fetch("/api/contact", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: formData.name.trim(),
+              email: formData.email.trim(),
+              subject: formData.subject.trim(),
+              message: formData.message.trim(),
+            }),
           })
 
-          const textResp = await response.text()
-          let data: any = null
-          try {
-            data = JSON.parse(textResp)
-          } catch {
-            // Non-JSON response
-          }
-
-          if (response.ok && data?.success) {
+          const serverData = await serverRes.json().catch(() => null)
+          if (serverRes.ok && serverData?.success) {
             success = true
-          } else if (data?.message) {
-            errorMessage = data.message
+          } else if (serverData?.error) {
+            errorMessage = serverData.error
           }
-        } catch (clientErr) {
-          console.warn("Client-side submission error:", clientErr)
+        } catch (serverErr) {
+          console.warn("Server route call failed:", serverErr)
         }
       }
 
@@ -170,7 +170,7 @@ export default function PortfolioContact() {
         setFormData({ name: "", email: "", subject: "", message: "" })
       } else {
         setErrors({
-          form: errorMessage || "Email service key not configured in Vercel. Click below to send via your mail app!"
+          form: errorMessage || "Unable to deliver message automatically. Click below to send via your mail app!"
         })
       }
     } catch (err) {
@@ -179,6 +179,7 @@ export default function PortfolioContact() {
     } finally {
       setIsSubmitting(false)
     }
+
 
   }
 
