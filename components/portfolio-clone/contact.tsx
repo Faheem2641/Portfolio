@@ -123,7 +123,7 @@ export default function PortfolioContact() {
           body: JSON.stringify({
             name: formData.name.trim(),
             email: formData.email.trim(),
-            _subject: payload.subject,
+            subject: payload.subject,
             message: formData.message.trim(),
             _captcha: "false",
             _template: "table",
@@ -139,6 +139,7 @@ export default function PortfolioContact() {
       } catch (fsErr) {
         console.warn("FormSubmit fetch error:", fsErr)
       }
+
 
       // Attempt 2: Direct Client Web3Forms API
       if (!success) {
