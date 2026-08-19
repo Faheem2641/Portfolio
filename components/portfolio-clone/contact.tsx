@@ -109,32 +109,11 @@ export default function PortfolioContact() {
     }
 
     try {
-      // Primary Attempt: Direct client-side fetch to Web3Forms API
       let success = false
       let errorMessage = ""
 
+      // Attempt 1: Server API route (/api/contact)
       try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(payload),
-        })
-
-        const data = await response.json().catch(() => null)
-        if (response.ok && data?.success) {
-          success = true
-        } else if (data?.message) {
-          errorMessage = data.message
-        }
-      } catch (clientErr) {
-        console.warn("Direct Web3Forms submit prevented by client environment, trying fallback route:", clientErr)
-      }
-
-      // Secondary Fallback Attempt: Server API route (/api/contact)
-      if (!success) {
         const serverRes = await fetch("/api/contact", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -152,17 +131,51 @@ export default function PortfolioContact() {
         } else if (serverData?.error) {
           errorMessage = serverData.error
         }
+      } catch (serverErr) {
+        console.warn("Server route call failed, attempting client Web3Forms submission:", serverErr)
+      }
+
+      // Attempt 2: Direct Client Web3Forms API
+      if (!success) {
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+
+          const textResp = await response.text()
+          let data: any = null
+          try {
+            data = JSON.parse(textResp)
+          } catch {
+            // Non-JSON response
+          }
+
+          if (response.ok && data?.success) {
+            success = true
+          } else if (data?.message) {
+            errorMessage = data.message
+          }
+        } catch (clientErr) {
+          console.warn("Client-side submission error:", clientErr)
+        }
       }
 
       if (success) {
         setSubmitted(true)
         setFormData({ name: "", email: "", subject: "", message: "" })
       } else {
-        setErrors({ form: errorMessage || "Unable to deliver message right now. Please copy direct email above!" })
+        setErrors({
+          form: errorMessage || "Unable to deliver automatically right now. Click below to open direct email client!"
+        })
       }
     } catch (err) {
       console.error("Submission exception:", err)
-      setErrors({ form: "Network connection error. Please use direct email option on left." })
+      setErrors({ form: "Network connection error. Please use direct email option." })
     } finally {
       setIsSubmitting(false)
     }
@@ -174,12 +187,20 @@ export default function PortfolioContact() {
     setFormData({ name: "", email: "", subject: "", message: "" })
   }
 
+  const getMailtoLink = () => {
+    const sub = encodeURIComponent(formData.subject.trim() || `Portfolio Inquiry from ${formData.name || "Visitor"}`)
+    const bodyText = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )
+    return `mailto:${emailAddress}?subject=${sub}&body=${bodyText}`
+  }
+
   return (
-    <section id="contact" className="py-8 neu-bg">
+    <section id="contact" className="py-8 neu-bg overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Outer Frame */}
-        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-5 sm:p-10 space-y-6 sm:space-y-10">
+        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-5 sm:p-10 space-y-6 sm:space-y-10 overflow-hidden">
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -292,8 +313,8 @@ export default function PortfolioContact() {
             </div>
 
             {/* Form Column */}
-            <div className="lg:col-span-7 h-full">
-              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 h-full flex flex-col justify-between space-y-4">
+            <div className="lg:col-span-7 h-full min-w-0">
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 h-full flex flex-col justify-between space-y-4 overflow-hidden">
 
                 <AnimatePresence mode="wait">
                   {submitted ? (
@@ -333,7 +354,7 @@ export default function PortfolioContact() {
                       exit={{ opacity: 0 }}
                       onSubmit={handleSubmit}
                       noValidate
-                      className="flex-1 flex flex-col justify-between space-y-3.5 sm:space-y-4"
+                      className="flex-1 flex flex-col justify-between space-y-3.5 sm:space-y-4 min-w-0"
                     >
                       
                       {/* Global Neumorphic Form Error Banner */}
@@ -344,15 +365,24 @@ export default function PortfolioContact() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -8, scale: 0.98 }}
                             transition={{ duration: 0.2 }}
-                            className="neu-inset rounded-[18px] p-4 flex items-start gap-3 bg-rose-500/10 border border-rose-400/40 text-rose-800 shadow-inner"
+                            className="neu-inset rounded-[18px] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-rose-500/10 border border-rose-400/40 text-rose-800 shadow-inner"
                           >
-                            <div className="w-7 h-7 rounded-full neu-button shrink-0 flex items-center justify-center text-rose-600 mt-0.5">
-                              <AlertTriangle className="w-4 h-4" />
+                            <div className="flex items-start gap-3 min-w-0 flex-1">
+                              <div className="w-7 h-7 rounded-full neu-button shrink-0 flex items-center justify-center text-rose-600 mt-0.5">
+                                <AlertTriangle className="w-4 h-4" />
+                              </div>
+                              <div className="space-y-0.5 min-w-0 flex-1">
+                                <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-rose-700">Notice</h5>
+                                <p className="text-xs font-medium text-rose-700/90 leading-tight">{errors.form}</p>
+                              </div>
                             </div>
-                            <div className="space-y-0.5 min-w-0 flex-1">
-                              <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-rose-700">Notice</h5>
-                              <p className="text-xs font-medium text-rose-700/90 leading-tight">{errors.form}</p>
-                            </div>
+                            <a
+                              href={getMailtoLink()}
+                              className="px-3 py-1.5 rounded-full neu-button text-[11px] font-bold text-slate-800 hover:text-topping flex items-center gap-1.5 shrink-0 transition-all self-end sm:self-center"
+                            >
+                              <Mail className="w-3.5 h-3.5" />
+                              <span>Open Mail App</span>
+                            </a>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -361,7 +391,7 @@ export default function PortfolioContact() {
                         {/* Name Field */}
                         <div className="space-y-1">
                           <div className="flex items-center justify-between">
-                            <label htmlFor="contact-name" className="text-xs font-mono font-bold text-slate-800">Your Name *</label>
+                            <label htmlFor="contact-name" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Your Name *</label>
                             <AnimatePresence>
                               {errors.name && (
                                 <motion.span
@@ -376,14 +406,17 @@ export default function PortfolioContact() {
                               )}
                             </AnimatePresence>
                           </div>
-                          <div className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.name ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                          <div
+                            onClick={() => document.getElementById("contact-name")?.focus()}
+                            className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all cursor-text focus-within:border focus-within:border-topping/50 ${errors.name ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}
+                          >
                             <input
                               id="contact-name"
                               type="text"
                               value={formData.name}
                               onChange={(e) => handleInputChange("name", e.target.value)}
                               placeholder="e.g. Ali"
-                              className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400"
+                              className="w-full bg-transparent border-none outline-none text-base sm:text-xs text-slate-800 font-medium placeholder-slate-400"
                             />
                           </div>
                         </div>
@@ -391,7 +424,7 @@ export default function PortfolioContact() {
                         {/* Email Field */}
                         <div className="space-y-1">
                           <div className="flex items-center justify-between">
-                            <label htmlFor="contact-email" className="text-xs font-mono font-bold text-slate-800">Your Email *</label>
+                            <label htmlFor="contact-email" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Your Email *</label>
                             <AnimatePresence>
                               {errors.email && (
                                 <motion.span
@@ -406,14 +439,17 @@ export default function PortfolioContact() {
                               )}
                             </AnimatePresence>
                           </div>
-                          <div className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.email ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                          <div
+                            onClick={() => document.getElementById("contact-email")?.focus()}
+                            className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all cursor-text focus-within:border focus-within:border-topping/50 ${errors.email ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}
+                          >
                             <input
                               id="contact-email"
                               type="email"
                               value={formData.email}
                               onChange={(e) => handleInputChange("email", e.target.value)}
                               placeholder="name@company.com"
-                              className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400"
+                              className="w-full bg-transparent border-none outline-none text-base sm:text-xs text-slate-800 font-medium placeholder-slate-400"
                             />
                           </div>
                         </div>
@@ -422,7 +458,7 @@ export default function PortfolioContact() {
                       {/* Subject Field */}
                       <div className="space-y-1">
                         <div className="flex items-center justify-between">
-                          <label htmlFor="contact-subject" className="text-xs font-mono font-bold text-slate-800">Subject *</label>
+                          <label htmlFor="contact-subject" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Subject *</label>
                           <AnimatePresence>
                             {errors.subject && (
                               <motion.span
@@ -437,14 +473,17 @@ export default function PortfolioContact() {
                             )}
                           </AnimatePresence>
                         </div>
-                        <div className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.subject ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                        <div
+                          onClick={() => document.getElementById("contact-subject")?.focus()}
+                          className={`neu-inset rounded-[16px] px-4 py-2.5 transition-all cursor-text focus-within:border focus-within:border-topping/50 ${errors.subject ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}
+                        >
                           <input
                             id="contact-subject"
                             type="text"
                             value={formData.subject}
                             onChange={(e) => handleInputChange("subject", e.target.value)}
                             placeholder="e.g. Mechanical Design, Embedded IoT, Web Collaboration"
-                            className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400"
+                            className="w-full bg-transparent border-none outline-none text-base sm:text-xs text-slate-800 font-medium placeholder-slate-400"
                           />
                         </div>
                       </div>
@@ -452,7 +491,7 @@ export default function PortfolioContact() {
                       {/* Message Field */}
                       <div className="space-y-1 flex-1 flex flex-col min-h-0">
                         <div className="flex items-center justify-between">
-                          <label htmlFor="contact-message" className="text-xs font-mono font-bold text-slate-800">Message *</label>
+                          <label htmlFor="contact-message" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Message *</label>
                           <AnimatePresence>
                             {errors.message && (
                               <motion.span
@@ -467,13 +506,16 @@ export default function PortfolioContact() {
                             )}
                           </AnimatePresence>
                         </div>
-                        <div className={`neu-inset rounded-[16px] px-4 py-2.5 flex-1 flex flex-col transition-all focus-within:ring-2 focus-within:ring-slate-400/50 ${errors.message ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}>
+                        <div
+                          onClick={() => document.getElementById("contact-message")?.focus()}
+                          className={`neu-inset rounded-[16px] px-4 py-2.5 flex-1 flex flex-col transition-all cursor-text focus-within:border focus-within:border-topping/50 ${errors.message ? "ring-2 ring-rose-500/60 bg-rose-500/5" : ""}`}
+                        >
                           <textarea
                             id="contact-message"
                             value={formData.message}
                             onChange={(e) => handleInputChange("message", e.target.value)}
                             placeholder="Share details about your project scope, technical requirements, timeline, or inquiry..."
-                            className="w-full bg-transparent border-none outline-none text-xs text-slate-800 font-medium placeholder-slate-400 resize-none flex-1 min-h-[60px]"
+                            className="w-full bg-transparent border-none outline-none text-base sm:text-xs text-slate-800 font-medium placeholder-slate-400 resize-none flex-1 min-h-[80px] max-h-48 overflow-y-auto"
                           ></textarea>
                         </div>
                       </div>
@@ -483,7 +525,7 @@ export default function PortfolioContact() {
                         whileTap={{ scale: 0.98 }}
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-3 sm:py-3.5 rounded-full neu-button font-bold text-xs text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all"
+                        className="w-full py-3 sm:py-3.5 rounded-full neu-button font-bold text-xs text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all shrink-0"
                       >
                         {isSubmitting ? (
                           <>
