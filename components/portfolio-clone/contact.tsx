@@ -112,35 +112,65 @@ export default function PortfolioContact() {
       let success = false
       let errorMessage = ""
 
-      // Attempt 1: Direct Client Web3Forms API (Supported on Free tier for browser clients)
+      // Attempt 1: Direct FormSubmit AJAX Endpoint (Sends directly to faheemali3724@gmail.com)
       try {
-        const response = await fetch("https://api.web3forms.com/submit", {
+        const formSubmitRes = await fetch("https://formsubmit.co/ajax/faheemali3724@gmail.com", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            _subject: payload.subject,
+            message: formData.message.trim(),
+            _captcha: "false",
+            _template: "table",
+          }),
         })
 
-        const textResp = await response.text()
-        let data: any = null
-        try {
-          data = JSON.parse(textResp)
-        } catch {
-          // Non-JSON response
-        }
-
-        if (response.ok && data?.success) {
+        const formSubmitData = await formSubmitRes.json().catch(() => null)
+        if (formSubmitRes.ok && (formSubmitData?.success === "true" || formSubmitData?.success === true)) {
           success = true
-        } else if (data?.message) {
-          errorMessage = data.message
+        } else if (formSubmitData?.message) {
+          errorMessage = formSubmitData.message
         }
-      } catch (clientErr) {
-        console.warn("Direct Web3Forms client submission error:", clientErr)
+      } catch (fsErr) {
+        console.warn("FormSubmit fetch error:", fsErr)
       }
 
-      // Attempt 2: Server API route (/api/contact) fallback
+      // Attempt 2: Direct Client Web3Forms API
+      if (!success) {
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+
+          const textResp = await response.text()
+          let data: any = null
+          try {
+            data = JSON.parse(textResp)
+          } catch {
+            // Non-JSON response
+          }
+
+          if (response.ok && data?.success) {
+            success = true
+          } else if (data?.message && !errorMessage) {
+            errorMessage = data.message
+          }
+        } catch (clientErr) {
+          console.warn("Direct Web3Forms client submission error:", clientErr)
+        }
+      }
+
+      // Attempt 3: Server API route (/api/contact) fallback
       if (!success) {
         try {
           const serverRes = await fetch("/api/contact", {
@@ -157,7 +187,7 @@ export default function PortfolioContact() {
           const serverData = await serverRes.json().catch(() => null)
           if (serverRes.ok && serverData?.success) {
             success = true
-          } else if (serverData?.error) {
+          } else if (serverData?.error && !errorMessage) {
             errorMessage = serverData.error
           }
         } catch (serverErr) {
@@ -170,7 +200,7 @@ export default function PortfolioContact() {
         setFormData({ name: "", email: "", subject: "", message: "" })
       } else {
         setErrors({
-          form: errorMessage || "Unable to deliver message automatically. Click below to send via your mail app!"
+          form: errorMessage || "Service activation required. Check your Gmail inbox for activation link or click 'Open Mail App'!"
         })
       }
     } catch (err) {
@@ -179,6 +209,7 @@ export default function PortfolioContact() {
     } finally {
       setIsSubmitting(false)
     }
+
 
 
   }
