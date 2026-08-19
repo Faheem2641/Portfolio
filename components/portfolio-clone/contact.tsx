@@ -98,7 +98,7 @@ export default function PortfolioContact() {
     setIsSubmitting(true)
     setErrors({})
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "15df6855-e507-44a2-b47f-5de155ffa7ff"
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
     const payload = {
       access_key: accessKey,
       name: formData.name.trim(),
@@ -132,11 +132,11 @@ export default function PortfolioContact() {
           errorMessage = serverData.error
         }
       } catch (serverErr) {
-        console.warn("Server route call failed, attempting client Web3Forms submission:", serverErr)
+        console.warn("Server route call failed:", serverErr)
       }
 
-      // Attempt 2: Direct Client Web3Forms API
-      if (!success) {
+      // Attempt 2: Direct Client Web3Forms API (Only if client key is configured in env)
+      if (!success && accessKey && !accessKey.includes("your_")) {
         try {
           const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -170,7 +170,7 @@ export default function PortfolioContact() {
         setFormData({ name: "", email: "", subject: "", message: "" })
       } else {
         setErrors({
-          form: errorMessage || "Unable to deliver automatically right now. Click below to open direct email client!"
+          form: errorMessage || "Email service key not configured in Vercel. Click below to send via your mail app!"
         })
       }
     } catch (err) {
@@ -179,6 +179,7 @@ export default function PortfolioContact() {
     } finally {
       setIsSubmitting(false)
     }
+
   }
 
   const handleResetForm = () => {
