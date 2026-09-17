@@ -132,14 +132,14 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-plus-jakarta), var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-geist-pixel), "Geist Pixel", sans-serif;
+  --font-display: var(--font-geist-pixel), "Geist Pixel", sans-serif;
+  --font-mono: var(--font-geist-pixel), "Geist Pixel", ui-monospace, monospace;
   --font-pixel: var(--font-geist-pixel), "Geist Pixel", ui-monospace, monospace;
   --font-geist-pixel: var(--font-geist-pixel), "Geist Pixel", ui-monospace, monospace;
-  --font-serif: var(--font-plus-jakarta), serif;
+  --font-serif: var(--font-geist-pixel), "Geist Pixel", serif;
   --font-gochi: "Gochi Hand", cursive;
-  --font-oswald: var(--font-plus-jakarta), sans-serif;
+  --font-oswald: var(--font-geist-pixel), "Geist Pixel", sans-serif;
 
   /* Custom fonts */
   --font-brier: "Brier", sans-serif;
@@ -209,13 +209,15 @@
   .neu-raised,
   .neu-raised-sm,
   .hover-scale {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif;
     @apply bg-background text-foreground;
   }
 
@@ -233,9 +235,9 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-sans);
-    @apply uppercase tracking-wide font-extrabold;
-    letter-spacing: 0.03em;
+    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif;
+    @apply uppercase tracking-wide font-bold;
+    letter-spacing: 0.04em;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -254,21 +256,11 @@
 
 /* Custom animations for enhanced effects */
 @layer utilities {
-  .font-sans {
-    font-family: var(--font-sans);
-  }
-
-  .font-display {
-    font-family: var(--font-display);
-  }
-
-  .font-mono {
-    font-family: var(--font-mono);
-  }
-
   .font-pixel,
-  .font-geist-pixel {
-    font-family: var(--font-geist-pixel), "Geist Pixel", ui-monospace, monospace;
+  .font-geist-pixel,
+  .font-mono,
+  .font-sans {
+    font-family: var(--font-geist-pixel), "Geist Pixel", sans-serif;
   }
 
   /* Dynamic Topping Color System Classes */
@@ -319,11 +311,12 @@
   }
 
   .hover-scale {
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.15s ease;
+    will-change: transform;
   }
 
   .hover-scale:hover {
-    transform: translateY(-2px);
+    transform: scale(1.05) translateZ(0);
   }
 
   .transition-smooth {
@@ -361,78 +354,77 @@
   .neu-raised {
     background-color: var(--neu-bg);
     box-shadow:
-      5px 5px 12px var(--shadow-dark),
-      -5px -5px 12px var(--shadow-light);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+      6px 6px 14px var(--shadow-dark),
+      -6px -6px 14px var(--shadow-light);
+    border: none;
   }
 
   .neu-raised-sm {
     background-color: var(--neu-bg);
     box-shadow:
-      2px 2px 5px var(--shadow-dark),
-      -2px -2px 5px var(--shadow-light);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+      3px 3px 8px var(--shadow-dark),
+      -3px -3px 8px var(--shadow-light);
+    border: none;
   }
 
   .neu-raised-lg {
     background-color: var(--neu-bg);
     box-shadow:
-      7px 7px 16px var(--shadow-dark),
-      -7px -7px 16px var(--shadow-light);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+      8px 8px 18px var(--shadow-dark),
+      -8px -8px 18px var(--shadow-light);
+    border: none;
   }
 
   /* ── Inset: dual inset shadow (dark top-left + light bottom-right) ── */
   .neu-inset {
     background-color: var(--neu-bg);
     box-shadow:
-      inset 3px 3px 6px var(--shadow-dark),
-      inset -3px -3px 6px var(--shadow-light);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+      inset 4px 4px 8px var(--shadow-dark),
+      inset -4px -4px 8px var(--shadow-light);
   }
 
   .neu-inset-sm {
     background-color: var(--neu-bg);
     box-shadow:
-      inset 2px 2px 4px var(--shadow-dark),
-      inset -2px -2px 4px var(--shadow-light);
-    border: 1px solid rgba(0, 0, 0, 0.02);
+      inset 2px 2px 5px var(--shadow-dark),
+      inset -2px -2px 5px var(--shadow-light);
   }
 
   .neu-inset-lg {
     background-color: var(--neu-bg);
     box-shadow:
-      inset 5px 5px 10px var(--shadow-dark),
-      inset -5px -5px 10px var(--shadow-light);
-    border: 1px solid rgba(0, 0, 0, 0.04);
+      inset 6px 6px 12px var(--shadow-dark),
+      inset -6px -6px 12px var(--shadow-light);
   }
 
   /* ── Buttons ── */
   .neu-button {
     background-color: var(--neu-bg);
     box-shadow:
-      2px 2px 6px var(--shadow-dark),
-      -2px -2px 6px var(--shadow-light);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    transition: box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+      3px 3px 8px var(--shadow-dark),
+      -3px -3px 8px var(--shadow-light);
+    border: none;
+    transition: box-shadow 0.15s ease-out, transform 0.15s ease-out, background-color 0.15s ease-out, color 0.15s ease-out, opacity 0.15s ease-out;
+    will-change: transform, box-shadow;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   .neu-button:hover {
     box-shadow:
-      3px 3px 8px var(--shadow-dark),
-      -3px -3px 8px var(--shadow-light);
-    transform: translateY(-1.5px);
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+    transform: translateY(-1px) translateZ(0);
   }
 
   .neu-button:active,
   .neu-button-active {
     box-shadow:
-      inset 2px 2px 5px var(--shadow-dark),
-      inset -2px -2px 5px var(--shadow-light);
-    transform: translateY(0);
+      inset 3px 3px 6px var(--shadow-dark),
+      inset -3px -3px 6px var(--shadow-light);
+    transform: translateY(0) translateZ(0);
   }
 
   /* Hide scrollbar utility */
