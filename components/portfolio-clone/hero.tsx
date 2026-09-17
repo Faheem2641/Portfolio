@@ -124,42 +124,42 @@ export default function PortfolioHero() {
                   href="https://github.com/Faheem2641"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-800 hover:text-black transition-all group shrink-0"
                   aria-label="GitHub Profile"
                   title="GitHub Profile"
                 >
-                  <Github className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 group-hover:scale-110 transition-transform" />
+                  <Github className="w-4 h-4 sm:w-5 sm:h-5 text-slate-900 group-hover:scale-110 transition-transform stroke-[2]" />
                 </a>
 
                 <a
                   href="https://www.linkedin.com/in/faheem-ali-b87293373/?skipRedirect=true"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-[#0a66c2] hover:text-[#004182] transition-all group shrink-0"
                   aria-label="LinkedIn Profile"
                   title="LinkedIn Profile"
                 >
-                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-sky-700 group-hover:scale-110 transition-transform" />
+                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-[#0a66c2] group-hover:scale-110 transition-transform stroke-[2]" />
                 </a>
 
                 <div className="relative">
                   <button
                     onClick={handleCopyEmail}
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 transition-all group shrink-0"
                     aria-label="Copy Email Address"
                     title="Copy Email Address"
                   >
                     {copiedEmail ? (
-                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-topping" />
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-topping stroke-[2.5]" />
                     ) : (
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-rose-600 group-hover:scale-110 transition-transform" />
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-rose-600 group-hover:scale-110 transition-transform stroke-[2]" />
                     )}
                   </button>
                   {copiedEmail && (
                     <motion.div
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="absolute -top-8 left-1/2 -translate-x-1/2 bg-topping text-white text-[10px] font-mono py-1 px-2.5 rounded-lg whitespace-nowrap shadow-md z-30 font-bold"
+                      className="absolute -top-8 left-1/2 -translate-x-1/2 bg-topping text-white text-[10px] font-sans py-1 px-2.5 rounded-lg whitespace-nowrap shadow-md z-30 font-bold"
                     >
                       Email copied!
                     </motion.div>
@@ -168,11 +168,11 @@ export default function PortfolioHero() {
 
                 <a
                   href="#contact"
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 transition-all group shrink-0"
                   aria-label="Contact Form"
                   title="Send Message"
                 >
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-900 group-hover:translate-x-0.5 transition-transform stroke-[2]" />
                 </a>
               </div>
 
@@ -200,19 +200,19 @@ export default function PortfolioHero() {
                 <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
                   <a
                     href="#projects"
-                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-topping hover:scale-105 transition-transform flex items-center gap-2"
+                    className="neu-button px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-topping hover:text-slate-950 transition-all flex items-center gap-2 group cursor-pointer"
                   >
-                    <span>View Showcase</span>
-                    <ArrowRight className="w-4 h-4 text-topping" />
+                    <span className="tracking-wide">View Showcase</span>
+                    <ArrowRight className="w-4 h-4 text-topping group-hover:translate-x-1 transition-transform stroke-[2.5]" />
                   </a>
 
                   <a
                     href="/Faheem_Ali_CV.pdf"
                     download="Faheem_Ali_CV.pdf"
-                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-slate-700 hover:text-slate-900 flex items-center gap-2"
+                    className="neu-button px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-slate-800 hover:text-black transition-all flex items-center gap-2 group cursor-pointer"
                   >
-                    <Download className="w-4 h-4 text-slate-500" />
-                    <span>Download CV</span>
+                    <Download className="w-4 h-4 text-slate-700 group-hover:translate-y-0.5 transition-transform stroke-[2.5]" />
+                    <span className="tracking-wide">Download CV</span>
                   </a>
                 </div>
               </div>

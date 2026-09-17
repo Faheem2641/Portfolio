@@ -311,36 +311,40 @@ export default function PortfolioContact() {
 
               {/* Social Cards */}
               <div className="neu-raised rounded-[24px] p-6 space-y-3">
-                <h4 className="text-xs font-mono font-bold text-slate-700 uppercase mb-2">Connect Across Platforms</h4>
+                <h4 className="text-xs font-sans font-extrabold text-slate-800 uppercase tracking-wider mb-2">Connect Across Platforms</h4>
                 
                 <motion.a
-                  whileHover={{ scale: 1.01, x: 2 }}
+                  whileHover={{ x: 3 }}
                   whileTap={{ scale: 0.98 }}
                   href="https://github.com/Faheem2641"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-full neu-button text-xs font-bold text-slate-800 hover:text-slate-950 transition-all"
+                  className="flex items-center justify-between p-3.5 rounded-full neu-button text-xs font-bold text-slate-900 hover:text-black transition-all group"
                 >
-                  <div className="flex items-center gap-2.5">
-                    <Github className="w-4 h-4 text-slate-700" />
-                    <span>GitHub Profile</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0 shadow-sm">
+                      <Github className="w-4 h-4 text-white stroke-[2]" />
+                    </div>
+                    <span className="font-bold text-slate-900 text-xs sm:text-sm">GitHub Profile</span>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-slate-900 transition-colors stroke-[2]" />
                 </motion.a>
 
                 <motion.a
-                  whileHover={{ scale: 1.01, x: 2 }}
+                  whileHover={{ x: 3 }}
                   whileTap={{ scale: 0.98 }}
                   href="https://www.linkedin.com/in/faheem-ali-b87293373/?skipRedirect=true"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-full neu-button text-xs font-bold text-slate-800 hover:text-slate-950 transition-all"
+                  className="flex items-center justify-between p-3.5 rounded-full neu-button text-xs font-bold text-slate-900 hover:text-black transition-all group"
                 >
-                  <div className="flex items-center gap-2.5">
-                    <Linkedin className="w-4 h-4 text-slate-700" />
-                    <span>LinkedIn Network</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-[#0a66c2] text-white flex items-center justify-center shrink-0 shadow-sm">
+                      <Linkedin className="w-4 h-4 text-white stroke-[2]" />
+                    </div>
+                    <span className="font-bold text-slate-900 text-xs sm:text-sm">LinkedIn Network</span>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-[#0a66c2] transition-colors stroke-[2]" />
                 </motion.a>
               </div>
 
