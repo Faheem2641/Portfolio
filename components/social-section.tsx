@@ -82,12 +82,12 @@ export default function SocialSection() {
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   className="inline-flex items-center justify-center bg-[#e8e8e3] rounded-full px-6 py-3 shadow-sm hover:shadow-lg transition-all duration-300"
                 >
-                  <span className="font-black uppercase text-xs md:text-sm tracking-widest text-[#162439]">{item.label}</span>
+                  <span className="font-bold uppercase text-xs sm:text-sm tracking-wider text-[#162439]">{item.label}</span>
                 </motion.a>
               ))}
             </div>

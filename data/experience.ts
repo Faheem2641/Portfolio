@@ -31,7 +31,7 @@ export const experiencesData: ExperienceEntry[] = [
       {
         title: "Mechanical Design & Prototyping Intern",
         type: "Full time",
-        duration: "Jun 2026 – Present · 3 mos",
+        duration: "Jun 2026 – Aug 2026 · 3 mos",
         location: "Islamabad, Pakistan",
         description: 'Worked across diverse engineering projects, mastering <strong class="text-topping font-bold">design iteration and rapid prototyping</strong>. Gained hands-on experience in manufacturing processes, including <strong class="text-topping font-bold">3D printing, laser cutting, and engraving</strong>, alongside <strong class="text-topping font-bold">IoT systems integration, PCB design, and chemical etching</strong>. Applied analytical problem-solving throughout the prototyping lifecycle to deliver designs optimized for manufacturing constraints.'
       }
@@ -62,20 +62,20 @@ export const experiencesData: ExperienceEntry[] = [
   {
     organization: "Manufacturing Resource Center (MRC)",
     type: "Internship",
-    duration: "3 mos",
+    duration: "2 mos",
     location: "Islamabad, Pakistan · On site",
     roles: [
       {
         title: "Machining Tool Manufacturing Trainee",
         type: "Part time",
-        duration: "Jul 2025 – Aug 2025 · 2 mos",
+        duration: "Jul 2025 · 1 mo",
         location: "Islamabad, Pakistan",
         description: 'Specialized in <strong class="text-topping font-bold">precision cutting tool manufacturing</strong>, transforming raw materials including <strong class="text-topping font-bold">steel bars and carbide blanks</strong> into high-performance cutting tools through <strong class="text-topping font-bold">comprehensive machining processes</strong>.'
       },
       {
         title: "Machining Trainee",
         type: "Full time",
-        duration: "Jun 2025 – Aug 2025 · 3 mos",
+        duration: "Jun 2025 – Jul 2025 · 2 mos",
         location: "Islamabad, Pakistan",
         description: 'Developed foundational machining skills through hands-on training in <strong class="text-topping font-bold">precision manufacturing operations</strong>. Gained practical experience in <strong class="text-topping font-bold">manual lathe and mill operations</strong> while building proficiency with <strong class="text-topping font-bold">precision tools</strong>.'
       }

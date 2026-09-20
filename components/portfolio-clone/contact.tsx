@@ -258,14 +258,14 @@ export default function PortfolioContact() {
                     <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase">Direct Email</h4>
+                    <h4 className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">Direct Email</h4>
                     <p className="text-xs sm:text-sm font-bold text-slate-800 mt-0.5 truncate">{emailAddress}</p>
                   </div>
                 </div>
 
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={handleCopyEmail}
                   type="button"
                   className="w-full py-3.5 px-4 rounded-full neu-button text-xs font-bold text-slate-800 flex items-center justify-center gap-2 cursor-pointer transition-all"
@@ -285,41 +285,34 @@ export default function PortfolioContact() {
               </div>
 
               {/* Location & Availability */}
-              <div className="neu-raised rounded-[20px] p-3.5 sm:p-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-[12px] neu-button flex items-center justify-center text-topping shrink-0 mt-0.5">
-                    <MapPin className="w-4.5 h-4.5 text-topping" />
+              <div className="neu-raised rounded-[20px] sm:rounded-[24px] p-3.5 sm:p-4 space-y-2.5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] neu-button flex items-center justify-center text-topping shrink-0">
+                    <MapPin className="w-5 h-5 text-topping" />
                   </div>
-                  <div className="space-y-1.5 min-w-0 flex-1">
-                    <div>
-                      <h4 className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-wider">Location & Status</h4>
-                      <p className="text-xs sm:text-sm font-bold text-slate-800 flex flex-wrap items-center gap-1.5 mt-0.5">
-                        <span>Islamabad, Pakistan</span>
-                        <span className="text-[10px] font-mono font-normal text-slate-500">PKT (UTC+5)</span>
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-topping font-medium">
-                      <span className="relative flex h-2 w-2 shrink-0">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-topping opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-topping"></span>
-                      </span>
-                      <span>Available for Remote Contracts, Internships & Part-time Roles</span>
+                  <div className="space-y-0.5 min-w-0 flex-1">
+                    <h4 className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">Location & Status</h4>
+                    <div className="flex flex-wrap items-center gap-1.5 mt-0.5">
+                      <span className="text-xs sm:text-sm font-bold text-slate-900">Islamabad, Pakistan</span>
+                      <span className="text-xs sm:text-sm font-bold text-slate-900">PKT (UTC+5)</span>
                     </div>
                   </div>
                 </div>
+
+                <p className="text-[11px] sm:text-xs text-topping font-medium pt-0.5 text-center">
+                  Available for Remote Contracts, Internships & Part-time Roles
+                </p>
               </div>
 
               {/* Social Cards */}
               <div className="neu-raised rounded-[24px] p-6 space-y-3">
-                <h4 className="text-xs font-mono font-bold text-slate-700 uppercase mb-2">Connect Across Platforms</h4>
-                
                 <motion.a
-                  whileHover={{ scale: 1.01, x: 2 }}
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                   href="https://github.com/Faheem2641"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-full neu-button text-xs font-bold text-slate-800 hover:text-slate-950 transition-all"
+                  className="w-full py-3.5 px-4 rounded-full neu-button text-xs font-bold text-slate-800 hover:text-slate-950 flex items-center justify-between transition-all"
                 >
                   <div className="flex items-center gap-2.5">
                     <Github className="w-4 h-4 text-slate-700" />
@@ -329,12 +322,12 @@ export default function PortfolioContact() {
                 </motion.a>
 
                 <motion.a
-                  whileHover={{ scale: 1.01, x: 2 }}
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                   href="https://www.linkedin.com/in/faheem-ali-b87293373/?skipRedirect=true"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-full neu-button text-xs font-bold text-slate-800 hover:text-slate-950 transition-all"
+                  className="w-full py-3.5 px-4 rounded-full neu-button text-xs font-bold text-slate-800 hover:text-slate-950 flex items-center justify-between transition-all"
                 >
                   <div className="flex items-center gap-2.5">
                     <Linkedin className="w-4 h-4 text-slate-700" />
@@ -425,7 +418,7 @@ export default function PortfolioContact() {
                         {/* Name Field */}
                         <div className="space-y-1">
                           <div className="flex items-center justify-between">
-                            <label htmlFor="contact-name" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Your Name *</label>
+                            <label htmlFor="contact-name" className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase tracking-wider cursor-pointer">Your Name *</label>
                             <AnimatePresence>
                               {errors.name && (
                                 <motion.span
@@ -458,7 +451,7 @@ export default function PortfolioContact() {
                         {/* Email Field */}
                         <div className="space-y-1">
                           <div className="flex items-center justify-between">
-                            <label htmlFor="contact-email" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Your Email *</label>
+                            <label htmlFor="contact-email" className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase tracking-wider cursor-pointer">Your Email *</label>
                             <AnimatePresence>
                               {errors.email && (
                                 <motion.span
@@ -492,7 +485,7 @@ export default function PortfolioContact() {
                       {/* Subject Field */}
                       <div className="space-y-1">
                         <div className="flex items-center justify-between">
-                          <label htmlFor="contact-subject" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Subject *</label>
+                          <label htmlFor="contact-subject" className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase tracking-wider cursor-pointer">Subject *</label>
                           <AnimatePresence>
                             {errors.subject && (
                               <motion.span
@@ -525,7 +518,7 @@ export default function PortfolioContact() {
                       {/* Message Field */}
                       <div className="space-y-1 flex-1 flex flex-col min-h-0">
                         <div className="flex items-center justify-between">
-                          <label htmlFor="contact-message" className="text-xs font-mono font-bold text-slate-800 cursor-pointer">Message *</label>
+                          <label htmlFor="contact-message" className="text-[10px] sm:text-xs font-mono font-bold text-slate-700 uppercase tracking-wider cursor-pointer">Message *</label>
                           <AnimatePresence>
                             {errors.message && (
                               <motion.span
@@ -555,11 +548,11 @@ export default function PortfolioContact() {
                       </div>
 
                       <motion.button
-                        whileHover={{ scale: 1.01 }}
+                        whileHover={{ y: -1 }}
                         whileTap={{ scale: 0.98 }}
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-3 sm:py-3.5 rounded-full neu-button font-bold text-xs text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all shrink-0"
+                        className="w-full py-3.5 px-4 rounded-full neu-button text-xs font-bold text-topping flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer transition-all shrink-0"
                       >
                         {isSubmitting ? (
                           <>

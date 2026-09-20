@@ -20,13 +20,19 @@ export default function PortfolioExperience() {
         {/* Top Content Group */}
         <div className="space-y-4 flex-1 flex flex-col justify-between">
           
-          {/* Header Info Area - Fixed min-height ensures all role containers start on the exact same horizontal line */}
-          <div className="space-y-3 min-h-[145px] sm:min-h-[160px] flex flex-col justify-start">
+          {/* Header Info Area */}
+          <div className="space-y-3 min-h-[160px] sm:min-h-[175px] flex flex-col justify-start">
             
-            {/* Type & Duration Pills */}
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+            {/* Timeline & Type Stack */}
+            <div className="flex flex-col items-start gap-2 text-xs font-mono">
+              {exp.duration && (
+                <span className="neu-raised-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
+                  <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+                  <span>{exp.duration}</span>
+                </span>
+              )}
               {exp.type && (
-                <span className="neu-inset-sm px-3 py-1 rounded-full text-topping font-bold flex items-center gap-1.5 max-w-full truncate">
+                <span className="neu-raised-sm px-3 py-1 rounded-full text-topping font-bold flex items-center gap-1.5 max-w-full truncate">
                   <Briefcase className="w-3.5 h-3.5 text-topping shrink-0" />
                   <span className="truncate">{exp.type}</span>
                 </span>
@@ -36,16 +42,10 @@ export default function PortfolioExperience() {
                   {exp.workType}
                 </span>
               )}
-              {exp.duration && (
-                <span className="neu-inset-sm px-3 py-1 rounded-full text-slate-800 font-bold flex items-center gap-1.5 shrink-0">
-                  <Calendar className="w-3.5 h-3.5 text-slate-600 shrink-0" />
-                  <span>{exp.duration}</span>
-                </span>
-              )}
             </div>
 
             {/* Organization Title */}
-            <div className="space-y-1">
+            <div className="space-y-1 pt-1">
               <h3 className="text-lg sm:text-xl font-black text-slate-800 leading-snug tracking-tight text-left">
                 {exp.organization}
               </h3>
@@ -96,17 +96,17 @@ export default function PortfolioExperience() {
                       </h4>
                     </div>
 
-                    {/* Timeline & Work Type Row */}
-                    <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                    {/* Timeline & Job Type Stack (Timeline on top, Job Type below) */}
+                    <div className="flex flex-col items-start gap-2 pt-0.5">
                       {role.duration && (
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full neu-raised-sm text-xs font-mono font-bold text-slate-800">
-                          <Calendar className="w-3 h-3 text-slate-700 shrink-0" />
+                          <Calendar className="w-3.5 h-3.5 text-slate-700 shrink-0" />
                           <span>{role.duration}</span>
                         </span>
                       )}
                       {role.type && (
-                        <span className="neu-raised-sm px-2.5 py-1 rounded-full text-xs font-mono font-bold text-slate-900 shrink-0">
-                          {role.type}
+                        <span className="inline-flex items-center px-3 py-1 rounded-full neu-raised-sm text-xs font-mono font-bold text-slate-800">
+                          <span>{role.type}</span>
                         </span>
                       )}
                     </div>

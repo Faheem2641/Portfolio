@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   ArrowRight,
   Github,
@@ -124,7 +124,7 @@ export default function PortfolioHero() {
                   href="https://github.com/Faheem2641"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:-translate-y-0.5 active:scale-95 transition-all group"
                   aria-label="GitHub Profile"
                   title="GitHub Profile"
                 >
@@ -135,7 +135,7 @@ export default function PortfolioHero() {
                   href="https://www.linkedin.com/in/faheem-ali-b87293373/?skipRedirect=true"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:-translate-y-0.5 active:scale-95 transition-all group"
                   aria-label="LinkedIn Profile"
                   title="LinkedIn Profile"
                 >
@@ -145,7 +145,7 @@ export default function PortfolioHero() {
                 <div className="relative">
                   <button
                     onClick={handleCopyEmail}
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:-translate-y-0.5 active:scale-95 transition-all group"
                     aria-label="Copy Email Address"
                     title="Copy Email Address"
                   >
@@ -168,7 +168,7 @@ export default function PortfolioHero() {
 
                 <a
                   href="#contact"
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:scale-105 active:scale-95 transition-all group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neu-button flex items-center justify-center text-slate-700 hover:text-slate-950 hover:-translate-y-0.5 active:scale-95 transition-all group"
                   aria-label="Contact Form"
                   title="Send Message"
                 >
@@ -200,7 +200,7 @@ export default function PortfolioHero() {
                 <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
                   <a
                     href="#projects"
-                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-topping hover:scale-105 transition-transform flex items-center gap-2"
+                    className="neu-button px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold text-topping hover:-translate-y-0.5 transition-transform flex items-center gap-2"
                   >
                     <span>View Showcase</span>
                     <ArrowRight className="w-4 h-4 text-topping" />
@@ -218,10 +218,10 @@ export default function PortfolioHero() {
               </div>
 
               {/* Engineering Console Panel (Mechanical, FEA & Manufacturing Spec) */}
-              <div className="neu-inset rounded-[16px] p-3 sm:p-4 space-y-3 max-w-full overflow-hidden">
+              <div className="neu-inset rounded-[16px] p-3 sm:p-4 space-y-3 max-w-full">
                 {/* Console Tab Bar */}
                 <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 pb-3 border-b border-slate-300/40">
-                  <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar max-w-full p-1.5 -m-1.5">
+                  <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar max-w-full p-2">
                     <button
                       onClick={() => setActiveCodeTab("mech")}
                       className={`px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold shrink-0 transition-all ${
@@ -262,36 +262,59 @@ export default function PortfolioHero() {
                 </div>
 
                 {/* Console Engineering View */}
-                <div className="font-mono text-[10px] sm:text-xs text-slate-700 leading-normal overflow-x-auto max-w-full no-scrollbar">
-                  {activeCodeTab === "mech" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-0.5">
-                      <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">mechanicalEngineer</span> = &#123;</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">cadTools:</span> [<span className="text-topping font-bold">"SolidWorks"</span>, <span className="text-topping font-bold">"Autodesk Inventor"</span>],</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">feaTools:</span> [<span className="text-topping font-bold">"ANSYS Mechanical"</span>, <span className="text-topping font-bold">"Thermal Modeling"</span>],</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">standards:</span> [<span className="text-topping font-bold">"GD&T (ISO/ASME)"</span>, <span className="text-topping font-bold">"DFM/DFA"</span>]</p>
-                      <p>&#125;;</p>
-                    </motion.div>
-                  )}
+                <div className="font-mono text-[10px] sm:text-xs text-slate-700 leading-normal overflow-x-auto max-w-full no-scrollbar min-h-[110px] flex flex-col justify-center">
+                  <AnimatePresence mode="wait">
+                    {activeCodeTab === "mech" && (
+                      <motion.div
+                        key="mech"
+                        initial={{ opacity: 0, y: 2 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -2 }}
+                        transition={{ duration: 0.15 }}
+                        className="space-y-0.5"
+                      >
+                        <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">mechanicalEngineer</span> = &#123;</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">cadTools:</span> [<span className="text-topping font-bold">"SolidWorks"</span>, <span className="text-topping font-bold">"Autodesk Inventor"</span>],</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">feaTools:</span> [<span className="text-topping font-bold">"ANSYS Mechanical"</span>, <span className="text-topping font-bold">"Thermal Modeling"</span>],</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">standards:</span> [<span className="text-topping font-bold">"GD&T (ISO/ASME)"</span>, <span className="text-topping font-bold">"DFM/DFA"</span>]</p>
+                        <p>&#125;;</p>
+                      </motion.div>
+                    )}
 
-                  {activeCodeTab === "fea" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-0.5">
-                      <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">rapidPrototyping</span> = &#123;</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">processes:</span> [<span className="text-topping font-bold">"FDM 3D Printing"</span>, <span className="text-topping font-bold">"Rapid Prototyping"</span>],</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">electronics:</span> [<span className="text-topping font-bold">"PCB Etching"</span>, <span className="text-topping font-bold">"ATmega328 / ESP32"</span>],</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">verification:</span> [<span className="text-topping font-bold">"Thermal Profiling"</span>, <span className="text-topping font-bold">"Lab Validation"</span>]</p>
-                      <p>&#125;;</p>
-                    </motion.div>
-                  )}
+                    {activeCodeTab === "fea" && (
+                      <motion.div
+                        key="fea"
+                        initial={{ opacity: 0, y: 2 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -2 }}
+                        transition={{ duration: 0.15 }}
+                        className="space-y-0.5"
+                      >
+                        <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">rapidPrototyping</span> = &#123;</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">processes:</span> [<span className="text-topping font-bold">"FDM 3D Printing"</span>, <span className="text-topping font-bold">"Rapid Prototyping"</span>],</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">electronics:</span> [<span className="text-topping font-bold">"PCB Etching"</span>, <span className="text-topping font-bold">"ATmega328 / ESP32"</span>],</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">verification:</span> [<span className="text-topping font-bold">"Thermal Profiling"</span>, <span className="text-topping font-bold">"Lab Validation"</span>]</p>
+                        <p>&#125;;</p>
+                      </motion.div>
+                    )}
 
-                  {activeCodeTab === "cnc" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-0.5">
-                      <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">machiningOps</span> = &#123;</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">operations:</span> [<span className="text-topping font-bold">"5-Axis CNC Milling"</span>, <span className="text-topping font-bold">"Precision Tooling"</span>],</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">machining:</span> [<span className="text-topping font-bold">"Adaptive Roughing"</span>, <span className="text-topping font-bold">"Carbide Endmilling"</span>, <span className="text-topping font-bold">"Manual Lathe & Mill"</span>],</p>
-                      <p className="pl-4"><span className="text-slate-600 font-bold">qualityControl:</span> [<span className="text-topping font-bold">"G-Code Verification"</span>, <span className="text-topping font-bold">"Micrometer & Calipers"</span>],</p>
-                      <p>&#125;;</p>
-                    </motion.div>
-                  )}
+                    {activeCodeTab === "cnc" && (
+                      <motion.div
+                        key="cnc"
+                        initial={{ opacity: 0, y: 2 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -2 }}
+                        transition={{ duration: 0.15 }}
+                        className="space-y-0.5"
+                      >
+                        <p><span className="text-purple-600 font-bold">const</span> <span className="text-slate-900 font-bold">machiningOps</span> = &#123;</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">operations:</span> [<span className="text-topping font-bold">"5-Axis CNC Milling"</span>, <span className="text-topping font-bold">"Precision Tooling"</span>],</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">machining:</span> [<span className="text-topping font-bold">"Adaptive Roughing"</span>, <span className="text-topping font-bold">"Carbide Endmilling"</span>, <span className="text-topping font-bold">"Manual Lathe & Mill"</span>],</p>
+                        <p className="pl-4"><span className="text-slate-600 font-bold">qualityControl:</span> [<span className="text-topping font-bold">"G-Code Verification"</span>, <span className="text-topping font-bold">"Micrometer & Calipers"</span>],</p>
+                        <p>&#125;;</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
 
