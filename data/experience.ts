@@ -66,14 +66,14 @@ export const experiencesData: ExperienceEntry[] = [
     location: "Islamabad, Pakistan · On site",
     roles: [
       {
-        title: "Precision Machining Tool Manufacturing Trainee",
+        title: "Machining Tool Manufacturing Trainee",
         type: "Part time",
         duration: "Jul 2025 – Aug 2025 · 2 mos",
         location: "Islamabad, Pakistan",
         description: 'Specialized in <strong class="text-topping font-bold">precision cutting tool manufacturing</strong>, transforming raw materials including <strong class="text-topping font-bold">steel bars and carbide blanks</strong> into high-performance cutting tools through <strong class="text-topping font-bold">comprehensive machining processes</strong>.'
       },
       {
-        title: "Production Machining Trainee",
+        title: "Machining Trainee",
         type: "Full time",
         duration: "Jun 2025 – Aug 2025 · 3 mos",
         location: "Islamabad, Pakistan",
