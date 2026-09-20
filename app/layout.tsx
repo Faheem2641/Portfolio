@@ -47,7 +47,7 @@ const siteUrl = "https://faheemali.site"
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Faheem Ali | Mechanical Engineer & Hardware Innovator",
+    default: "Faheem Ali | Mechanical Engineer",
     template: "%s | Faheem Ali",
   },
   description:
