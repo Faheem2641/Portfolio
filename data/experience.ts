@@ -29,7 +29,7 @@ export const experiencesData: ExperienceEntry[] = [
     location: "Islamabad, Pakistan · On site",
     roles: [
       {
-        title: "Research & Development (R&D) Engineering Intern",
+        title: "Mechanical Design & Prototyping Intern",
         type: "Full time",
         duration: "Jun 2026 – Present · 3 mos",
         location: "Islamabad, Pakistan",
@@ -51,7 +51,7 @@ export const experiencesData: ExperienceEntry[] = [
         description: 'Researching <strong class="text-topping font-bold">Machine Learning approaches for Fluid Flow reconstruction</strong>, evaluating how data-driven models predict and reconstruct complex flow patterns from sparse measurement data for <strong class="text-topping font-bold">aerodynamic and fluid dynamics applications</strong>.'
       },
       {
-        title: "FYP Collaborator",
+        title: "FYP Associate",
         type: "Part time",
         duration: "Mar 2026 – May 2026 · 3 mos",
         location: "On site",
