@@ -1,34 +1,20 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Cpu, Code2, Wrench, Settings, Activity } from "lucide-react"
-import { skillsData, SkillCategory } from "@/data/skills"
-
-function getCategoryIcon(iconName: string) {
-  switch (iconName) {
-    case "Wrench":
-      return <Wrench className="w-5 h-5" />
-    case "Cpu":
-      return <Cpu className="w-5 h-5" />
-    case "Code2":
-      return <Code2 className="w-5 h-5" />
-    case "Activity":
-      return <Activity className="w-5 h-5" />
-    default:
-      return <Settings className="w-5 h-5" />
-  }
-}
+import { skillsData } from "@/data/skills"
 
 export default function PortfolioSkills() {
+  const allSkills = skillsData.flatMap((group) => group.skills)
+
   return (
     <section id="skills" className="py-5 neu-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Outer Frame (Concentric 40px Radius & Symmetrical Padding) */}
-        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-4 sm:p-8 space-y-6 sm:space-y-10">
+        {/* Main Outer Frame */}
+        <div className="neu-raised rounded-[28px] sm:rounded-[40px] p-5 sm:p-8 space-y-6 sm:space-y-8">
           
           {/* Header */}
-          <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-3">
             <h2 className="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight">
               Technical <span className="text-topping">Skills</span>
             </h2>
@@ -37,48 +23,21 @@ export default function PortfolioSkills() {
             </p>
           </div>
 
-          {/* Responsive 3-Column Grid (Equal Height Category Cards) */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-            {skillsData.map((group: SkillCategory, idx: number) => {
-              return (
-                <div
-                  key={idx}
-                  className="neu-raised rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 flex flex-col justify-between space-y-5 sm:space-y-6 h-full"
-                >
-                  <div className="space-y-5 flex-1 flex flex-col justify-start">
-                    {/* Category Header */}
-                    <div className="flex items-center justify-between pb-4 border-b border-slate-300/40">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-[16px] neu-button flex items-center justify-center text-topping shadow-topping-glow">
-                          {getCategoryIcon(group.iconName)}
-                        </div>
-                        <h3 className="text-base font-black text-slate-900 leading-snug">
-                          {group.category}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Side-by-side 2-Column Capsule Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                      {group.skills.map((s, sIdx) => (
-                        <motion.div
-                          key={sIdx}
-                          initial={{ opacity: 0, y: 4 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.2, delay: sIdx * 0.015 }}
-                          className="neu-inset-sm px-3.5 py-2.5 rounded-[14px] text-slate-800 text-[11px] sm:text-xs font-bold leading-snug flex items-start gap-2.5 cursor-default h-full"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-topping shrink-0 mt-1" />
-                          <span className="min-w-0 flex-1 break-normal [word-break:normal]">{s.name}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                </div>
-              )
-            })}
+          {/* Single Unified Skills Flex Container */}
+          <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3.5 pt-2">
+            {allSkills.map((s, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 4 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.2, delay: idx * 0.015 }}
+                className="neu-inset-sm px-4 py-2.5 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center gap-2.5 cursor-default hover-scale"
+              >
+                <span className="w-2 h-2 rounded-full bg-topping shrink-0" />
+                <span>{s.name}</span>
+              </motion.div>
+            ))}
           </div>
 
         </div>
@@ -87,3 +46,4 @@ export default function PortfolioSkills() {
     </section>
   )
 }
+

@@ -11,40 +11,38 @@ export interface SkillCategory {
 
 export const skillsData: SkillCategory[] = [
   {
-    category: "Mechanical & Manufacturing",
+    category: "Technical Skills",
     iconName: "Wrench",
     skills: [
-      { name: "SolidWorks & CAD/CAM" },
-      { name: "Additive Manufacturing" },
-      { name: "Manual Lathe & Milling" },
-      { name: "Laser Engraving" },
-      { name: "Thermal Systems & HX" },
-      { name: "Tool Servicing" },
-      { name: "Heat Treatment Basics" },
-      { name: "DIY Fabrication" },
-      { name: "Mechanical Diagnostics" }
-    ]
-  },
-  {
-    category: "Embedded Systems & Robotics",
-    iconName: "Cpu",
-    skills: [
+      { name: "Control Engineering" },
+      { name: "3D Printing" },
+      { name: "Laser Cutting" },
+      { name: "Research Skills" },
+      { name: "LaTeX" },
+      { name: "Next.js" },
+      { name: "Web Development" },
+      { name: "Thermal Systems" },
+      { name: "Heat Exchangers" },
+      { name: "CAD/CAM" },
       { name: "Internet of Things (IoT)" },
-      { name: "PCB Chemical Etching" },
-      { name: "PCB Design & Layout" },
-      { name: "Hardware Integration" }
-    ]
-  },
-  {
-    category: "Other",
-    iconName: "Code2",
-    skills: [
-      { name: "C++ & OOP Logic" },
-      { name: "Research Methodologies" },
-      { name: "Web Dev & Next.js" },
-      { name: "User Interface Design" },
-      { name: "Applied Research & R&D" },
-      { name: "Technical Collaboration" }
+      { name: "Automation" },
+      { name: "Data Visualization" },
+      { name: "C++" },
+      { name: "Object-Oriented Programming (OOP)" },
+      { name: "Electrical Troubleshooting" },
+      { name: "Mechanical Troubleshooting" },
+      { name: "DIY Fabrication" },
+      { name: "Cutting Tool Geometry" },
+      { name: "Tool Reconditioning" },
+      { name: "Workplace Safety" },
+      { name: "Manual Lathe and Mill Operation" },
+      { name: "Basic HVAC Principles" },
+      { name: "Fundamentals of Heating and Cooling" },
+      { name: "Ethical Research Practices" }
     ]
   }
 ]
+
+
+
+
