@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { Menu, X, User, Briefcase, FolderGit2, Cpu, Mail } from "lucide-react"
 
@@ -15,9 +15,13 @@ const navLinks = [
 export default function PortfolioNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("about")
+  const isNavClicking = useRef(false)
+  const navClickTimeout = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isNavClicking.current) return
+
       const sections = navLinks.map((link) => link.href.replace("#", ""))
       const scrollPosition = window.scrollY + window.innerHeight / 3
 
@@ -35,7 +39,10 @@ export default function PortfolioNavbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     handleScroll()
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (navClickTimeout.current) clearTimeout(navClickTimeout.current)
+    }
   }, [])
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -43,8 +50,14 @@ export default function PortfolioNavbar() {
     const targetId = href.replace("#", "")
     const targetEl = document.getElementById(targetId)
     if (targetEl) {
-      targetEl.scrollIntoView({ behavior: "smooth", block: "start" })
+      isNavClicking.current = true
       setActiveSection(targetId)
+      targetEl.scrollIntoView({ behavior: "smooth", block: "start" })
+
+      if (navClickTimeout.current) clearTimeout(navClickTimeout.current)
+      navClickTimeout.current = setTimeout(() => {
+        isNavClicking.current = false
+      }, 850)
     }
   }
 
@@ -66,7 +79,7 @@ export default function PortfolioNavbar() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNavPill"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
                       className="absolute inset-x-0.5 inset-y-1 neu-button-active rounded-full bg-[#d8d8d8] z-0 shadow-sm"
                     />
                   )}
@@ -74,13 +87,10 @@ export default function PortfolioNavbar() {
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`relative z-10 -rotate-90 whitespace-nowrap text-[11px] lg:text-xs font-bold tracking-wider transition-colors duration-200 py-1.5 px-3.5 rounded-full flex items-center gap-2 ${
+                    className={`relative z-10 -rotate-90 whitespace-nowrap text-[11px] lg:text-xs font-bold tracking-wider transition-colors duration-200 py-1.5 px-3.5 rounded-full flex items-center justify-center ${
                       isActive ? "text-topping font-black" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    {isActive && (
-                      <span className="w-2 h-0.5 rounded-full bg-topping shrink-0" />
-                    )}
                     <span>{link.name}</span>
                   </a>
                 </div>
@@ -135,3 +145,4 @@ export default function PortfolioNavbar() {
     </>
   )
 }
+
