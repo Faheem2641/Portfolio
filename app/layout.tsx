@@ -127,7 +127,7 @@ const jsonLdData = {
       jobTitle: "Mechanical Engineer",
       description:
         "Mechanical Engineer specializing in CAD design, FEA structural analysis, precision manufacturing, embedded IoT systems, and rapid prototyping.",
-      alumniOf": {
+      alumniOf: {
         "@type": "EducationalOrganization",
         name: "National University of Sciences and Technology (NUST)",
         sameAs: "https://nust.edu.pk/",
