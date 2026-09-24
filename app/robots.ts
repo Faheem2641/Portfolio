@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://faheemali.site/sitemap.xml",
+    sitemap: "https://www.faheemali.site/sitemap.xml",
   }
 }

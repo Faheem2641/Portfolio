@@ -42,7 +42,7 @@ const silkscreen = Silkscreen({
   weight: ["400", "700"],
 })
 
-const siteUrl = "https://faheemali.site"
+const siteUrl = "https://www.faheemali.site"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -62,6 +62,7 @@ export const metadata: Metadata = {
     "Faheem Ali Islamabad",
     "Faheem Ali Pakistan",
     "faheemali.site",
+    "www.faheemali.site",
     "Faheem Ali Mechanical",
     "Mechanical Engineer Portfolio",
     "CAD Design",
